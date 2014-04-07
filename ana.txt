@@ -1,9 +1,8 @@
 marina
 marina2
 marina3
-<<<<<<< HEAD
 marina4
 marina5
 =======
 marina5
->>>>>>> ana
+
