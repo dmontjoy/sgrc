@@ -1,0 +1,125 @@
+<form id="form_modal_stakeholder" enctype="multipart/form-data" accept-charset="utf-8">
+    <input type="hidden" id="op_stakeholder" name="op_stakeholder" value="guardar_tag_stakeholder" />
+        <table >
+            <tr>
+                <td>
+                    <input type="hidden" id="nume_celda_stakeholder_tag_complejo" name="nume_celda_stakeholder_tag_complejo" value="{nume_celda_stakeholder_tag_complejo}" />
+                    <input type="hidden" id="nume_fila_stakeholder_tag_complejo" name="nume_fila_stakeholder_tag_complejo" value="{nume_fila_stakeholder_tag_complejo}" />
+                    <input class="buscar" type="text" name="tag_buscar" id="tag_buscar" onfocus="borrar_tag(); busqueda_rapida_tag();" value=" Buscar tag" size="40">
+                    <img id="img_buscar_sh_tag"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                </td>
+            </tr>
+            <tr>
+                <td id="subbloque_editar_tag">
+
+                    <table id="stakeholder_complejo_tag">
+
+                                                <!-- INICIO BLOQUE : tr_editar_tag -->
+                                                <tr>
+                                                    <!-- INICIO BLOQUE : td_editar_tag -->
+
+                                                    <td width="10%" id="stakeholder_complejo_tag{celda_nume_fila}{celda_nume_celda}" style="vertical-align:top">
+                                                         {tag}
+                                                    </td>
+                                                    <td id="sstakeholder_complejo_tag{celda_nume_fila}{celda_nume_celda}" style="vertical-align:top">
+                                                        <!-- INICIO BLOQUE : spinner_tag -->
+                                                        <input id="spinner_{celda_nume_fila}{celda_nume_celda}" name="orden_complejo_tag[]" style="width:20px;"/>
+
+                                                        <script type="text/javascript">
+                                                        $( "#spinner_{celda_nume_fila}{celda_nume_celda}" ).spinner({
+                                                            spin: function( event, ui ) {
+                                                            if ( ui.value < 0 ) {
+                                                              $( this ).spinner( "value", 0 );
+                                                              return false;
+                                                            }
+                                                          }
+                                                        });
+                                                        $( "#spinner_{celda_nume_fila}{celda_nume_celda}").spinner( "value", {prioridad} );
+                                                        </script>
+                                                        <!-- FIN BLOQUE : spinner_tag -->
+                                                        &nbsp;
+                                                    </td>
+                                                    <td id="estakeholder_complejo_tag{celda_nume_fila}{celda_nume_celda}" style="vertical-align:top">
+                                                        <!-- INICIO BLOQUE : eliminar_tag -->
+                                                        <input type="hidden" name="idstakeholder_complejo_tag[]" id="idstakeholder_complejo_tag{celda_nume_fila}{celda_nume_celda}" value={stakeholder_complejo_tag} />
+                                                        <img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('stakeholder_complejo_tag{celda_nume_fila}{celda_nume_celda}')" >
+                                                        <!-- FIN BLOQUE : eliminar_tag -->
+                                                        &nbsp;
+                                                    </td>
+                                                    <!-- FIN BLOQUE : td_editar_tag -->
+
+                                                </tr>
+                                                <!-- FIN BLOQUE : tr_editar_tag -->
+
+                     </table>
+                </td>
+            </tr>
+             <tr>
+
+                <td colspan="4" align="center">
+                    <div id="guardar_tag_complejo">
+                        <input type="submit"  id="tag_complejo_submit" value="Guardar"/>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+</form>
+<script type="text/javascript" >
+
+    $("#tag_complejo_submit").button();
+
+     $("#tag_buscar").blur(function() {
+            $("#tag_buscar").val("Buscar tag");
+        });
+
+    var idpersona = $("#idpersona").val();
+    var idmodulo = $("#idmodulo").val();
+    var url = '../../../programas/stakeholder/stakeholder/astakeholder.php?idpersona=' + idpersona + '&idmodulo=' + idmodulo;
+
+    //datastring = $("#guardar_interaccion_stakeholder").serialize();
+
+    //url = url +'&'+datastring;
+
+    //alert('URL: '+url);
+    $("#form_modal_stakeholder").attr('action', url);
+
+    $('#form_modal_stakeholder').ajaxForm({
+        beforeSubmit: function() {
+            //alert('Submitting...');
+            if($("#form_modal_stakeholder").valid()){
+                $("#guardar_stakeholder_complejo").html('<img src="../../../img/bar-ajax-loader.gif">');
+
+            }else{
+                return false;
+            }
+        },
+        success: function(data) {
+         var obj = jQuery.parseJSON(data);
+
+                $("#pantalla_aux_principal").dialog("close");
+                if (obj.success) {
+                    $.ajax({
+                        url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_tag_stakeholder&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                        beforeSend: function() {
+                           $("#tabla_persona_tag").attr("src","../../../img/ajax-loader.png");
+
+                       },
+                        success: function(datos) {
+
+                            $("#tabla_persona_tag").html(datos);
+
+                        }
+                    });
+                    $.jGrowl(obj.mensaje, {theme: 'verde'});
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }
+
+        }
+    });
+
+
+$("#form_modal_stakeholder").validate({ignore:""});
+</script>

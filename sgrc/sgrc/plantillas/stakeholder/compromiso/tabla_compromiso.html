@@ -1,0 +1,47 @@
+
+    <table width="100%" class="bloque">
+        <tr>
+        <td colspan="2" align="center">
+            <!-- INICIO BLOQUE : enlaces --> 
+            <table width="100%">
+                <tr>
+                    <td align="center"> {numero} {de} {total} </td>
+                    <td align="center" >{nombre}</td>
+                    <td align="center" width="400px">
+                    <a class="button-link" href="javascript:ver_bloque_reclamo(30, {idpersona}, {idmodulo}, 1, 2, 1)">Reclamos</a>
+                    <a class="button-link-active" href="javascript:ver_bloque_compromiso(30, {idpersona}, {idmodulo}, 1, 2, 1)">Compromisos</a>                    
+                    <a class="button-link" href="javascript:ver_bloque_stakeholder(30, {idpersona}, {idmodulo}, 1, 2, 1)">Interacciones</a>
+                    </td>
+                    <td align="right">
+                        <!-- INICIO BLOQUE : crear_interaccion -->                        
+                        <a title="Registrar interaccion" href="javascript:vista_avanzada_interaccion(0);"> <img src="../../../img/add-circle-green.png" style="width:auto; height:auto;vertical-align: middle;"/> Crear</a>                        
+                        <!-- FIN BLOQUE : crear_interaccion -->
+                        <!-- INICIO BLOQUE : crear_reclamo -->                        
+                            <a title="Registrar reclamo" href="javascript:vista_avanzada_reclamo(0);"> <img src="../../../img/add-circle-green.png" style="width:auto; height:auto;vertical-align: middle;"/> Crear</a>                        
+                        <!-- FIN BLOQUE : crear_reclamo -->
+                        &nbsp;
+                    </td>
+                </tr>
+            </table>
+             <!-- FIN BLOQUE : enlaces -->
+             {titulo}
+        </td>
+        </tr>
+</table>
+
+        {bloque_compromiso}
+        <!-- INICIO BLOQUE : mensaje -->
+       <div class="show-more">No se hallaron resultados</div>
+       <!-- FIN BLOQUE : mensaje -->
+       
+          <script type="text/javascript" >
+          
+    $( ".tooltip" ).tooltip({
+        content: function(){
+            var element = $( this );
+            var text = element.attr( "data" );
+             return "<img class='map' src='" + text +
+            "' alt='' border='1' height='50px'>";
+        }});
+
+          </script>

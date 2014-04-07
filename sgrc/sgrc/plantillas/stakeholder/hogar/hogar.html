@@ -1,0 +1,127 @@
+<div id="hogar">
+<script type="text/javascript">
+    $("#comp_fecha_hogar").blur();
+    $("#comp_fecha_hogar").datepicker({changeYear: true, changeMonth: true});
+    $('#form_hogar').ajaxForm({
+        beforeSubmit: function() {
+            //alert('Submitting...');
+            dataType: "json",
+            $("#boton_hogar_guardar").html('<table width="100%"><tr><td align="center"><img src="../../../img/bar-ajax-loader.gif"></td></tr></table>');
+        },
+        success: function(data) {
+            var obj = jQuery.parseJSON(data);
+
+            if (obj.success) {
+
+                $.jGrowl(obj.mensaje, {theme: 'verde'});
+
+
+                       $.ajax({
+                        type: 'get',
+                        url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_nuevo_editar_hogar&idpersona='+obj.idpersona+'&idmodulo='+obj.idmodulo,
+                        success: function(data) {
+                            $("#hogar").html(data);
+                        }
+                    });
+
+
+            } else {
+                $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+            }
+
+        }
+    });
+</script>
+
+<form id="form_hogar" enctype="multipart/form-data" accept-charset="utf-8">
+    <input type="hidden" id="op_stakeholder" name="op_stakeholder" value="{op_hogar_stakeholder}" />
+    <input type="hidden" name="idpersona" id="idpersona" value="{idpersona}" />
+    <input type="hidden" name="idmodulo" id="idmodulo" value="{idmodulo}" />
+    <!-- INICIO BLOQUE : editar_hogar -->
+   <span style="font-weight: bolder">Editando</span>
+       <input type="hidden" name="idsh_hogar" id="idsh_hogar" value="{idsh_hogar}" />
+    <input type="hidden" name="idmodulo_sh_hogar" id="idmodulo_sh_hogar" value="{idmodulo_sh_hogar}" />
+   <!-- FIN BLOQUE : editar_hogar -->
+
+
+    <table width="100%">
+        <tr>
+            <td>
+                Fecha&nbsp; <input type="text" name="fecha_hogar" id="comp_fecha_hogar"  value="{fecha_hogar}" size="10"/>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td >
+                            <input type="hidden" id="nume_celda_hogar_sh" name="nume_celda_hogar_sh" value="0" />
+                            <input type="hidden" id="nume_fila_hogar_sh" name="nume_fila_hogar_sh" value="{nume_fila_hogar_sh}" />
+                            <input type="text" class="buscar" name="hogar_sh_buscar" id="hogar_sh_buscar" onfocus="borrar_hogar_buscar();
+                                    busquedarapida_hogar_sh_buscar()" value="Buscar stakeholder por apellido paterno apellido materno nombre"  size="80"  width="100px">
+                            <img id="img_buscar_hogar_sh"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                            <input type="hidden" test="hogar" value="{cant_hogar}" id="cant_hogar" name="cant_hogar" />
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <table width="100%" class="borde" id="hogar_sh">
+                    <!-- INICIO BLOQUE : tr_sh_hogar -->
+                    <tr id="trhogar_sh{celda_nume_fila_sh}">
+                        <!-- INICIO BLOQUE : td_sh_hogar -->
+
+                        <td width="90%" id="hogar_sh{celda_nume_fila_sh}{celda_nume_celda_sh}" align="left">
+                            <a href="javascript:ver_datos_stakeholder('{idsh}---{idmodulo}---1')">{sh}</a>
+
+                            <!-- INICIO BLOQUE : idhogar_complejo_sh -->
+                            <input type="hidden" name="idhogar_complejo_sh[]" id="idhogar_sh{celda_nume_fila_sh}{celda_nume_celda_sh}" value={idhogar_complejo_sh} />
+                            <!-- FIN BLOQUE : idhogar_complejo_sh -->
+
+                        </td>
+                        <td>
+                            <select id="idpersona_parentesco[0]" name="idpersona_parentesco[]">
+                            <!-- INICIO BLOQUE : persona_parentesco -->
+                            <option value="{idpersona_parentesco}" {selected}>{descripcion}</option>
+                            <!-- FIN BLOQUE : persona_parentesco -->
+                            </select>
+                        </td>
+                        <td id="ehogar_sh{celda_nume_fila_sh}{celda_nume_celda_sh}" width="10%" align="left">&nbsp;
+                            <!-- INICIO BLOQUE : eliminar_sh_hogar -->
+
+
+                            <img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('hogar_sh{celda_nume_fila_sh}{celda_nume_celda_sh}', 'cant_hogar')" >
+
+                            <!-- FIN BLOQUE : eliminar_sh_hogar -->
+
+                        </td>
+                        <!-- FIN BLOQUE : td_sh_hogar -->
+
+                    </tr>
+                    <!-- FIN BLOQUE : tr_sh_hogar -->
+                </table>
+            </td>
+
+        </tr>
+        <tr>
+            <td align="center">
+
+                <div id="boton_hogar_guardar">
+                <input type="submit"  id="hogar_complejo_submit" value="Guardar"/>
+                &nbsp;&nbsp;
+                <input type="button" id="boton_hogar_cancelar" value="Cancelar" onclick="javascript:ver_hogar({idpersona},{idmodulo})">
+                </div>
+
+
+            </td>
+
+        </tr>
+    </table>
+</form>
+</div>

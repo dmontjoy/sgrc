@@ -1,0 +1,41 @@
+  <table width="100%" class="bloque">
+        <thead>
+        <td align="center" colspan="2">
+            Stakeholder - Posici&oacute;n/Tiempo
+        </td>
+        </thead>
+</table>
+<br/>
+<div>
+Durante el siguiente periodo de tiempo:  
+<select name="rango_posicion_tiempo" id="rango_posicion_tiempo" onChange="cambiar_rango_posicion_tiempo()">	
+        <option value="1" >		
+		1 a&ntilde;o				
+	</option>
+        <option value="2" >		
+		2 a&ntilde;o				
+	</option>
+        <option value="3" >		
+		3 a&ntilde;o				
+	</option>
+</select>
+</div>
+<br/>
+
+<div style="width:700px;  text-align: left;padding-left: 10px;">Posici&oacute;n</div>
+<div id="placeholder" style="width:700px;height:300px"></div>
+<div style="width:700px;text-align: right;padding-right: 10px;" >Tiempo</div>
+
+
+<div style="border: 1px solid #fdd; padding:5px; background-color: #fee; width: 280px; "><strong>Ratio:</strong>&nbsp;&nbsp;# SH Clave Calificados / # Total SH Calificados</div>
+   
+
+<script type="text/javascript">
+$(function () {
+    
+    cambiar_rango_posicion_tiempo();
+
+    
+
+});
+</script>

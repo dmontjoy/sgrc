@@ -1,0 +1,7 @@
+<?xml version='1.0'?>
+<CONF>
+   <idmodulo>1</idmodulo>
+   <ip_servidor>192.168.1.100</ip_servidor>
+   <ruta_servidor>sgrc</ruta_servidor>
+   <es_server>1</es_server>
+</CONF>

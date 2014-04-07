@@ -1,0 +1,81 @@
+<form id="guardar_calificacion_stakeholder">
+    <table>     
+        <tr style="margin:10px;">
+            <td align="center">
+                <input type="hidden" name="idpersona_voto" 
+                id="idpersona_voto"    
+                value="0">
+                <input type="hidden" name="idmodulo_voto" 
+                id="idmodulo_voto"    
+                value="0">                              
+            </td>
+        </tr>            
+        <!-- INICIO BLOQUE : dimension_relevancia -->
+        <tr style="margin:10px;">
+            <td align="center"><span style="font-size:150%">{nombre_dimension}</span>
+                <input type="hidden" name="dimension[]" 
+                id="dimension_{id_dimension}"    
+                value="0">
+                
+            </td>
+        </tr>
+        <tr>
+            <!-- INICIO BLOQUE : dimension_relevancia_valor -->
+            <td width="60px" align="center">
+                <a 
+                href="javascript:seleccionar_puntaje({iddimension_matriz},{id_dimension})"
+                >
+                    <img border="0" src="{ruta_dimension}{valor_dimension}"
+                    id="imagen_{iddimension_matriz}"
+                    />
+                </a>
+                <input type="hidden" name="valor_{iddimension_matriz}" 
+                id="valor_{iddimension_matriz}"
+                value="0">
+            </td>                       
+            <!-- FIN BLOQUE : dimension_relevancia_valor -->
+             
+        </tr>        
+        <!-- FIN BLOQUE : dimension_relevancia -->
+    </table>
+    <br/>
+    <table>            
+        <!-- INICIO BLOQUE : dimension_matriz_sh -->
+        <tr style="margin:10px;">
+            <td>{nombre_dimension}
+                <input type="hidden" name="dimension[]" 
+                id="dimension_{id_dimension}"    
+                value="0">
+                
+            </td>
+            <!-- INICIO BLOQUE : dimension_matriz_sh_valor -->
+            <td style="margin:10px;">
+                <a 
+                href="javascript:seleccionar_puntaje({iddimension_matriz},{id_dimension})" 
+                id="valor_{iddimension_matriz}"
+                > <img border="0" src="{ruta_dimension}{valor_dimension}"
+                    id="imagen_{iddimension_matriz}"
+                    /></a>
+            </td>                       
+            <!-- FIN BLOQUE : dimension_matriz_sh_valor -->
+             
+        </tr>        
+        <!-- FIN BLOQUE : dimension_matriz_sh -->
+    </table>
+     
+    <table>
+     <tr>
+         <td>Fecha:</td>
+         <td><input type="text" id="fecha_voto" size="20"/></td>
+     </tr>
+     <tr>
+                <td>Comentario</td>
+                <td>
+                    <textarea name="comentario" id="comentario" cols="30" rows="3">{comentario}</textarea></td>
+     </tr>
+    </table>
+    <table>
+        <tr><td>* Debe seleccionar todas las dimensiones.</td></tr>
+        <tr><td>* Elija "?" para alg&uacute;n valor desconocido.</td></tr>
+    </table>
+</form>

@@ -1,0 +1,58 @@
+
+                       
+<table>
+	
+	<tr>
+		<td width="150px">Nombre</td>
+		<!-- INICIO BLOQUE : td_fecha -->
+		<td width="80px">
+			{fecha}
+		</td>
+		<!-- FIN BLOQUE : td_fecha -->
+	</tr>
+
+
+	<tr>
+		<td><strong><a href="javascript:cargar_stakeholder('{idpersona}---{idmodulo}---{idpersona_tipo}')">{nombre}</a></strong></td>
+		<!-- INICIO BLOQUE : td_dimension -->
+		<td align="center">
+			<table>
+				<tr>
+					<td>
+					<img src="{ruta}small_{posicion}" title="{comentario}"/>
+					</td>
+					<td><div>{poder}</div><div>{interes}</div></td>
+				</tr>
+
+			</table>
+		</td>
+
+		<!-- FIN BLOQUE : td_dimension -->
+	</tr>	
+
+</table>
+Redes
+<table>		
+	<!-- INICIO BLOQUE : tr_red -->
+	<tr>
+		
+		<td width="150px"><strong> <a href="javascript:cargar_stakeholder('{idpersona}---{idmodulo}---{idpersona_tipo}')">{nombre_red}</a></strong></td>
+		<!-- INICIO BLOQUE : td_red -->
+		<td width="80px" align="center">
+			<table>
+				<tr>
+					<td>
+					<img src="{ruta}small_{posicion}" title="{comentario}" />
+					</td>
+					<td><div>{poder}</div><div>{interes}</div></td>
+				</tr>
+
+			</table>
+		</td>
+
+		<!-- FIN BLOQUE : td_red -->
+	</tr>	
+	<!-- FIN BLOQUE : tr_red -->
+
+</table>
+

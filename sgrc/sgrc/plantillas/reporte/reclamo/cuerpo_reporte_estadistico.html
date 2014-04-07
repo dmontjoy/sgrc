@@ -1,0 +1,66 @@
+
+<table class="bloque" width="100%" >
+    <thead>
+        <td colspan="4">Tags m&aacute;s frecuentes</td>
+    </thead>
+	<!-- INICIO BLOQUE : tag -->
+	<tr class="renglon">		
+		<td class="celda_titulo" >{tag}</td>
+                <td width="20px">{cantidad}</td><td colspan="2"><IMG SRC="../../../img/green_bar_point.gif" WIDTH="{porcentaje}" HEIGHT="10" BORDER="0"> {porcentaje}%  </td>		
+	</tr>
+	<!-- FIN BLOQUE : tag -->
+        <!-- INICIO BLOQUE : reporte_ver_mas_tag -->
+        <tr>		
+		<td colspan="4"><a href="javascript:reporte_ver_mas_tag_reclamo('{fecha}')">Ver mas</a></td>				
+	</tr>
+        <!-- FIN BLOQUE : reporte_ver_mas_tag -->
+    <thead>
+        <td colspan="4">Reclamos Resueltos</td>
+    </thead>
+    <tr><td colspan="4">
+    <span style="font-weight:bold; font-size:110%;">{resueltos}</span> {unidad_resueltos}.
+    
+    </td></tr>   
+	<!-- INICIO BLOQUE : reclamo_resuelto -->
+	<tr class="renglon">
+		
+		<td class="celda_titulo" >{fase}</td>
+		<td> {cantidad} </td><td colspan="2"><IMG SRC="../../../img/blue_bar_point.gif" WIDTH="{porcentaje}" HEIGHT="10" BORDER="0"> {porcentaje}% </td>
+		
+	</tr>
+	<!-- FIN BLOQUE : reclamo_resuelto -->
+        
+     <thead>
+        <td colspan="4">Reclamos Abiertos</td>
+    </thead>
+    <tr><td colspan="4">
+   <span style="font-weight:bold; font-size:110%;">{abiertos}</span> {unidad_abiertos}.
+    
+    </td></tr>   
+	<!-- INICIO BLOQUE : reclamo_abierto -->
+	<tr class="renglon">
+		
+		<td class="celda_titulo" >{fase}</td>
+		<td> {cantidad} </td><td colspan="2"><IMG SRC="../../../img/blue_bar_point.gif" WIDTH="{porcentaje}" HEIGHT="10" BORDER="0"> {porcentaje}% </td>
+		
+	</tr>
+	<!-- FIN BLOQUE : reclamo_abierto -->
+        
+        <thead>
+        <td colspan="4">Reclamos Cerrados</td>
+    </thead>
+    <tr><td colspan="4">
+    <span style="font-weight:bold; font-size:110%;">{cerrados}</span> {unidad_cerrados}.
+    
+    </td></tr>   
+	<!-- INICIO BLOQUE : reclamo_cerrado -->
+	<tr class="renglon">
+		
+		<td class="celda_titulo" ><a href="javascript:reporte_ver_estado_fase_reclamo('{fecha}',{idfase})">{fase}</a></td>
+		<td> {cantidad} </td><td colspan="2"><IMG SRC="../../../img/blue_bar_point.gif" WIDTH="{porcentaje}" HEIGHT="10" BORDER="0"> {porcentaje}% </td>
+		
+	</tr>
+	<!-- FIN BLOQUE : reclamo_cerrado -->
+        
+</table>
+<br/>

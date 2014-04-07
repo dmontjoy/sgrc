@@ -1,0 +1,4 @@
+02-11 16:32:58.750: I/Lab-Intents(2039): Entered startImplicitActivation()
+02-11 16:32:58.755: I/Lab-Intents(2039): Chooser Intent Action:android.intent.action.CHOOSER
+02-11 16:33:00.785: I/TestRunner(2039): finished: testRun(course.labs.intentslab.test.ImplicitTest)
+02-11 16:33:00.785: I/TestRunner(2039): passed: testRun(course.labs.intentslab.test.ImplicitTest)

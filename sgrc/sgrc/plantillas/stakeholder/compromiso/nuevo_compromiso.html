@@ -1,0 +1,28 @@
+
+                            
+<!-- INICIO BLOQUE : item_compromiso -->
+       <div class="compromiso_{idcompromiso}_{idmodulo_compromiso}" style="padding-left: 20px;">
+        <table width="100%"  class="celdaSimple" >
+            <tr>
+              <td width="60%">
+                  <strong>{fecha_compromiso}</strong>
+                </td>
+                <td width="40%" align="right" >
+                    <a href='javascript:exportar_pdf_compromiso("frame1",{idcompromiso},{idmodulo_compromiso})' title='Ver PDF'><img src='../../../img/pdf.png' alt='PDF'/></a>
+                    <a href="javascript:modal_editar_compromiso({idcompromiso},{idmodulo_compromiso});" title="Editar compromiso"><img src="../../../img/edit.png" alt="Editar"/></a>
+                    <a href="javascript:eliminar_compromiso({idcompromiso},{idmodulo_compromiso});" title="Eliminar compromiso"><img src="../../../img/trash.png" alt="Eliminar"/></a>
+                </td>
+
+            </tr>
+             <tr>
+              <td colspan="2">
+                {compromiso}
+                </td>
+
+            </tr>
+        </table>
+        </div>
+<!-- FIN BLOQUE : item_compromiso -->
+  
+
+

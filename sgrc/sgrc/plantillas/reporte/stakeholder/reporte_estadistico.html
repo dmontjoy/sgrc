@@ -1,0 +1,140 @@
+
+    <style>
+		
+		#contenedor_r_e{  border: 1px solid silver;width: 800px;text-align: left; padding: 5px 5px 5px 5px;position: relative;overflow: hidden;}
+		#contenedor_r_e div{ margin: 5px;}
+                #contenedor_r_e * {font-size: 12px;}
+	        #contenido div h2{text-align: center;}
+                #bloque_izq * {font-size: 12px;}
+                #bloque_der * {font-size: 12px;}
+	</style>
+
+    <table class="bloque" width="100%">
+      <thead>
+        <tr>
+            <td colspan="2" align="center"> Stakeholder - Estad&iacute;stico </td>
+        </tr>
+      </thead>
+    </table>
+    <br>
+    <form id="form_consulta_reporte_estadistico">
+       <div id="contenedor_r_e">
+          <div style="float: left;"> Durante el siguiente periodo de
+            tiempos:
+            <select name="rango_reporte" id="rango_reporte" onchange="consultar_reporte_estadistico()">
+              <option value="0"> <-- SELECCIONE --> </option>
+              <option value="1"> 7 dias </option>
+              <option value="2" selected="selected"> 1 mes </option>
+              <option value="3"> 3 meses </option>
+              <option value="4"> 6 meses </option>
+              <option value="5"> 1 a&ntildeos </option>
+              <option value="6"> 3 a&ntildeos </option>
+              <option value="7"> 5 a&ntilde;os </option>
+              <option value="0"> Todos </option>
+            </select>
+          </div>
+
+          <div style="clear:left;float:left;width: 40%"> 
+              <label for="from"> Del </label> 
+              <input id="ifecha1" name="fecha_del" value="" type="text"> 
+              <label for="to"> Al </label>
+              <input id="ifecha2" name="fecha_al" value="" type="text"> 
+          </div>
+          <div style="float: left;"> 
+               <button id="boton_filtro" type="button" onclick="consultar_reporte_estadistico_avanzado();"> Buscar</button> 
+          </div>
+          <div style="clear:left;float: left;"> <input id="nume_celda_estadistico_tag"
+    
+              name="nume_celda_estadistico_tag" value="0" type="hidden"> <input id="nume_fila_estadistico_tag"
+    
+              name="nume_fila_estadistico_tag" value="0" type="hidden"> Tag: <input
+    
+              class="buscar" name="buscar_estadistico_tag" id="buscar_estadistico_tag"
+    
+              onfocus="borrar_estadistico_tag(); busqueda_rapida_estadistico_tag();"
+    
+              value=" Buscar tag" size="20" type="text"> <img id="img_buscar_estadistico_tag"
+    
+              src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;">
+          </div>
+          <div style="float: left;">
+            <table id="estadistico_tag" width="100%">
+            </table>
+          </div>
+          <div style="clear:both;display: block;"></div>
+        </div>   
+      
+    </form>
+
+    <script>
+    $("#boton_filtro").button({
+            icons: {
+            secondary: "ui-icon-search"
+            }
+        });
+   
+   function busqueda_rapida_estadistico_tag() {
+
+    $("#buscar_estadistico_tag").autocomplete({//Usamos el ID de la caja de texto donde lo queremos
+        dataType: "json",
+        delay: 500,
+        minLength: 1,
+        source: function(request, response) {
+            $.ajax({
+                dataType: 'json',
+                type: 'get',
+                data: {
+                    busca_rapida_tag: request.term
+                },
+                url: "../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_tag",
+                 beforeSend: function() {
+                    $("#img_buscar_estadistico_tag").attr("src","../../../img/ajax-loader.png");
+
+                },
+                success: function(datos) {
+                    //$("#mensaje").val(datos);
+                    response($.map(datos, function(item) {
+                        return{
+                            label: item.label,
+                            value: item.value
+                        }
+                    }));
+                    $("#img_buscar_estadistico_tag").attr("src","../../../img/serach.png");
+
+                }
+            });
+        },
+        focus: function(event, ui) {
+            event.preventDefault();
+            return false;
+        },
+        select: function(a, b) {
+            $("#buscar_estadistico_tag").val("");
+            if(b.item.value!='nuevo_tag')
+                agrega_celda('estadistico_tag', b.item, 'idestadistico_complejo_tag', 'nume_celda_estadistico_tag', 'nume_fila_estadistico_tag');
+            return false;
+        }
+    });
+
+}
+
+    
+    function borrar_estadistico_tag() {
+        $("#buscar_estadistico_tag").val("");
+    }
+</script><br>
+    <div style="clear:both;display: block;">
+      <table width="100%">
+        <tbody>
+          <tr>
+            <td valign="top" width="50%">
+              <div id="bloque_izq"> {cuerpo_reporte_estadistico} </div>
+            </td>
+            <td valign="top" width="50%"> 
+                <div id="bloque_der"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    

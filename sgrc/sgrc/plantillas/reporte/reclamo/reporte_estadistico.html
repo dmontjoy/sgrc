@@ -1,0 +1,50 @@
+<table width="100%" class="bloque">
+        <thead>
+        <td align="center" colspan="2">
+            Reclamo - Estad&iacute;stico
+        </td>
+        </thead>
+</table>
+        
+<br/>
+<div>
+Durante el siguiente periodo de tiempo:  
+<select name="rango_reporte" id="rango_reporte" onChange="consultar_reclamo_estadistico()">
+	<option value="1" >		
+		7 dias				
+	</option>
+        <option value="2" selected>		
+		1 mes				
+	</option>
+        <option value="3" >		
+		3 meses				
+	</option>
+        <option value="4" >		
+		6 meses				
+	</option>
+        <option value="5" >		
+		1 a&ntilde;o				
+	</option>
+        <option value="6" >		
+		3 a&ntilde;os				
+	</option>
+        <option value="7" >		
+		5 a&ntilde;os				
+	</option>
+        <option value="0" >		
+		Todos				
+	</option>
+</select>
+</div>
+<br/>
+<table width="70%">
+    <tr><td width="50%" valign="top">
+<div id="bloque_izq" >
+{cuerpo_reporte_estadistico}
+</div>
+        </td><td width="50%" valign="top">
+
+<div id="bloque_der" style="margin-left: 10px;"></div>
+        </td></tr>
+</table>
+   

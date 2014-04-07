@@ -1,0 +1,191 @@
+
+
+<!-- INICIO BLOQUE : item_reclamo -->
+<div id="reclamo_{idreclamo}_{idmodulo_reclamo}">
+<table width="100%" style="background-color: #fff;" >
+<tr   class="renglon">
+    <td  colspan="2" class="celdaSimple">
+
+        <table  border="0" width="100%">
+            <tr>
+                <td width="75%"> 
+                    <label style="font-weight:bold;">{fecha_reclamo} </label>
+                    Reclamo N&ordm; {idreclamo}-{idmodulo_reclamo} - {evaluacion}
+                    <!-- INICIO BLOQUE : sh_reclamo -->
+                    &nbsp;
+                    <a href="javascript:cargar_stakeholder('{idsh}---{idmodulo}---{idpersona_tipo}')" title="" data="{imagen}" class="tooltip">{sh}</a> 
+                    &nbsp;
+                    <!-- FIN BLOQUE : sh_reclamo -->
+                    recibido por {rc} asignado a 
+                    <!-- INICIO BLOQUE : rc_reclamo -->
+                    &nbsp;
+                    {rc}
+                    &nbsp;
+                    <!-- FIN BLOQUE : rc_reclamo -->
+                </td>
+                <td width="25%" valign="center" align="right">                    
+                    <a href='javascript:exportar_pdf_reclamo("frame1",{idreclamo},{idmodulo_reclamo},4)' title='Ver Historico Interno'><img src='../../../img/pdf.png' alt='PDF'/></a>
+                    <!-- INICIO BLOQUE : editar_reclamo -->
+                    <a href="javascript:modal_reclamo({idreclamo},{idmodulo_reclamo},{persona})" title="Editar Reclamo"><img src="../../../img/edit.png" alt="Editar"/></a>
+                    <!-- FIN BLOQUE : editar_reclamo -->
+                    <!-- INICIO BLOQUE : eliminar_reclamo -->
+                    <a href="javascript:eliminar_reclamo({idreclamo},{idmodulo_reclamo})" title="Eliminar reclamo"><img src="../../../img/trash.png" alt="Eliminar"/></a>
+                    <!-- FIN BLOQUE : eliminar_reclamo -->
+                </td>
+
+            </tr>
+            <tr>
+                <td  colspan="2" width="100%">
+                    {reclamo}
+                </td>
+
+            </tr>
+        </table>
+            <table id="tabla_reclamo_{idreclamo}_{idmodulo_reclamo}" border="0" width="100%">
+            <!-- INICIO BLOQUE : item_evaluacion -->
+            <!-- INICIO BLOQUE : item_propuesta -->
+
+            <tr class="propuesta_reclamo_{idpropuesta}_{idmodulo_propuesta}" style="{estilo}">
+                <td colspan="2">
+                    <div class="propuesta_{idpropuesta}_{idmodulo_propuesta}" style="padding-left: 20px;">
+                        <table width="100%"  class="celdaPropuesta">
+                            <tr>
+                                <td width="80%">
+                                    <strong>{fecha_propuesta}</strong> Acuerdo N&ordm; {idpropuesta}-{idmodulo_propuesta}
+                                </td>
+                                <td width="20%" align="right">
+                                    <!-- INICIO BLOQUE : editar_propuesta -->
+                                    <a href="javascript:modal_editar_propuesta({idpropuesta},{idmodulo_propuesta});" title="Editar acuerdo"><img src="../../../img/edit.png" alt="Editar"/></a>
+                                    <!-- FIN BLOQUE : editar_propuesta -->
+                                    <!-- INICIO BLOQUE : eliminar_propuesta -->
+                                    <a href="javascript:eliminar_propuesta({idpropuesta},{idmodulo_propuesta},{idreclamo},{idmodulo_reclamo});" title="Eliminar acuerdo"><img src="../../../img/trash.png" alt="Eliminar"/></a>
+                                    <!-- FIN BLOQUE : eliminar_propuesta -->
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    {propuesta}
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                </td>
+            </tr>
+            <!-- FIN BLOQUE : item_propuesta -->
+             <!-- INICIO BLOQUE : item_apelacion -->
+
+            <tr class="apelacion_reclamo_{idapelacion}_{idmodulo_apelacion}" style="{estilo}">
+                <td colspan="2">
+                    <div class="apelacion_{idapelacion}_{idmodulo_apelacion}" style="padding-left: 20px;">
+                        <table width="100%"  class="celdaApelacion">
+                            <tr>
+                                <td width="80%">
+                                    <strong>{fecha_apelacion}</strong> Apelaci&oacute;n N&ordm; {idapelacion}-{idmodulo_apelacion}
+                                </td>
+                                <td width="20%" align="right">
+                                    <!-- INICIO BLOQUE : editar_apelacion -->
+                                    <a href="javascript:modal_editar_apelacion({idapelacion},{idmodulo_apelacion});" title="Editar apelacion"><img src="../../../img/edit.png" alt="Editar"/></a>
+                                    <!-- FIN BLOQUE : editar_apelacion -->
+                                    <!-- INICIO BLOQUE : eliminar_apelacion -->
+                                    <a href="javascript:eliminar_apelacion({idapelacion},{idmodulo_apelacion});" title="Eliminar apelacion"><img src="../../../img/trash.png" alt="Eliminar"/></a>
+                                    <!-- FIN BLOQUE : eliminar_apelacion -->
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    {apelacion}
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                </td>
+            </tr>
+            <!-- FIN BLOQUE : item_apelacion -->
+
+            <tr class="evaluacion_reclamo_{idevaluacion}_{idmodulo_evaluacion}" style="{estilo}">
+                <td colspan="2">
+                    <div class="evaluacion_{idevaluacion}_{idmodulo_evaluacion}" style="padding-left: 20px;">
+                        <table width="100%"  class="celdaSimple">
+                            <tr>
+                                <td width="80%">
+                                    <strong>{fecha_evaluacion}</strong> Evaluaci&oacute;n N&ordm; {idevaluacion}-{idmodulo_evaluacion}
+                                </td>
+                                <td width="20%" align="right">
+                                    <!-- INICIO BLOQUE : editar_evaluacion -->                                    
+                                    <a href="javascript:modal_editar_evaluacion({idevaluacion},{idmodulo_evaluacion});" title="Editar evaluacion"><img src="../../../img/edit.png" alt="Editar"/></a>
+                                    <!-- FIN BLOQUE : editar_evaluacion -->
+                                    <!-- INICIO BLOQUE : eliminar_evaluacion -->
+                                    <a href="javascript:eliminar_evaluacion({idevaluacion},{idmodulo_evaluacion});" title="Eliminar evaluacion"><img src="../../../img/trash.png" alt="Eliminar"/></a>
+                                    <!-- FIN BLOQUE : eliminar_evaluacion -->
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    {evaluacion}
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                </td>
+            </tr>
+            
+            <!-- FIN BLOQUE : item_evaluacion -->
+             
+            <!-- INICIO BLOQUE : menu_evaluacion -->
+            <tr>
+                <td colspan="2" align="right" >
+                  <form id="form_modal_evaluacion_{idreclamo}_{idmodulo_reclamo}" enctype="multipart/form-data" >
+                      <div class="evaluacion_reclamo_{idreclamo}_{idmodulo_reclamo}" style="display:none;">
+                       <!--   
+                       <textarea minlength="2" required name="evaluacion" id="evaluacion" rows="5" style="width:95%;"></textarea>
+                       -->
+                      </div>
+                      <div>
+                                    <table width="100%">
+                                        <td align="left">
+                                           <!-- INICIO BLOQUE : boton_ocultar -->
+                                            <button class="boton_ocultar" onclick="cambiar_visibilidad_clase('evaluacion_reclamo_{idreclamo}_{idmodulo_reclamo}');return false;">Mostrar</button>
+                                            <!-- FIN BLOQUE : boton_ocultar -->
+                                           <!--
+                                           <button class="boton_rc" onclick="cambiar_visibilidad_clase('evaluacion_reclamo_{idreclamo}_{idmodulo_reclamo}');return false;">RC</button>       
+                                           -->
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                        <td align="right">
+                                            <!--
+                                           <button class="boton_guardar" onclick="">Guardar</button>
+                                            -->
+                                            
+                                        </td>
+                                    </table>
+                         </div>
+                      </form>  
+                     </td>
+                     
+                  </tr>
+                  <!-- FIN BLOQUE : menu_evaluacion -->
+
+
+        </table>
+
+    </td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" >
+</script>
+<!-- FIN BLOQUE : item_reclamo -->
+
+
+

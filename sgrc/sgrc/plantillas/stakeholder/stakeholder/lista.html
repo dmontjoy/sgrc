@@ -1,0 +1,55 @@
+<br/>
+Se hallaron los siguientes registros parecidos:
+<br/>
+<table border="0" >
+     <tr>
+         <td class="celdaSimple"><strong>N&ordm;</strong></td>
+         <td class="celdaSimple"><strong>Nombres</strong></td>
+         <td class="celdaSimple"><strong>Tipo</strong></td>
+     </tr>    
+    <!-- INICIO BLOQUE : sh_resultado -->
+
+    <tr>
+        <td class="celdaSimple">{numero}.</td>
+        <td class="celdaSimple">
+            
+            <!-- INICIO BLOQUE : sh_nombre -->
+            <a href="javascript:ver_datos_stakeholder('{idsh}---{idmodulo}---{idpersona_tipo}')">{nombres}</a>
+            <!-- FIN BLOQUE : sh_nombre -->
+            <!-- INICIO BLOQUE : rc_nombre -->
+            <a href="javascript:ver_datos_relacionista({idpersona_tipo},0, {idrc}, {idmodulo})">{nombres}</a>
+            <!-- FIN BLOQUE : rc_nombre -->
+            <!-- INICIO BLOQUE : nombre -->
+            {nombres}
+            <!-- FIN BLOQUE : nombre -->
+        </td>
+        <td class="celdaSimple" width="50px">
+            <!-- INICIO BLOQUE : sh -->
+            &nbsp;SH
+            <!-- FIN BLOQUE : sh -->
+            <!-- INICIO BLOQUE : rc -->
+            &nbsp;RC
+            <!-- FIN BLOQUE : rc -->
+        </td>
+    </tr>
+    <!-- FIN BLOQUE : sh_resultado -->
+    <tr>
+        <td colspan="3" align="center">
+            <div><br><strong>¿Desea continuar de todos modos?</strong><br></div>
+            <div>
+            <button id="validar_ok" style="margin:5px;" onclick="validar_nombre_aceptar();return false;">Aceptar</button>
+            
+            <button id="validar_cancel" style="margin:5px;" onclick="validar_nombre_cancelar();return false;">Cancelar</button>
+            </div>
+        </td>
+
+    </tr>
+ </table>
+
+<script type="text/javascript" >
+    
+    
+    $("#validar_ok").button();
+    
+    $("#validar_cancel").button();
+</script>

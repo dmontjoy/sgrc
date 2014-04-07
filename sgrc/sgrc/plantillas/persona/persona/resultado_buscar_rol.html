@@ -1,0 +1,47 @@
+
+
+<table width="100%" align="center">
+<tr>
+	<td valign="top">
+    
+		<table class="bloque" width="100%">
+        	<thead>
+    	<td colspan="3" >
+            <div class="nuevo">
+        	<a href="#" onclick="ver_crear_rol();">Nuevo Rol</a>
+            </div>
+        	Listado de Roles
+        </td>
+    </thead>
+        
+      <!-- INICIO BLOQUE : resultado_rol -->
+		<tr id="fila_{idrol}" class="renglon">
+			<td align="center" width="5%" class="celdaSimple">
+				{numero}.
+			</td>
+			<td class="{clase}" id="columna_{idrol}" width="80%" >
+				{rol}
+			</td>
+			<td id="enlace_{idrol}" width="15%" class="celdaSimple">
+                                
+				<a href="javascript:ver_editar_rol({idrol},'{rol}');" title="Editar">
+				<img src="../../../img/edit.png" alt="Editar"/>
+				</a>
+                                
+                                <!-- INICIO BLOQUE : eliminar_rol -->
+				<a href="javascript:mostrar_eliminar_rol({idrol},{idmodulo_rol});" title="Eliminar">
+				<img src="../../../img/trash.png" alt="Eliminar"/>
+				</a>
+                                <!-- FIN BLOQUE : eliminar_rol -->
+			</td>
+		</tr>
+	
+	<!-- FIN BLOQUE : resultado_rol -->
+
+    </table>
+
+	{bloque_usuarios}
+	</td>
+	
+</tr>
+</table>

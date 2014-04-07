@@ -1,0 +1,277 @@
+
+<table id="list0"></table>
+<script>
+    var datos2=[
+                
+		{c1:"Stakeholder",c2:"{cantidad_tsh}"},
+                {c1:"Interacciones",c2:"{cantidad_ti}"}
+		];
+            
+    jQuery("#list0").jqGrid({ 
+                datatype: "local",
+                data: datos2,
+                height: "100%", 
+                autowidth: true,
+                altRows :true,
+                altclass: 'myRowAltClass', 
+                colNames:['Entitad','Total'], 
+                colModel:[  
+                            {name:'c1',index:'c1',width:50, sorttype:'text'},
+                            {name:'c2',index:'c2',width:50,align:'right', sorttype:'number'}
+                        ],
+                 rowNum:4,
+                 sortname: 'total_stakeholder',
+                 gridview:true,
+                 caption: 'Resumen del {fecha_del} al {fecha_al}',
+                 loadonce: true,
+            }); 
+  //var grid = $("#list0");
+  //var gview = $("#gview_"+grid[0].id); 
+  //gview.css ("height", 30)
+  //  gview.children("div.ui-jqgrid-hdiv").hide();
+        
+        //,'<strong>{total2}</strong> tags han sido asignados a {text_stakeholders}.'
+</script>
+
+
+<table id="list1"></table>
+<script>
+    $("#ifecha1").datepicker({
+            defaultDate: "+1w",
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function(selectedDate) {
+                $("#ifecha2").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#ifecha2").datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            dateFormat: 'dd/mm/yy',
+            numberOfMonths: 1,
+            onClose: function(selectedDate) {
+                $("#ifecha1").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+                            
+    $( "#ifecha1" ).datepicker( "setDate", "{fecha_del}" );
+    $( "#ifecha2" ).datepicker( "setDate", "{fecha_al}" );
+            
+    $("#ifecha1").datepicker("option", "maxDate", $( "#ifecha2" ).datepicker( "getDate" ));
+    $("#ifecha2").datepicker("option", "minDate", $( "#ifecha1" ).datepicker( "getDate" ));
+    
+    var datos1;
+    jQuery("#list1").jqGrid({ 
+                datatype: "local",
+                data: datos1,
+                height: "100%", 
+                autowidth: true,
+                colNames:['<strong>{interacciones}</strong> interacciones  han sido registradas en <strong>{stakeholders}</strong> {text_stakeholders}.'], 
+                colModel:[  
+                            {name:'message',index:'message', sortable:false}
+                        ],
+                 rowNum:20,
+                 rowList:[10,20,30],
+                 rownumWidth: 30,
+                 caption: '1. Interacciones ',
+                 loadonce: true,
+            }); 
+</script>
+
+<table id="list2"></table>
+<!-- INICIO BLOQUE : reporte_ver_mas_tag_sh -->
+<a class="show-more" href="javascript:reporte_ver_mas_tag('{fecha_del}','SH','{fecha_al}')">Ver m&aacute;s...</a>
+<!-- FIN BLOQUE : reporte_ver_mas_tag_sh -->
+<script>
+    var datos2=[
+                <!-- INICIO BLOQUE : tag_sh -->
+		{tag:"{tag}",cantidad:"{cantidad}",porcentaje:"<span style=\"width:30px;display:inline-block;text-align:right\">{porcentaje}%</span> <IMG SRC=\"../../../img/green_bar_point.gif\" WIDTH=\"{porcentaje}\" HEIGHT=\"10\" BORDER=\"0\">"},
+                <!-- FIN BLOQUE : tag_sh -->
+		];
+            
+    jQuery("#list2").jqGrid({ 
+                datatype: "local",
+                data: datos2,
+                height: "100%", 
+                autowidth: true,
+                altRows :true,
+                altclass: 'myRowAltClass',
+                colNames:['Tag','Cantidad','Porcentaje'], 
+                colModel:[  
+                            {name:'tag',index:'tag',width:40, sorttype:'text'},
+                            {name:'cantidad',index:'cantidad',width:20,align:'center', sorttype:'number'},
+                            {name:'porcentaje',index:'porcentaje',width:40, sorttype:'text'},
+                        ],
+                 rowNum:4,
+                 sortname: 'cantidad',
+                 sortorder: 'desc',
+                 gridview:true,
+                 caption: '2. Tags - {text_Stakeholder} m&aacute;s frecuentes',
+                 loadonce: true,
+            }); 
+        
+        jQuery("#list2").jqGrid('setGroupHeaders', {
+            useColSpanStyle: true, 
+            groupHeaders:[
+                  {startColumnName: 'tag', numberOfColumns: 3, titleText: '<strong>{total2}</strong> tags han sido asignados a {text_stakeholders}. '}
+            ]	
+          });
+        
+        //,'<strong>{total2}</strong> tags han sido asignados a {text_stakeholders}.'
+</script>
+<table id="list3"></table>
+ <!-- INICIO BLOQUE : reporte_ver_mas_tag_interaccion -->
+<a class="show-more"  href="javascript:reporte_ver_mas_tag('{fecha_del}','Interaccion','{fecha_al}')">Ver m&aacute;s...</a>
+<!-- FIN BLOQUE : reporte_ver_mas_tag_interaccion -->
+<script>
+    var datos3=[
+                <!-- INICIO BLOQUE : tag_interaccion -->
+		{tag:"{tag}",cantidad:"{cantidad}",porcentaje:"<span style=\"width:30px;display:inline-block;text-align:right\">{porcentaje}%</span> <IMG SRC=\"../../../img/green_bar_point.gif\" WIDTH=\"{porcentaje}\" HEIGHT=\"10\" BORDER=\"0\">"},
+                <!-- FIN BLOQUE : tag_interaccion -->
+		];
+            
+    jQuery("#list3").jqGrid({ 
+                datatype: "local",
+                data: datos3,
+                height: "100%", 
+                autowidth: true,
+                altRows :true,
+                altclass: 'myRowAltClass',
+                colNames:['Tag','Cantidad','Porcentaje'], 
+                colModel:[  
+                            {name:'tag',index:'tag',width:40, sorttype:'text'},
+                            {name:'cantidad',index:'cantidad',width:20,align:'center', sorttype:'number'},
+                            {name:'porcentaje',index:'porcentaje',width:40, sorttype:'text'},
+                        ],
+                 rowNum:4,
+                 sortname: 'cantidad',
+                 sortorder: 'desc',
+                 rowList:[10,20,30],
+                 rownumWidth: 30,
+                 caption: '3. Tags - Interacci&oacute;n m&aacute;s frecuentes',
+                 gridview:true,
+                 loadonce: true,
+            }); 
+        
+        jQuery("#list3").jqGrid('setGroupHeaders', {
+            useColSpanStyle: true, 
+            groupHeaders:[
+                  {startColumnName: 'tag', numberOfColumns: 3, titleText: '<strong>{total3}</strong> tags han sido asignados a interacciones. '}
+            ]	
+          });
+        
+        //,'<strong>{total2}</strong> tags han sido asignados a {text_stakeholders}.'
+</script>
+<table id="list4"></table>
+<!-- INICIO BLOQUE : reporte_ver_mas_interaccion_tag_sh -->
+ <a class="show-more"   href="javascript:reporte_ver_mas_tag('{fecha_del}','Interaccion-Tag-SH','{fecha_al}')">Ver m&aacute;s...</a>
+<!-- FIN BLOQUE : reporte_ver_mas_interaccion_tag_sh -->
+<script>
+    var datos4=[
+                <!-- INICIO BLOQUE : interaccion_tag_sh -->
+		{tag:"{tag}",porcentaje:"<span style=\"width:50px;display:inline-block;text-align:right\">{porcentaje}%</span> <IMG SRC=\"../../../img/green_bar_point.gif\" WIDTH=\"{porcentaje}\" HEIGHT=\"10\" BORDER=\"0\">"},
+                <!-- FIN BLOQUE : interaccion_tag_sh -->
+		];
+            
+    jQuery("#list4").jqGrid({ 
+                datatype: "local",
+                data: datos4,
+                height: "100%", 
+                autowidth: true,
+                altRows :true,
+                altclass: 'myRowAltClass',
+                colNames:['Tag','Porcentaje'], 
+                colModel:[  
+                            {name:'tag',index:'tag',width:60, sorttype:'text'},                            
+                            {name:'porcentaje',index:'porcentaje',width:40, sorttype:'text'},
+                        ],
+                 rowNum:20,
+                 rowList:[10,20,30],
+                 rownumWidth: 30,
+                 caption: '4. % Temas Tratados en  Interacciones de los {text_Stakeholders}',
+                 loadonce: true,
+            }); 
+      
+        
+        //,'<strong>{total2}</strong> tags han sido asignados a {text_stakeholders}.'
+</script>
+<table class="estadistico" width="100%">
+    
+    <thead class="estadistico">
+        <td colspan="4"> 5. Relacionistas Comunitarios / Interacciones </td>
+    </thead>
+	
+	<!-- INICIO BLOQUE : usuario -->
+	<tr class="renglon">
+		
+		<td class="celda_titulo" width="60%"><a  href='../stakeholder/astakeholder.php?nombre={nombre}&idpersona={idpersona}&idmodulo={idmodulo}&modo=0' >{usuario}</a></td>
+		<td width="20px">{cantidad}</td><td colspan="2"><IMG SRC="../../../img/blue_bar_point.gif" WIDTH="{porcentaje}" HEIGHT="10" BORDER="0"> {porcentaje}%  </td>		
+		
+	</tr>
+	<!-- FIN BLOQUE : usuario -->
+        <!-- INICIO BLOQUE : reporte_ver_mas_rc -->
+        <tr>
+		
+            <td colspan="4"><a href="javascript:reporte_ver_mas_rc('{fecha_del}','{fecha_al}')">Ver m&aacute;s...</a></td>
+		
+		
+	</tr>
+        <!-- FIN BLOQUE : reporte_ver_mas_rc -->
+        <thead class="estadistico">
+        <td colspan="4"> 6. Stakeholders / Interacciones</td>
+    </thead>
+	
+	<!-- INICIO BLOQUE : interaccion_sh -->
+	<tr class="renglon">
+		
+		<td class="celda_titulo" width="60%"><a href="javascript:ver_datos_stakeholder('{idpersona_compuesto}')">{nombre}.</a></td> 
+		<td width="20px">{cantidad}</td><td colspan="2"><IMG SRC="../../../img/green_bar_point.gif" WIDTH="{porcentaje}" HEIGHT="10" BORDER="0"> {porcentaje}%  </td>		
+		
+	</tr>
+	<!-- FIN BLOQUE : interaccion_sh -->
+        <!-- INICIO BLOQUE : reporte_ver_mas_interaccion -->
+        <tr>
+		
+            <td colspan="4"><a href="javascript:reporte_ver_mas_interaccion('{fecha_del}','{fecha_al}')">Ver m&aacute;s...</a></td>
+		
+		
+	</tr>
+        <!-- FIN BLOQUE : reporte_ver_mas_interaccion -->
+
+<thead class="estadistico">
+        <td colspan="4"> 7. Compromisos</td>
+</thead>
+<tr><td colspan="4">
+<span style="font-weight:bold; font-size:110%;">{compromisos_registrados}</span> compromisos han sido registrados.
+</td></tr>
+<!-- INICIO BLOQUE : compromiso -->
+<tr class="renglon">
+
+    <td class="celda_titulo" >{estado}.</td>
+    <td width="20px">{cantidad}</td><td colspan="2"><IMG SRC="../../../img/blue_bar_point.gif" WIDTH="{porcentaje}" HEIGHT="10" BORDER="0"> {porcentaje}%  </td>		
+
+</tr>
+<!-- FIN BLOQUE : compromiso -->
+
+<thead class="estadistico">
+        <td colspan="4"> 8. Stakeholders clave</td>
+</thead>
+	
+	<!-- INICIO BLOQUE : stakeholder -->
+	<tr class="renglon">
+		
+		<td class="celda_titulo" width="60%"><a href="javascript:ver_datos_stakeholder('{idsh}')">{nombre}.</a></td>		
+		<td colspan="2"><img src="../../../img/{imagen}" title="{estado}" style="width:auto; height:auto;vertical-align: middle;"/> ({importancia})</td>
+	</tr>
+	<!-- FIN BLOQUE : stakeholder -->
+        <!-- INICIO BLOQUE : ver_mas_stakeholder -->
+        <tr>
+		
+            <td colspan="4"><a href="javascript:ver_mas_stakeholder('{fecha_del}','{fecha_al}')">Ver m&aacute;s...</a></td>
+		
+		
+	</tr>
+        <!-- FIN BLOQUE : ver_mas_stakeholder -->
+</table>
+<br/>

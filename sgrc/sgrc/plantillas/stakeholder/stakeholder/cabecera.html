@@ -1,0 +1,42 @@
+
+
+<input type="hidden" name="idpersona" id="idpersona" value="{idpersona}" />
+<input type="hidden" name="idmodulo" id="idmodulo" value="{idmodulo}" />
+
+<table width="100%">
+
+    <tr>
+        <td width="100px"><img src="{imagen}" alt="" border="1" height="100px"/></td>
+        <td width="120px">
+            <div id="calificacion_stakeholder">
+                {ver_calificacion_stakeholder}
+            </div>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <span class="titulo">{nombre_stakeholder}</span>
+                    </td>
+
+                </tr>
+                <!-- INICIO BLOQUE : organizacion -->
+
+                <tr>
+                    <td>
+                        En <a href="javascript:cargar_stakeholder('{idpersona}---{idmodulo}---{idpersona_tipo}');">{organizacion}</a> es {cargo}
+                    </td>
+                </tr>
+                <!-- FIN BLOQUE : organizacion -->
+
+                {cuerpo_cabecera_tag}
+
+
+            </table>
+
+        </td>
+        
+    </tr>
+</table>
+
+

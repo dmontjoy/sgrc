@@ -1,0 +1,64 @@
+
+<form id="form_ver_editar_movimiento" class="table_2rows"  method="post" enctype="multipart/form-data" accept-charset="utf-8" action="./../../empresa_local/movimiento_facturacion/amovimiento_facturacion.php">
+    <input type="hidden" id="op_empresa_local" name="op_empresa_local" value="{op_empresa_local}" />
+    <input type="hidden" name="idpersona" id="idpersona" value="{idpersona}" />
+    <input type="hidden" name="idmodulo" id="idmodulo" value="{idmodulo}" />
+    <input type="hidden" name="idperiodo" id="idperiodo" value="{idperiodo}" />
+
+    <ul>
+
+        <li>
+         <h2>Periodo: {periodo}</h2>
+     </li>
+
+     <!-- INICIO BLOQUE : mes -->
+
+     <li>
+        <label for="name">{periodo_sub}:</label>
+        <input class="numero" type="number" size="30" name=idperiodo_sub[{idperiodo_sub}] value={monto}>
+    </li>
+
+    <!-- FIN BLOQUE : mes -->
+
+    <li>
+     <button id="guardar_movimiento_facturacion" class="submit" type="submit">Guardar</button>
+ </li>
+</ul>
+</form>
+
+
+<script type="text/javascript">
+$('#form_ver_editar_movimiento').ajaxForm({
+  beforeSubmit: function() {
+        //alert('Submitting...');
+        $("#guardar_movimiento_facturacion").html('<table width="100%"><tr><td align="center"><img src="../../../img/bar-ajax-loader.gif"></td></tr></table>');
+
+    },
+    success: function(data) {
+        var obj = jQuery.parseJSON(data);
+
+        if (obj.success) {
+
+          $.jGrowl(obj.mensaje, {theme: 'verde'});
+
+
+
+      } else {
+          $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+      }
+
+      $.ajax({
+        type: 'get',
+        url: '../../../programas/empresa_local/movimiento_facturacion/amovimiento_facturacion.php?op_empresa_local=ver_editar_periodo&idpersona=' + obj.idpersona + '&idmodulo=' + obj.idmodulo +'&idperiodo=' + obj.idperiodo,
+        success: function(datos) {
+                    //alert(datos);
+
+                    //console.log(datos);
+                    $("#cdetalle_movimiento_facturacion").html(datos);
+                }
+            });
+
+  }
+});
+</script>

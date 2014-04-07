@@ -1,0 +1,54 @@
+
+<div id="predio_sh">
+<table width="100%">
+            <tr>
+                <td width="100%" class="celdaSimple" colspan="3">
+                <!-- INICIO BLOQUE : crear_predio_sh -->
+                <div style="padding-left: 5px;padding-bottom: 5px">
+                <input type="text" class="buscar" name="busqueda_rapida_predio_sh" id="busqueda_rapida_predio_sh"  onfocus="borrar_busqueda_rapida_predio_sh_buscar();busqueda_rapida_predio_sh_buscar();"   value=" Buscar stakeholder por apellido paterno apellido materno nombre" size="70"  width="70px">
+                 <img id="img_busqueda_rapida_predio_sh"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+
+                </div>
+                <!-- FIN BLOQUE : crear_predio_sh -->  
+            </td>
+        </tr>
+            <!-- INICIO BLOQUE : predio_sh -->
+            <tr>
+                <td width="2%">{predio_sh_num}. </td>
+                <td width="33%">
+                    
+                    <a href="javascript:cargar_stakeholder('{idpersona}---{idmodulo}---1')" title="ir a ficha stakeholder"> {predio_sh_nombre}</a><br> 
+                    <select onchange="actualizar_predio_tipo_tenencia($(this).val());"> 
+                                       <!-- INICIO BLOQUE : bloque_predio_tipo_tenencia --> 
+                                      <option value='{idpredio_tipo_tenencia_complejo}' {selected} >{predio_tipo_tenencia}</option>  
+                                       <!-- FIN BLOQUE : bloque_predio_tipo_tenencia -->
+                    </select>
+                  
+
+                </td>
+                <td width="35%">
+                    <table width="100%">
+                        <tr>
+
+                                <td width="60%">
+                                    <select onchange="actualizar_predio_sh_proceso_paso($(this).val());"> 
+                                       <!-- INICIO BLOQUE : bloque_predio_procesos_pasos --> 
+                                      <option value='{idpredio_proceso_pasos_complejo}' {selected} >{predio_proceso_pasos}</option>  
+                                       <!-- FIN BLOQUE : bloque_predio_procesos_pasos --> 
+
+                                    </select>
+                                </td>
+                                <td valign="top">
+                                    <!-- INICIO BLOQUE : eliminar_predio_sh -->
+                                    <a href="#" onclick="eliminar_predio_sh({idpredio_sh},{idmodulo_predio_sh})">Eliminar</a>
+                                    <!-- FIN BLOQUE : eliminar_predio_sh -->
+                                </td>
+
+                        </tr>
+ 
+                    </table>
+                </td>
+                <!-- FIN BLOQUE : predio_sh -->
+
+         </table>
+    </div>

@@ -1,0 +1,106 @@
+
+
+<!-- INICIO BLOQUE : item_interaccion -->
+<div id="interaccion_{idinteraccion}_{idmodulo_interaccion}">
+<table width="100%" style="background-color: #fff;">
+<tr   class="renglon">
+    <td  colspan="2" class="celdaSimple">
+
+        <table  border="0" width="80%">
+            <tr>
+                <td width="80%"><span style="width:90px;display:inline-block;"> 
+                    <label style="font-weight:bold;">{fecha_interaccion} </label></span>
+                    <!-- INICIO BLOQUE : sh_interaccion -->
+                    &nbsp;
+                    <a href="javascript:cargar_stakeholder('{idsh}---{idmodulo}---{idpersona_tipo}')" title="" data="{imagen}" class="tooltip">{sh}</a> 
+                    &nbsp;
+                    <!-- FIN BLOQUE : sh_interaccion -->
+                    con
+                    <!-- INICIO BLOQUE : rc_interaccion -->
+                    {rc}{coma}
+                    <!-- FIN BLOQUE : rc_interaccion -->
+                </td> 
+                <td width="20%" valign="center" align="right">
+                    <!-- INICIO BLOQUE : crear_compromiso -->
+                    <a href="javascript:modal_nuevo_compromiso({idinteraccion},{idmodulo_interaccion})" title="Compromiso"><img src="../../../img/clip.png" alt="Compromiso"/></a>
+                    <!-- FIN BLOQUE : crear_compromiso -->
+                    <a href='javascript:exportar_pdf_interaccion("frame1",{idinteraccion},{idmodulo_interaccion})' title='Ver PDF'><img src='../../../img/pdf.png' alt='PDF'/></a>
+                    <!-- INICIO BLOQUE : editar_interaccion -->
+                    <a href="javascript:modal_interaccion({idinteraccion},{idmodulo_interaccion},{persona})" title="Editar interacci&oacute;n"><img src="../../../img/edit.png" alt="Editar"/></a>
+                    <!-- FIN BLOQUE : editar_interaccion -->
+                    <!-- INICIO BLOQUE : eliminar_interaccion -->
+                    <a href="javascript:eliminar_interaccion({idinteraccion},{idmodulo_interaccion})" title="Eliminar interacci&oacute;n"><img src="../../../img/trash.png" alt="Eliminar"/></a>
+                    <!-- FIN BLOQUE : eliminar_interaccion -->
+                </td>
+
+            </tr>
+            <tr>
+                <td  colspan="2" width="100%" style="text-align:justify;">
+                    {interaccion}
+                </td>
+
+            </tr>
+            <tr>
+                <td  colspan="2" style="text-align:justify;">                    
+                    <!-- INICIO BLOQUE : archivo -->
+                    <img src="../../../img/attach.png" alt="adjuntos"><a href="javascript:populateIframe('frame1','interaccion','{archivo}')" title="Descargar">{archivo}</a>{coma}
+                    <!-- FIN BLOQUE : archivo -->
+                </td>
+
+            </tr>
+            <tr>
+                <td  colspan="2" style="text-align:justify;">
+                    <table><tr>
+                    <!-- INICIO BLOQUE : imagen -->
+                    <td><a href="javascript:populateIframe('frame1','interaccion','{archivo}')" title="{nombre}"><img src="../../../archivo/{proyecto}/interaccion/thumbnail/{archivo}" style="padding:1px; border:1px solid #CCC;box-shadow: 2px 2px 1px #ddd;" /></a></td>
+                    <!-- FIN BLOQUE : imagen -->
+                    </tr></table>
+                </td>
+
+            </tr>
+            
+            
+        </table>
+            <table id="tabla_interaccion_{idinteraccion}_{idmodulo_interaccion}" border="0" width="100%">
+            <!-- INICIO BLOQUE : item_compromiso -->
+
+            <tr class="compromiso_interaccion_{idinteraccion}_{idmodulo_interaccion}" style="{estilo}">
+                <td colspan="2">
+                    <div class="compromiso_{idcompromiso}_{idmodulo_compromiso}" style="padding-left: 100px;">
+                        <table width="100%"  class="celdaSimple">
+                            <tr>
+                                <td width="80%">
+                                    <strong>{fecha_compromiso}</strong>
+                                </td>
+                                <td width="20%" align="right">
+                                    <a href='javascript:exportar_pdf_compromiso("frame1",{idcompromiso},{idmodulo_compromiso})' title='Ver PDF'><img src='../../../img/pdf.png' alt='PDF'/></a>
+                                    <!-- INICIO BLOQUE : editar_compromiso -->
+                                    <a href="javascript:modal_editar_compromiso({idcompromiso},{idmodulo_compromiso});" title="Editar compromiso"><img src="../../../img/edit.png" alt="Editar"/></a>
+                                    <!-- FIN BLOQUE : editar_compromiso -->
+                                    <!-- INICIO BLOQUE : eliminar_compromiso -->
+                                    <a href="javascript:eliminar_compromiso({idcompromiso},{idmodulo_compromiso});" title="Eliminar compromiso"><img src="../../../img/trash.png" alt="Eliminar"/></a>
+                                    <!-- FIN BLOQUE : eliminar_compromiso -->
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align:justify; padding-right: 100px;padding-left: 70px;">
+                                    {compromiso}
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                </td>
+            </tr>
+            <!-- FIN BLOQUE : item_compromiso -->           
+
+        </table>
+    </td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" >
+</script>
+<!-- FIN BLOQUE : item_interaccion -->

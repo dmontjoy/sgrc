@@ -1,0 +1,432 @@
+ 
+<input type="hidden" name="idpredio" id="idpredio" value="{idpredio}">
+<input type="hidden" name="idmodulo_predio" id="idmodulo_predio" value="{idmodulo_predio}">
+<div id="enlace_habilitar_interaccion_simple" style="display:none;"> 
+    <a href="javascript:habilitar_registrar_interaccion()">Nueva Interacci&oacute;n [ + ] </a>
+</div>
+
+<div id="interaccion_stakeholder" style="display: block;">
+    <div id="interaccion_stakeholder_simple" >
+        
+        
+        <table width="70%" style="float:left;">
+            <tr>
+                <td colspan="2">
+                    <form id="guardar_interaccion_predio"  enctype="multipart/form-data">
+                        <!--
+                        <input type="hidden" name="idinteraccion_complejo_sh" id="idinteraccion_sh" value={idinteraccion_sh} />
+                        <input type="hidden" name="idinteraccion_complejo_rc" id="idinteraccion_rc" value={idinteraccion_rc} />
+                        <input type="hidden" id="op_predio" name="op_predio" value="guardar_interaccion_predio" />
+
+                        -->
+                                                
+                        <table width="100%" border="0">
+                             <tr>
+                                <td colspan="2" align="justify">
+                                    <textarea minlength="2" required name="interaccion" id="interaccion" style="width:100%;" rows="5">{interaccion}</textarea>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td colspan="2">
+                                    <table width="100%">
+                                        <tr>
+                                             <td>
+                                                Fecha
+                                                <input type="text" name="fecha_interaccion" id="fecha_interaccion" value="{fecha_interaccion}" size="10"/>
+                                            </td>
+                                            <td >Estado
+                                                <select name="idinteraccion_estado" id="idinteraccion_estado">
+                                                    <!-- INICIO BLOQUE : interaccion_estado -->
+                                                    <option value={idinteraccion_estado} {selected}>{interaccion_estado}</option>
+                                                    <!-- FIN BLOQUE : interaccion_estado -->
+
+                                                </select>
+                                            </td>
+
+                                            <td>Prioridad
+                                                <select name="idinteraccion_prioridad" id="idinteraccion_prioridad">
+                                                    <option {selected5}>5</option>
+                                                    <option {selected4}>4</option>
+                                                    <option {selected3}>3</option>
+                                                    <option {selected2}>2</option>
+                                                    <option {selected1}>1</option>
+                                                </select>
+                                            </td>
+
+                                            <td>
+                                                Tipo
+                                                <select name="idinteraccion_tipo" id="idinteraccion_tipo">
+                                                    <!-- INICIO BLOQUE : interaccion_tipo -->
+                                                    <option value={idinteraccion_tipo} {selected}>{interaccion_tipo}</option>
+                                                    <!-- FIN BLOQUE : interaccion_tipo -->
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" align="left">
+                                    <table>
+                                        <tr>
+                                            <td>
+
+                                                <input type="text" class="buscar"  name="buscar_interaccion_tag" id="buscar_interaccion_tag" onfocus="borrar_interaccion_tag();
+                            busqueda_rapida_interacccion_tag(1);" value=" Buscar tag" size="20"  >
+                                                    <img id="img_buscar_sh_rc"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+
+                                            </td>
+                                            <td>
+                                                <table id="interaccion_tag"  width="100%">
+                                       
+                                                </table>
+                                            </td>
+
+                                        </tr>
+                                    </table>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+
+                                    <input type="hidden" id="nume_celda_interaccion_tag" name="nume_celda_interaccion_tag" value="0" />
+                                    <input type="hidden" id="nume_fila_interaccion_tag" name="nume_fila_interaccion_tag" value="0" />
+
+                                    
+                                </td>
+                            </tr>
+                            <tr id="fila_rc" style="display:none;">
+                                    
+                                    <td>
+
+                                        <table>
+                                            <tr>
+                                                <td >
+                                                    <input type="hidden" id="nume_celda_interaccion_rc" name="nume_celda_interaccion_rc" value="2" />
+                                                    <input type="hidden" id="nume_fila_interaccion_rc" name="nume_fila_interaccion_rc" value="1" />
+
+
+                                                    <input type="text" class="buscar" name="interaccion_rc_buscar" id="interaccion_rc_buscar" onfocus="borrar_interaccion_rc_buscar();
+                busquedarapida_interaccion_rc_buscar()" value="Buscar relacionista por apellido paterno apellido materno nombre"  size="80"  width="80px">
+                                                    <img id="img_buscar_interaccion_rc"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                                    <input type="hidden" test="RC" value="{cant_rc}" id="cant_rc" name="cant_rc" />
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                        <table width="100%" class="borde" id="interaccion_rc">
+                                            <!-- INICIO BLOQUE : tr_rc_interaccion -->
+                                                <tr>
+                                                    <!-- INICIO BLOQUE : td_rc_interaccion -->
+
+                                                    <td width="10%" id="interaccion_rc{celda_nume_fila_rc}{celda_nume_celda_rc}">
+                                                        {rc}
+                                                        <!-- INICIO BLOQUE : idinteraccion_complejo_rc -->
+                                                        <input type="hidden" name="idinteraccion_complejo_rc[]" id="idinteraccion_rc{celda_nume_fila_rc}{celda_nume_celda_rc}" value={idinteraccion_complejo_rc} />
+                                                        <!-- FIN BLOQUE : idinteraccion_complejo_rc -->
+                                                    </td>
+                                                    <td id="einteraccion_rc{celda_nume_fila_rc}{celda_nume_celda_rc}">
+
+                                                        <!-- INICIO BLOQUE : eliminar_rc_interaccion -->
+
+
+                                                        <img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('interaccion_rc{celda_nume_fila_rc}{celda_nume_celda_rc}','cant_rc')" >
+                                                        <!-- FIN BLOQUE : eliminar_rc_interaccion -->
+
+                                                    </td>
+                                                    <!-- FIN BLOQUE : td_rc_interaccion -->
+
+                                                </tr>
+                                                <!-- FIN BLOQUE : tr_rc_interaccion -->
+
+                                        </table>
+                                    </td>
+                                    </tr> 
+                                     <tr id="fila_sh" style="display:none;">
+                                        
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td >
+                                                        <input type="hidden" id="nume_celda_interaccion_sh" name="nume_celda_interaccion_sh" value="2" />
+                                                        <input type="hidden" id="nume_fila_interaccion_sh" name="nume_fila_interaccion_sh" value="1" />
+                                                        <input type="text" class="buscar" name="interaccion_sh_buscar" id="interaccion_sh_buscar" onfocus="borrar_interaccion_sh_buscar();
+                        busquedarapida_interaccion_sh_buscar()" value="Buscar stakeholder por apellido paterno apellido materno nombre"  size="80"  width="100px">
+                                                         <img id="img_buscar_interaccion_sh"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                                         <input type="hidden" test="SH" value="{cant_sh}" id="cant_sh" name="cant_sh" />
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                    <table width="100%" class="borde" id="interaccion_sh">
+                                         <!-- INICIO BLOQUE : tr_sh_interaccion -->
+                                                <tr>
+                                                    <!-- INICIO BLOQUE : td_sh_interaccion -->
+
+                                                    <td width="10%" id="interaccion_sh{celda_nume_fila_sh}{celda_nume_celda_sh}">
+                                                        <a href="javascript:ver_datos_stakeholder('{idsh}---{idmodulo}---1')">{sh}</a>
+
+                                                        <!-- INICIO BLOQUE : idinteraccion_complejo_sh -->
+                                                        <input type="hidden" name="idinteraccion_complejo_sh[]" id="idinteraccion_sh{celda_nume_fila_sh}{celda_nume_celda_sh}" value={idinteraccion_complejo_sh} />
+                                                        <!-- FIN BLOQUE : idinteraccion_complejo_sh -->
+
+                                                    </td>
+                                                    <td id="einteraccion_sh{celda_nume_fila_sh}{celda_nume_celda_sh}">&nbsp;
+                                                        <!-- INICIO BLOQUE : eliminar_sh_interaccion -->
+
+
+                                                        <img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('interaccion_sh{celda_nume_fila_sh}{celda_nume_celda_sh}','cant_sh')" >
+
+                                                        <!-- FIN BLOQUE : eliminar_sh_interaccion -->
+
+                                                    </td>
+                                                    <!-- FIN BLOQUE : td_sh_interaccion -->
+
+                                                </tr>
+                                                <!-- FIN BLOQUE : tr_sh_interaccion -->
+                                    </table>
+
+                                </td>
+                            </tr>
+                            
+                            <tr id="fila_doc" style="display:none;">
+                                        
+                                        <td>
+                                            
+                                            <div id="interaccion_archivo">
+                                                <div><input type='file' name='archivos[]' >(tama&ntilde;o m&aacute;ximo: {maximo} MB)</div><br/>
+                                            </div>
+                                            <a href="javascript:agregar_campo_archivo('interaccion')">Adjuntar otro Archivo (+) </a><br/><br/>
+                                            <table >
+                                             <!-- INICIO BLOQUE : archivo -->
+                                             <tr>
+                                                 <td id="archivo_{idinteraccion_archivo}_{idmodulo_interaccion_archivo}" ><a href="javascript:populateIframe('frame1','interaccion','{ruta}')"  title="Descargar">{archivo}</a></td>
+                                                 <td><input type="hidden" name="idinteraccion_archivo[]" id="idarchivo_{idinteraccion_archivo}_{idmodulo_interaccion_archivo}" value="{idinteraccion_archivo}***{idmodulo_interaccion_archivo}***{activo}"/> {fecha}</td>
+                                                 <td><img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('archivo_{idinteraccion_archivo}_{idmodulo_interaccion_archivo}')" ><br/></td></tr>
+                                             <!-- FIN BLOQUE : archivo -->
+                                            </table>
+                                        </td>
+                                            
+                                    </tr>
+                                    <tr id="fila_comentario" style="display:none;">
+                                        <td class="celda_titulo">Comentario</br>
+                                            <textarea name="comentario_interaccion" id="comentario_interaccion" style="width:100%;" rows="5">{comentario_interaccion}</textarea></td>
+                                    </tr>
+                           
+                            <tr>
+
+                                <td colspan="2">
+                                    <div class="ui-widget-header ui-corner-all">
+                                    <table width="100%">
+                                        <td>
+                                            <button id="boton_ocultar" onclick="habilitar_registrar_interaccion();return false;">Ocultar</button>
+                                            <button id="boton_mostrar_rc" onclick="cambiar_visibilidad('fila_rc');return false;">RC</button>
+                                            <button id="boton_mostrar_sh" onclick="cambiar_visibilidad('fila_sh');return false;">SH</button>
+                                            <button id="boton_mostrar_doc" onclick="cambiar_visibilidad('fila_doc');return false;">Adjuntar</button>
+                                            <button id="boton_mostrar_comentario" onclick="cambiar_visibilidad('fila_comentario');return false;">Comentar</button>
+                                        </td>
+                                        <td align="right">
+                                            <input type="hidden" id="interaccion_simple" name="interaccion_simple" value="1" />
+                                            <div id="guardar_interaccion_simple">
+                                                <input type="submit" name="submitButton" id="interaccion_submit" value="Guardar">
+                                                
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <!--
+                                            <div style="float:right;"><a href="javascript:vista_avanzada_interaccion(1);" onclick="">Vista Avanzada</a></div>
+                                            -->
+                                        </td>
+                                    </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        
+        </div>
+    
+</div>
+<div id="bloque_interaccion" style="clear:both;display: block;">
+        {tabla_interaccion}
+ </div>
+
+
+<!-- INICIO BLOQUE : crear_interaccion -->
+<script type="text/javascript" >
+$("#interaccion_stakeholder_simple").html("");
+$("#enlace_habilitar_interaccion_simple").html("");
+</script>
+<!-- FIN BLOQUE : crear_interaccion -->
+
+<script type="text/javascript" >
+     $("#buscar_interaccion_tag").blur(function() {
+            $("#buscar_interaccion_tag").val("Buscar tag");
+        });
+    
+    
+    $("#interaccion_submit").button();
+    $("#boton_ocultar").button({
+                        icons: {
+                        primary: "ui-icon-newwin",
+                        secondary: "ui-icon-minus"
+                        }
+                        });
+    var boton_mostrar_rc = true;
+    
+    $("#boton_mostrar_rc").button({
+                        icons: {
+                        primary: "ui-icon-person",
+                        secondary: "ui-icon-plus"
+                        }}).click(function() {
+                            var options;
+                            if ( boton_mostrar_rc ) {
+                                boton_mostrar_rc=false;
+                                options = {                                    
+                                    icons: {
+                                    primary: "ui-icon-person",secondary: "ui-icon-minus"
+                                    }
+                                };
+                            } else {
+                                boton_mostrar_rc=true;
+                                options = {                                    
+                                    icons: {
+                                    primary: "ui-icon-person",secondary: "ui-icon-plus"
+                                    }
+                                };
+                            }
+                            $( this ).button( "option", options );
+                            });
+                            
+    var boton_mostrar_sh = true;
+                        
+    $("#boton_mostrar_sh").button({
+                        icons: {
+                        primary: "ui-icon-person",
+                        secondary: "ui-icon-plus"
+                        }}).click(function() {
+                            var options;
+                            if ( boton_mostrar_sh ) {
+                                boton_mostrar_sh=false;
+                                options = {                                    
+                                    icons: {
+                                    primary: "ui-icon-person",secondary: "ui-icon-minus"
+                                    }
+                                };
+                            } else {
+                                boton_mostrar_sh=true;
+                                options = {                                    
+                                    icons: {
+                                    primary: "ui-icon-person",secondary: "ui-icon-plus"
+                                    }
+                                };
+                            }
+                            $( this ).button( "option", options );
+                            });
+
+     var boton_mostrar_doc = true;
+
+    $("#boton_mostrar_doc").button({
+                        icons: {
+                        primary: "ui-icon-paperclip",
+                        secondary: "ui-icon-plus"
+                        }
+                        }).click(function() {
+                            var options;
+                            if ( boton_mostrar_doc ) {
+                                boton_mostrar_doc=false;
+                                options = {                                    
+                                    icons: {
+                                    primary: "ui-icon-paperclip",secondary: "ui-icon-minus"
+                                    }
+                                };
+                            } else {
+                                boton_mostrar_doc=true;
+                                options = {                                    
+                                    icons: {
+                                    primary: "ui-icon-paperclip",secondary: "ui-icon-plus"
+                                    }
+                                };
+                            }
+                            $( this ).button( "option", options );
+                            });
+                            
+    
+    
+   var boton_mostrar_comentario = true;
+                        
+    $("#boton_mostrar_comentario").button({
+                        icons: {
+                        primary: "ui-icon-comment",
+                        secondary: "ui-icon-plus"
+                        }
+                        }).click(function() {
+                            var options;
+                            if ( boton_mostrar_comentario ) {
+                                boton_mostrar_comentario=false;
+                                options = {                                    
+                                    icons: {
+                                    primary: "ui-icon-comment",secondary: "ui-icon-minus"
+                                    }
+                                };
+                            } else {
+                                boton_mostrar_comentario=true;
+                                options = {                                    
+                                    icons: {
+                                    primary: "ui-icon-comment",secondary: "ui-icon-plus"
+                                    }
+                                };
+                            }
+                            $( this ).button( "option", options );
+                            });
+                                
+     
+    
+    var idpredio = $("#idpredio").val();
+    var idmodulo_predio = $("#idmodulo_predio").val();
+    //var presenta=1;
+    
+    var url = '../../../programas/predio/predio/apredio.php?op_predio=guardar_interaccion_predio&idpredio=' + idpredio + '&idmodulo_predio=' + idmodulo_predio;
+    //+ '&presenta=' + presenta
+    //datastring = $("#guardar_interaccion_stakeholder").serialize();
+    
+    //url = url +'&'+datastring;
+    
+    //alert('URL: '+url);
+    $("#guardar_interaccion_predio").attr('action', url); 
+    
+    $('#guardar_interaccion_predio').ajaxForm({
+        beforeSubmit: function() {
+            //alert('Submitting...');
+            if($("#guardar_interaccion_predio").valid()){
+                $("#guardar_interaccion_simple").html('<img src="../../../img/ajax-loader.png">');
+           
+            }else{
+                return false;
+            }
+            
+        },
+        success: function(data) {
+         var obj = jQuery.parseJSON(data);
+          if (obj.success) {
+                $('#tabs').tabs('load', 0);
+               
+                $.jGrowl(obj.mensaje, {theme: 'verde'});
+            } else {
+                $("#guardar_interaccion_simple").html('<input type="submit" name="submitButton" value="Guardar">');
+                $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+            }
+        }
+    });
+
+
+$("#guardar_interaccion_predio").validate({ignore:""});
+</script> 
+

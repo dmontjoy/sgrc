@@ -1,0 +1,139 @@
+
+    <form id="form_modal_apelacion" enctype="multipart/form-data" accept-charset="utf-8">
+        <input type="hidden" id="idmodulo_evaluacion" name="idmodulo_evaluacion" value="{idmodulo_evaluacion}" />
+        <input type="hidden" id="idevaluacion" name="idevaluacion" value="{idevaluacion}" />
+         <input type="hidden" id="idmodulo_apelacion" name="idmodulo_apelacion" value="{idmodulo_apelacion}" />
+        <input type="hidden" id="idapelacion" name="idapelacion" value="{idapelacion}" />
+        <input type="hidden" id="op_apelacion" name="op_apelacion" value="{op_apelacion}" />
+ 	<input type="hidden" name="persona" id="persona" value="0" />
+        <input type="hidden" name="persona" id="presenta" value="0" />
+        <div id="enlace_mostrar_reclamo_complejo" style="display:none;"> <a href="javascript:habilitar_mostrar_reclamo()">Mostrar Reclamo [ + ] </a></div>
+        <div id="enlace_ocultar_reclamo_complejo" > <a href="javascript:habilitar_mostrar_reclamo()">Ocultar Reclamo [ - ] </a></div>
+        <div id="reclamo_stakeholder_complejo" >
+                                {reclamo_cabecera}
+        </div>
+       
+                                <table>
+                                    <tr>
+                                        <td class="celda_titulo" bgcolor="#FFFFCC" >Apelaci&oacute;n</td>
+                                        <td colspan="3" class="celdaSimple" bgcolor="#FFFFCC">
+                                            <div><textarea minlength="2" required name="apelacion" id="apelacion" cols="100" rows="5" >{apelacion}</textarea></div>
+                                           
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td class="celda_titulo" bgcolor="#FFFFCC" >Fecha</td>
+                                        <td colspan="3" class="celdaSimple" bgcolor="#FFFFCC">
+                                            <input type="text" name="fecha_apelacion" id="fecha_apelacion"  value="{fecha_apelacion}" size="10"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="celda_titulo">Documentos</td>
+                                        <td class="celdaSimple" colspan="3">
+                                            
+                                            <div id="apelacion_archivo">
+                                                <div><input type='file' name='archivos[]' >(tama&ntilde;o m&aacute;ximo: {maximo} MB)</div><br/>
+                                            </div>
+                                            <a href="javascript:agregar_campo_archivo('apelacion')">Adjuntar otro Archivo (+) </a><br/><br/>
+                                            <table >
+                                             <!-- INICIO BLOQUE : archivo -->
+                                             <tr>
+                                                 <td id="archivo_{idapelacion_archivo}_{idmodulo_apelacion_archivo}" ><a href="javascript:populateIframe('frame5','apelacion','{ruta}')"  title="Descargar">{archivo}</a></td>
+                                                 <td><input type="hidden" name="idapelacion_archivo[]" id="idarchivo_{idapelacion_archivo}_{idmodulo_apelacion_archivo}" value="{idapelacion_archivo}***{idmodulo_apelacion_archivo}***{activo}"/> {fecha}</td>
+                                                 <td><img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('archivo_{idapelacion_archivo}_{idmodulo_apelacion_archivo}')" ><br/></td></tr>
+                                             <!-- FIN BLOQUE : archivo -->
+                                            </table>
+                                           </td> 
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td colspan="3" align="center">
+                                            <div id="guardar_apelacion_complejo" style="margin:5px;">
+                                                <input type="submit"  id="apelacion_complejo_submit" value="Guardar"/>
+                                                <!-- INICIO BLOQUE : reclamo_pdf -->
+                                                &nbsp;&nbsp;
+                                                <a href='javascript:exportar_pdf_reclamo("frame5",{idreclamo},{idmodulo_reclamo})' title='Ver PDF'><img style="width:auto; height:auto;vertical-align: middle;" src='../../../img/pdf.png' alt='PDF'/>Ver PDF</a> 
+                                                <!-- FIN BLOQUE : reclamo_pdf -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </form>
+
+            
+
+<iframe id="frame5" style="display:none" src=""></iframe>
+                                
+
+
+<script type="text/javascript" >
+    
+    var from = $("#fecha_reclamo").html().split("/");
+    
+    $("#fecha_apelacion").blur();
+    $("#fecha_apelacion").datepicker({changeYear: true,minDate: new Date(from[2], from[1] - 1, from[0]), changeMonth: true});
+      
+
+    $("#apelacion_complejo_submit").button();
+
+    var idpersona = $("#idpersona").val();
+    var idmodulo = $("#idmodulo").val();
+    
+    var url = '../../../programas/reclamo/apelacion/aapelacion.php?idpersona=' + idpersona + '&idmodulo=' + idmodulo;
+    
+    //datastring = $("#guardar_reclamo_stakeholder").serialize();
+    
+    //url = url +'&'+datastring;
+    
+    //alert('URL: '+url);
+    $("#form_modal_apelacion").attr('action', url); 
+    
+    $('#form_modal_apelacion').ajaxForm({
+        beforeSubmit: function() {
+            
+            if($("#form_modal_apelacion").valid()){
+                $("#guardar_apelacion_complejo").html('<img src="../../../img/bar-ajax-loader.gif">');
+                
+            }else{
+                return false;
+            }
+           
+        },
+        success: function(data) {
+         var obj = jQuery.parseJSON(data);
+         if (obj.op_stakeholder) {
+                $("#pantalla_aux_principal").dialog("close");
+                
+                
+                if (obj.success) {
+                    
+                    $(".apelacion_" + obj.idapelacion + "_" + obj.idmodulo_apelacion).html(obj.data);
+                    if(obj.error_archivo){
+                        $.jGrowl(obj.mensaje, {theme: 'amarillo'});
+                        alert('No se pudo cargar el archivo');
+                    }else{
+                        $.jGrowl(obj.mensaje, {theme: 'verde'});
+                    }
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }
+            } else {
+                $("#pantalla_aux_principal").dialog("close");
+                if (obj.success) {
+                    $('#tabs').tabs('load', 1);
+                    $.jGrowl(obj.mensaje, {theme: 'verde'});
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }
+            }
+        
+        }
+    });
+
+
+$("#form_modal_apelaion").validate({ignore:""});
+
+
+</script> 

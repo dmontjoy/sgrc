@@ -1,0 +1,139 @@
+
+    <form id="form_modal_reclamo" enctype="multipart/form-data" accept-charset="utf-8">
+        <input type="hidden" id="idmodulo_evaluacion" name="idmodulo_evaluacion" value="{idmodulo_evaluacion}" />
+        <input type="hidden" id="idevaluacion" name="idevaluacion" value="{idevaluacion}" />
+        <input type="hidden" id="op_reclamo" name="op_reclamo" value="{op_reclamo}" />
+ 	<input type="hidden" name="persona" id="persona" value="0" />
+        <input type="hidden" name="persona" id="presenta" value="0" />
+            <div id="enlace_mostrar_reclamo_complejo" style="display:none;"> <a href="javascript:habilitar_mostrar_reclamo()">Mostrar Reclamo [ + ] </a></div>
+            <div id="enlace_ocultar_reclamo_complejo" > <a href="javascript:habilitar_mostrar_reclamo()">Ocultar Reclamo [ - ] </a></div>
+            <div id="reclamo_stakeholder_complejo" >
+                                {reclamo_cabecera}
+            </div>
+                                <table>
+                                    <tr>
+                                        <td class="celda_titulo" bgcolor="#FFFFCC" >Evaluaci&oacute;n</td>
+                                        <td colspan="3" class="celdaSimple" bgcolor="#FFFFCC">
+                                            <div><textarea minlength="2" required name="evaluacion" id="evaluacion" cols="100" rows="5" >{evaluacion}</textarea></div>                                          
+                                        </td>
+                                    </tr>
+                                   
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td colspan="3" align="center">
+                                            <div id="guardar_reclamo_complejo" style="margin:5px;">
+                                                <input type="submit"  id="evaluacion_submit" value="Guardar"/>
+                                                <!-- INICIO BLOQUE : reclamo_pdf -->
+                                                &nbsp;&nbsp;
+                                                <a href='javascript:exportar_pdf_reclamo("frame5",{idreclamo},{idmodulo_reclamo})' title='Ver PDF'><img style="width:auto; height:auto;vertical-align: middle;" src='../../../img/pdf.png' alt='PDF'/>Ver PDF</a> 
+                                                <!-- FIN BLOQUE : reclamo_pdf -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </form>
+
+                                
+
+<iframe id="frame5" style="display:none" src=""></iframe>
+                                
+
+
+<script type="text/javascript" >
+    
+    var from = $("#fecha_reclamo").html().split("/");
+    
+    $("#fecha_reclamo").blur();
+    $("#fecha_reclamo").datepicker({changeYear: true,minDate: new Date(from[2], from[1] - 1, from[0]), changeMonth: true});
+    
+    // getter
+    //var minDate = $( "#fecha_reclamo" ).datepicker( "option", "minDate" );
+    
+    //alert('minDate : '+from[2] +'-'+ from[1] +'-'+ from[0]);
+    
+    $("#evaluacion_submit").button();
+
+    var idpersona = $("#idpersona").val();
+    var idmodulo = $("#idmodulo").val();
+    var url = '../../../programas/reclamo/reclamo/areclamo.php?idpersona=' + idpersona + '&idmodulo=' + idmodulo;
+    
+    //datastring = $("#guardar_reclamo_stakeholder").serialize();
+    
+    //url = url +'&'+datastring;
+    
+    //alert('URL: '+url);
+    $("#form_modal_reclamo").attr('action', url); 
+    
+    $('#form_modal_reclamo').ajaxForm({
+        beforeSubmit: function() {
+           
+        
+            if($("#form_modal_reclamo").valid()){
+                $("#guardar_reclamo_complejo").html('<img src="../../../img/bar-ajax-loader.gif">');
+                
+            }else{
+                return false;
+            }
+           
+        },
+        success: function(data) {
+         var obj = jQuery.parseJSON(data);
+         $("#pantalla_aux_principal").dialog("close");
+         if (obj.success) {
+                    //alert("#evaluacion_" + obj.idevaluacion + "_" + obj.idmodulo_evaluacion);
+                    $(".evaluacion_" + obj.idevaluacion + "_" + obj.idmodulo_evaluacion).html(obj.data);
+                    $.jGrowl(obj.mensaje, {theme: 'verde'});
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }
+         
+         /***
+           if (obj.op_stakeholder==4) {
+                $("#pantalla_aux_principal").dialog("close");
+                var idreclamo = $("#idreclamo").val();
+                
+                if (obj.success) {
+                    $("#reclamo_" + obj.idreclamo + "_" + obj.idmodulo_reclamo).html(obj.data);
+                    if(obj.error_archivo){
+                        $.jGrowl(obj.mensaje, {theme: 'amarillo'});
+                        alert('No se pudo cargar el archivo');
+                    }else{
+                        $.jGrowl(obj.mensaje, {theme: 'verde'});
+                    }
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }
+            } else if (obj.op_stakeholder==1) {
+                $("#pantalla_aux_principal").html("Acuerdo content...");
+                $("#pantalla_aux_principal").dialog('option', 'title', 'Registrar Acuerdo');
+                $("#pantalla_aux_principal").center();
+                if (obj.success) {
+                    $('#tabs').tabs('load', 1);
+                    $.jGrowl(obj.mensaje, {theme: 'verde'});
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }
+            }else {
+                $("#pantalla_aux_principal").dialog("close");
+                if (obj.success) {
+                    $('#tabs').tabs('load', 1);
+                    $.jGrowl(obj.mensaje, {theme: 'verde'});
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }
+            }
+        
+        **/
+        
+        }
+    });
+
+
+$("#form_modal_reclamo").validate({ignore:""});
+
+
+</script> 

@@ -1,0 +1,40 @@
+
+
+                                                            <table >
+                                                                <!-- INICIO BLOQUE : tr_calificacion -->
+                                                                <tr>
+                                                                    <td>
+                                                                        <img src="{posicion}" title="{comentario}" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <table>
+                                                                            <!-- INICIO BLOQUE : tr_dimension -->
+                                                                            <tr>
+                                                                                <td>
+                                                                                    {dimension}
+                                                                                </td>
+                                                                                <td>
+                                                                                    <img src="{valor}" title="{comentario}"/>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <!-- FIN BLOQUE : tr_dimension -->  
+
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                                
+                                                                <tr>
+                                                                    <td align="center">
+                                                                        <!-- INICIO BLOQUE : crear_calificacion_sh -->
+                                                                       <a href="javascript:mostrar_registrar_voto({idpersona},{idmodulo})"> Votar</a>
+                                                                       <!-- FIN BLOQUE : crear_calificacion_sh -->
+                                                                    </td>
+                                                                    <td align="center">
+                                                                        <!-- INICIO BLOQUE : eliminar_calificacion_sh -->
+                                                                       <a href="javascript:mostrar_historico({idpersona},{idmodulo})"> Historico</a>
+                                                                       <!-- FIN BLOQUE : eliminar_calificacion_sh -->
+                                                                    </td>   
+                                                                </tr>
+                                                                
+                                                                <!-- FIN BLOQUE : tr_calificacion -->  
+                                                            </table> 

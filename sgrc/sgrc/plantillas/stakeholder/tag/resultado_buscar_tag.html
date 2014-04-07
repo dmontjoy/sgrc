@@ -1,0 +1,58 @@
+
+
+<table width="710px" align="center">
+<tr>
+	<td valign="top">
+    
+		<table class="bloque" width="340px">
+        	<thead>
+    	<td colspan="3" >
+        	Listado de Tags
+        </td>
+    </thead>
+        
+        
+        <!-- INICIO BLOQUE : letra_tag -->
+            <tr>
+                    <td colspan="3"align="left" class="celda_titulo" style="font-size:14px">
+                        {letra}.
+                    </td>			
+                    
+            </tr>
+       
+    
+	<!-- INICIO BLOQUE : resultado_tag -->
+		<tr id="fila_{idtag}_{idmodulo_tag}" class="renglon">
+			<td align="center" width="5%" class="celdaSimple">
+				{numero}.
+			</td>
+			<td class="celdaSimple" id="columna_{idtag}_{idmodulo_tag}" width="80%" >
+				<a href="javascript:ver_stakeholders({idtag},{idmodulo_tag},'{tag}')">{tag} {fecha}</a>
+				
+				
+			</td>
+			<td id="enlace_{idtag}_{idmodulo_tag}" width="15%" class="celdaSimple">
+                                <!-- INICIO BLOQUE : editar_tag -->
+				<a href="javascript:modal_mostrar_editar_tag({idtag},{idmodulo_tag},'{tag}',2);" title="Editar">
+				<img src="../../../img/edit.png" alt="Editar"/>
+				</a>
+                                <!-- FIN BLOQUE : editar_tag -->
+                                <!-- INICIO BLOQUE : eliminar_tag -->
+				<a href="javascript:mostrar_eliminar_tag({idtag},{idmodulo_tag});" title="Eliminar">
+				<img src="../../../img/trash.png" alt="Eliminar"/>
+				</a>
+                                <!-- FIN BLOQUE : eliminar_tag -->
+			</td>
+		</tr>
+	
+	<!-- FIN BLOQUE : resultado_tag -->
+    <!-- FIN BLOQUE : letra_tag -->
+		</table>
+
+	
+	</td>
+	<td valign="top" width="350px">
+		<div id="stakeholder">{ver_tags_persona}</div>	
+	</td>
+</tr>
+</table>

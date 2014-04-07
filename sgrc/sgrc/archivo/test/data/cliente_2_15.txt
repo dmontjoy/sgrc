@@ -1,0 +1,17 @@
+UPDATE persona SET
+                      `fecha_a` = '2013-08-29 12:11:03',
+                      `idusu_a` = 1,
+                      `idmodulo_a` = 1,
+                      `apellido_p` = 'Sanchez',
+                      `apellido_m` = 'Delgado',
+                      `nombre` = 'Kevin', 
+                      `fecha_nacimiento` = '1980-01-01',
+                      `idpersona_tipo` = '1',
+                      `idestado_civil` = '1',
+                      `sexo` = '1',
+                       comentario = '',
+                       background = ''
+                      WHERE
+                       idpersona ='1' AND
+                       idmodulo='1';;
+INSERT INTO persona_mail(idpersona_mail,mail,idpersona,idmodulo,activo,idmodulo_persona_mail) VALUES (4,'kevsandel@gmail.com',1,1,1, 2);;

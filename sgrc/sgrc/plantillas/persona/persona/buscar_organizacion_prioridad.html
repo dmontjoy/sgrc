@@ -1,0 +1,83 @@
+
+
+<form id="form_buscar_persona" onsubmit="buscar_persona_prioridad();return false;">
+    <input type="hidden" name="es_stakeholder" id="es_stakeholder" value="{es_stakeholder}" />
+    
+    <table  class="bloque" cellpadding="4" cellspacing="4" width="710px">
+        <thead>
+        <td colspan="4"> Buscar Organizacion - Prioridad</td>
+        </thead>
+        <tr>
+            <td  class="celda_titulo">Nombre comercial</td>
+            <td class="celdaSimple">
+                <input type="text" name="apaterno" id="amaterno"  size='80' value="{amaterno}"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="130px" class="celda_titulo">Raz&oacute;n social</td>
+            <td  class="celdaSimple">
+                <input type="text" name="amaterno" id="apaterno"  size='80' value="{apaterno}"/>
+            </td>
+        </tr>
+        
+        <input type="hidden" name="nombre" id="nombre"  size='60' value=""/>
+        <!-- INICIO BLOQUE : persona_tipo -->
+        <tr>
+                <td class="celda_titulo">Tipo</td>
+                <td colspan="3" class="celdaSimple">
+
+                    <select name="idpersona_tipo" id="idpersona_tipo"  onchange="cambiar_busqueda_persona_prioridad()">
+                        <!-- INICIO BLOQUE : persona_tipo_opcion -->
+                        <option {selected} value="{idtipo}" >{tipo}</option>
+                        <!-- FIN BLOQUE : persona_tipo_opcion -->
+                        <option {selected_todos} value="0" >TODOS</option>
+                    </select>
+                    <!-- INICIO BLOQUE : filtro -->
+                    <input type="checkbox" name="filtro" id="filtro"  size='80' value="1" /> Incluir {tipo}
+                    <!-- FIN BLOQUE : filtro -->
+                </td>
+            </tr>
+        <!-- FIN BLOQUE : persona_tipo -->
+         <tr>
+                        <td class="celda_titulo">Prioridad</td>
+                        <td class="celda_titulo" colspan="3">
+                            <table>
+                                <tr>
+                                    <td >
+                                        <input type="hidden" id="nume_celda_prioridad_tag" name="nume_celda_prioridad_tag" value="0" />
+                                        <input type="hidden" id="nume_fila_prioridad_tag" name="nume_fila_prioridad_tag" value="0" />
+
+                                        <input class="buscar ui-autocomplete-input" type="text" name="buscar_prioridad_complejo_tag" id="buscar_prioridad_tag" onfocus="borrar_prioridad_tag();
+busqueda_rapida_prioridad_tag(2);" value=" Buscar tag" size="80" style="background-color: rgb(255, 255, 204); ">
+                                        <img id="img_buscar_prioridad"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <table width="200" class="borde" id="prioridad_tag">
+                               
+                            </table>
+                        </td>
+                    </tr>
+        
+                <tr>
+         
+            <td class="celdaSimple" colspan="2" align="center">
+           <input id="btn_buscar_org" type="submit" value="Buscar" />
+            </td>
+        </tr>
+      </table>
+
+</form>
+
+<div id="resultado_persona">
+</div>
+
+<script type="text/javascript" >
+
+      $("#form_persona").validate();
+      $("#btn_buscar_org").button();
+
+    
+</script> 
+

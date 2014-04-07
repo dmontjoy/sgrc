@@ -1,0 +1,111 @@
+
+<input type="hidden" name="idpredio" id="idpredio" value="{idpredio}">
+<input type="hidden" name="idmodulo_predio" id="idmodulo_predio" value="{idmodulo_predio}">
+
+<div id="contendero_principal" style="position: relative;clear:both;">
+    <div style="clear:left;float:left;width:65%;border: solid 1px #cccccc;padding: 1px;text-align: left">
+        <div style="clear:both;float:left;width:10%">
+            <img src="../../../archivo/test/imagen/1587748425_Edgar_F_Codd.jpg{imagen}" alt="" border="1" height="100px"/>
+        </div>
+        
+        <div style="float:left;width:50%;">
+
+            <table>
+                <tr>
+                    <td colspan="2">
+                        <span class="titulo">{codigo_predio}C&oacute;digo Predio</span>
+                    </td>
+ 
+                </tr>
+                <tr>
+                    <td colspan="2">
+                       {direccion}
+                    </td>
+
+                </tr> 
+                <tr>
+                    <td>
+                        {tabla_predio_tag}
+                    </td>
+                </tr>
+                </table>
+            
+
+        </div>    
+ 
+        <div style="float:left;width: 30%;">
+            <table>
+                
+                 <!-- INICIO BLOQUE : predio_datum -->
+                <tr>
+                    <td class="footer_titulo">
+                        {predio_datum} {simbolo}:
+                    </td>
+                    <td>
+                        {predio_datum_valor}
+                    </td>
+                </tr>
+                <!-- FIN BLOQUE : predio_datum -->
+            </table>
+           </div>
+        
+ 
+        
+        
+           <div id="tabs" style="clear: left;float: left;">
+                <ul>
+                  <li>
+                      <a href="../../../programas/predio/predio/apredio.php?op_predio=ver_interaccion_predio&idpredio={idpredio}&idmodulo_predio={idmodulo_predio}"> Interacci&oacute;n Predio</a> 
+                  </li>
+                  <li>
+                      <a href="../../../programas/predio/predio/apredio.php?op_predio=ver_editar_predio_sh&idpredio={idpredio}&idmodulo_predio={idmodulo_predio}"> Stakeholder</a> 
+                  </li>
+                  
+                   <li>
+                      <a href="../../../programas/predio/predio/apredio.php?op_predio=ver_editar_predio_datos&idpredio={idpredio}&idmodulo_predio={idmodulo_predio}"> Datos</a> 
+                  </li>
+                   <li>
+                        <li><a href="../../../programas/predio/predio/apredio.php?op_predio=ver_editar_predio_mapa&idpredio={idpredio}&idmodulo_predio={idmodulo_predio}"> Predios</a> </li>
+                  </li>
+                </ul>
+              </div> 
+    </div>
+    
+    <div style="float:left;width: 30%;margin-left: 20px; border: solid 1px #cccccc;">
+          <table width="100%">
+             <!-- INICIO BLOQUE : predio_sh -->
+            <tr>
+                <td width="2%">{predio_sh_num}. </td>
+                <td width="33%">
+                    <a href=""> {predio_sh_nombre}</a><br> ({predio_tipo_tenencia})
+
+                </td>
+                <td width="35%">
+                    <table width="100%">
+                        <tr>
+
+                                <td width="60%">
+                                    <select id="combo_proceso" onchange="actualizar_predio_sh_proceso_paso($(this).val());">
+                                       <!-- INICIO BLOQUE : bloque_predio_procesos_pasos --> 
+                                      <option value={idpredio_proceso_pasos_complejo} {selected}>{predio_proceso_pasos}</option>  
+                                       <!-- FIN BLOQUE : bloque_predio_procesos_pasos --> 
+
+                                    </select>
+                                </td>
+
+                        </tr>
+ 
+                    </table>
+                </td>
+                <!-- FIN BLOQUE : predio_sh -->
+                </tr>
+
+         </table>
+
+    </div>    
+
+</div>
+
+
+
+

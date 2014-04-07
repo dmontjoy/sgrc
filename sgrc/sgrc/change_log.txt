@@ -1,0 +1,50 @@
+SGRC - Change Log
+
+SGRC - 0.3.0 (Released 2013-01-18) [ View Issues ] 
+==================================
+- 0000019: [General] Agregar el tercer parametro en los enlaces de carga del stakeholder (ksanchez) - closed.
+- 0000018: [General] Corregir título pestaña Datos Personales (ksanchez) - closed.
+- 0000017: [General] Habilitar opción todos en el combo del formulario de búsqueda (ksanchez) - closed.
+- 0000016: [General] Quitar caja de texto nombre en el formulario crear empresa (ksanchez) - closed.
+- 0000012: [General] Actualizar campos del formulario para empresa (ksanchez) - closed.
+- 0000011: [General] Refrescar listado de personas al eliminar (ksanchez) - closed.
+- 0000010: [General] Implementar función cargar rc en vista de edición (ksanchez) - closed.
+- 0000009: [General] Agregar el combo tipo persona al formulario de búsqueda RC - SH (ksanchez) - closed.
+- 0000008: [General] Eliminación de usuarios (ksanchez) - closed.
+- 0000007: [General] Registro de usuarios (ksanchez) - closed.
+
+[10 issues]
+
+SGRC - 0.2.4 (Released 2013-01-17) [ View Issues ] 
+==================================
+- 0000013: [General] Vizualizacion de interacciones tanto de cuerpo como de la pantalla principal. (dmontjoy) - closed.
+- 0000014: [General] Doble click en ver más interacciones (dmontjoy) - closed.
+- 0000015: [General] Editar persona y organizacion : sh y rc; telefono, mail, direccion, documento de identificacion. (dmontjoy) - closed.
+
+[3 issues]
+
+SGRC - 0.2.3 (Released 2013-01-14) [ View Issues ] 
+==================================
+- 0000006: [General] Problema en la pestaña datos personales. (ksanchez) - closed.
+
+[1 issue]
+
+SGRC - 0.2.2 (Released 2013-01-14) [ View Issues ] 
+==================================
+- 0000005: [General] Crear tags con el mismo nombre de tags desactivados. (ksanchez) - closed.
+
+[1 issue]
+
+SGRC - 0.2.1 (Released 2013-01-14) [ View Issues ] 
+==================================
+- 0000002: [General] Agregar enlaces (ksanchez) - closed.
+- 0000004: [General] No carga el cuadro histórico modal de la calificación. (ksanchez) - closed.
+- 0000003: [General] Corregir el análisis de red (ksanchez) - closed.
+
+[3 issues]
+
+SGRC - 0.1.0 (Released 2013-01-14) [ View Issues ] 
+==================================
+- 0000001: [General] Agregar registro RC (ksanchez) - closed.
+
+[1 issue]

@@ -1,0 +1,81 @@
+<table class="celdaSimple" width="100%">
+        <!-- INICIO BLOQUE : codigo_reclamo -->
+        <tr>
+            <td class="celdaSimple">
+                <strong>C&oacute;digo Reclamo N° </strong>
+
+                <a href="javascript:modal_reclamo({idreclamo},{idmodulo_reclamo},1)" title="Editar Reclamo">{idreclamo}-{idmodulo_reclamo}</a>
+
+            </td>
+            <td class="celdaSimple"  >
+                <strong>Fecha</strong>
+                <div id="fecha_reclamo">{fecha_reclamo}</div>
+            </td>
+
+            <td class="celdaSimple" >
+                <strong>Tipo</strong>
+                {tipo}
+            </td>
+            <td class="celdaSimple" >
+                <strong>Fase</strong>
+                {fase}
+            </td>
+            
+        </tr>
+        <!-- FIN BLOQUE : codigo_reclamo -->
+          <tr>
+
+            <td colspan="4" class="celdaSimple">
+                {reclamo}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="celda_titulo">Tag</td>
+            <td class="celdaSimple" colspan="3">                                                                                       
+                 {tag}&nbsp;
+            </td>
+        </tr>
+         <tr id="fila_reclamo_complejo_previo" >
+
+            <td class="celda_titulo">Reclamo Previo</td>
+            <td class="celdaSimple" colspan="3">
+                {idreclamo_previo}-{idmodulo_reclamo_previo}&nbsp;    
+            </td>
+        </tr>
+           <tr>
+            <td class="celda_titulo">Reclamante</td>
+            <td class="celdaSimple" colspan="3">
+                {sh}&nbsp;                                                                                                    
+            </td>
+        </tr>
+          <tr id="fila_reclamo_complejo_rc1" >
+
+            <td class="celda_titulo">Recibido por</td>
+            <td class="celdaSimple" colspan="3">
+                {rc1}&nbsp;    
+            </td>
+        </tr>
+        <tr>
+            <td class="celda_titulo">Responsable</td>
+            <td class="celdaSimple" colspan="3">
+                {rc2}&nbsp;    
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="celda_titulo">Documentos</td>
+            <td class="celdaSimple" colspan="3">
+
+                <table >
+                 <!-- INICIO BLOQUE : archivo -->
+                 <tr>
+                     <td id="archivo_{idreclamo_archivo}_{idmodulo_reclamo_archivo}" ><a href="javascript:populateIframe('frame1','reclamo','{ruta}')"  title="Descargar">{archivo}</a></td>
+                     <td><input type="hidden" name="idreclamo_archivo[]" id="idarchivo_{idreclamo_archivo}_{idmodulo_reclamo_archivo}" value="{idreclamo_archivo}***{idmodulo_reclamo_archivo}***{activo}"/> {fecha}</td>
+                     <td><img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('archivo_{idreclamo_archivo}_{idmodulo_reclamo_archivo}')" ><br/></td></tr>
+                 <!-- FIN BLOQUE : archivo -->
+                </table>
+            </td>
+        </tr>
+    </table>

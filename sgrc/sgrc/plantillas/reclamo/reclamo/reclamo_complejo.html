@@ -1,0 +1,609 @@
+
+<div id="reclamo_stakeholder_complejo" >
+
+    <form id="form_modal_reclamo" enctype="multipart/form-data" accept-charset="utf-8">
+        <input type="hidden" id="idmodulo_reclamo" name="idmodulo_reclamo" value="{idmodulo_reclamo}" />
+        <input type="hidden" id="idreclamo" name="idreclamo" value="{idreclamo}" />
+        <input type="hidden" id="op_reclamo" name="op_reclamo" value="{op_reclamo}" />
+ 	<input type="hidden" name="persona" id="persona" value="0" />
+        <input type="hidden" name="persona" id="presenta" value="0" />
+      
+                                <table width="800px">
+                                    <!-- INICIO BLOQUE : codigo_reclamo -->
+                                    <tr>
+                                        <td class="celda_titulo">C&oacute;digo</td>
+                                        <td colspan="3" class="celdaSimple">
+                                            {idreclamo}-{idmodulo_reclamo}
+                                        </td>
+                                    </tr>
+                                    <!-- FIN BLOQUE : codigo_reclamo -->
+                                    <tr>
+                                        <td class="celdaSimple" colspan="4">
+                                                        &nbsp;
+                                                        <!-- INICIO BLOQUE : reclamo_fase -->
+                                                        <strong>Estado</strong>
+                                                        {estado} ( {nombre_tipo} )
+                                                        <strong>Fase</strong>
+                                                        {fase} {orden}/{total}
+                                                        <strong>Transcurrieron</strong>
+                                                        {dias} dias.
+                                                        <strong>Restan</strong>
+                                                        {faltan} dias.
+                                                        <!-- FIN BLOQUE : reclamo_fase -->
+
+                                                   </td>
+                                    </tr>
+                                      <tr>
+                                        
+                                        <td colspan="4" class="celdaSimple">
+                                            <textarea minlength="2" required name="reclamo" id="comp_reclamo" rows="5" cols="110">{reclamo}</textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td class="celda_titulo"  >Fecha</td>
+                                        <td class="celdaSimple">    <input type="text" name="fecha_reclamo" id="comp_fecha_reclamo"  value="{fecha_reclamo}" size="10"/>
+                                        </td>
+
+                                            <td class="celda_titulo" >
+                                                Tipo </td>
+                                            <td class="celdaSimple">
+                                                <select name="idreclamo_tipo" id="idreclamo_tipo">
+                                                    <!-- INICIO BLOQUE : reclamo_tipo -->
+                                                    <option value={idreclamo_tipo} {selected}>{tipo}</option>
+                                                    <!-- FIN BLOQUE : reclamo_tipo -->
+                                                </select>
+
+                                            </td>
+                                                    
+                                               
+                                            
+                                    </tr>                                                                                                               
+                                
+                                    <tr>
+                                        <td class="celda_titulo">Tag</td>
+                                        <td class="celda_titulo" colspan="3">
+                                            <table>
+                                                <tr>
+                                                    <td >
+                                                        <input type="hidden" id="nume_celda_reclamo_tag_complejo" name="nume_celda_reclamo_tag_complejo" value="{nume_celda_reclamo_tag_complejo}" />
+                                                        <input type="hidden" id="nume_fila_reclamo_tag_complejo" name="nume_fila_reclamo_tag_complejo" value="{nume_fila_reclamo_tag_complejo}" />
+                                                        <input type="hidden"  value="{cant_rc}" id="cant_complejo_tag" name="cant_tag" />
+                                                        <input type="text"  class="buscar" name="buscar_reclamo_complejo_tag" id="buscar_reclamo_complejo_tag" onfocus="borrar_reclamo_complejo_tag();
+            busqueda_rapida_reclamo_complejo_tag();" value="Buscar tag" size="80"  width="80px" style="background-color: rgb(255, 255, 204); ">
+                                                        <img id="img_reclamo_complejo_buscar_tag"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                            <table width="200" class="borde" id="reclamo_complejo_tag">
+
+                                                <!-- INICIO BLOQUE : tr_tag_reclamo -->
+                                                <tr>
+                                                    <!-- INICIO BLOQUE : td_tag_reclamo -->
+
+                                                    <td width="10%" id="reclamo_complejo_tag{celda_nume_fila}{celda_nume_celda}">
+                                                        {tag}
+
+
+                                                    </td>
+                                                    <td id="ereclamo_complejo_tag{celda_nume_fila}{celda_nume_celda}" >
+                                                        <!-- INICIO BLOQUE : eliminar_tag_reclamo -->
+                                                        <input type="hidden" name="idreclamo_complejo_tag[]" id="idreclamo_complejo_tag{celda_nume_fila}{celda_nume_celda}" value={reclamo_complejo_tag} />
+                                                        <img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('reclamo_complejo_tag{celda_nume_fila}{celda_nume_celda}')" >
+                                                        <!-- FIN BLOQUE : eliminar_tag_reclamo -->
+                                                        &nbsp;
+                                                    </td>
+                                                    <!-- FIN BLOQUE : td_tag_reclamo -->
+
+                                                </tr>
+                                                <!-- FIN BLOQUE : tr_tag_reclamo -->
+
+
+                                            </table>
+                                        </td>
+                                    </tr>
+                                      <tr id="fila_reclamo_complejo_previo" >
+                                        
+                                          <td class="celda_titulo">Reclamo Previo</td>
+                                                    <td class="celdaSimple" colspan="2">
+                                                        
+                                                        <input type="text" class="buscar" name="reclamo_complejo_previo_buscar" id="reclamo_complejo_previo_buscar" onfocus="borrar_reclamo_complejo_previo_buscar();
+                        busqueda_rapida_reclamo_complejo_previo_buscar()" value="Buscar reclamo por codigo"  size="50"  width="50px">
+                                                         <img id="img_buscar_reclamo_complejo_previo"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                                         
+                                                         
+                                                    </td>
+                                               
+                                                    <td class="celdaSimple">
+                                                        <div id="reclamo_complejo_previo">
+                                                            <!-- INICIO BLOQUE : reclamo_previo -->
+                                                            {idreclamo}-{idmodulo_reclamo}
+                                                            <img src="../../../img/trash.png" title="Eliminar" class="icono" style="margin-left:10px;vertical-align: middle;" onclick="borrar_previo_complejo()" border="0" height="16" width="16">
+                                                            <input name="idreclamo_previo" id="idreclamo_previo" value="{idreclamo}---{idmodulo_reclamo}" type="hidden">
+                                                           <!-- FIN BLOQUE : reclamo_previo -->
+                                                        </div>
+                                                    </td>
+                                                         
+                                         
+                                    </tr>
+                                       <tr>
+                                        <td class="celda_titulo">Reclamante</td>
+                                        <td class="celdaSimple" colspan="3">
+                                            <table>
+                                                <tr>
+                                                    <td >
+                                                        <input type="hidden" id="nume_celda_reclamo_sh_complejo" name="nume_celda_reclamo_sh_complejo" value="{nume_celda_reclamo_sh_complejo}" />
+                                                        <input type="hidden" id="nume_fila_reclamo_sh_complejo" name="nume_fila_reclamo_sh_complejo" value="{nume_fila_reclamo_sh_complejo}" />
+                                                        
+                                                        <input type="text" class="buscar" name="reclamo_complejo_sh_buscar" id="reclamo_complejo_sh_buscar" onfocus="borrar_reclamo_complejo_sh_buscar();
+            busqueda_rapida_reclamo_complejo_sh_buscar()" value="Buscar stakeholder por apellido paterno apellido materno nombre"  size="80"  width="100px">
+                                                         <img id="img_buscar_reclamo_complejo_sh"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                                         <input type="hidden"  value="{cant_sh}" id="cant_complejo_sh" name="cant_sh" test="SH"/>
+
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                            <table width="100%" class="borde" id="reclamo_complejo_sh">
+                                                <!-- INICIO BLOQUE : tr_sh_reclamo -->
+                                                <tr>
+                                                    <!-- INICIO BLOQUE : td_sh_reclamo -->
+
+                                                    <td width="10%" id="reclamo_complejo_sh{celda_nume_fila_sh}{celda_nume_celda_sh}">
+                                                        <a href="javascript:ver_datos_stakeholder('{idsh}---{idmodulo}---1')">{sh}</a>
+
+                                                        <!-- INICIO BLOQUE : idreclamo_complejo_sh -->
+                                                        <input type="hidden" name="idreclamo_complejo_sh[]" id="idreclamo_complejo_sh{celda_nume_fila_sh}{celda_nume_celda_sh}" value={idreclamo_complejo_sh} />
+                                                        <!-- FIN BLOQUE : idreclamo_complejo_sh -->
+
+                                                    </td>
+                                                    <td id="ereclamo_complejo_sh{celda_nume_fila_sh}{celda_nume_celda_sh}">&nbsp;
+                                                        <!-- INICIO BLOQUE : eliminar_sh_reclamo -->
+
+
+                                                        <img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('reclamo_complejo_sh{celda_nume_fila_sh}{celda_nume_celda_sh}','cant_complejo_sh')" >
+
+                                                        <!-- FIN BLOQUE : eliminar_sh_reclamo -->
+
+                                                    </td>
+                                                    <!-- FIN BLOQUE : td_sh_reclamo -->
+
+                                                </tr>
+                                                <!-- FIN BLOQUE : tr_sh_reclamo -->
+                                            </table>
+
+                                        </td>
+                                    </tr>
+                                      <tr id="fila_reclamo_complejo_rc1" >
+                                        
+                                          <td class="celda_titulo">Recibido por</td>
+                                                    <td class="celdaSimple" colspan="2">
+                                                        
+                                                        <input type="text" class="buscar" name="reclamo_complejo_rc1_buscar" id="reclamo_complejo_rc1_buscar" onfocus="borrar_reclamo_complejo_rc1_buscar();
+                        busqueda_rapida_reclamo_complejo_rc1_buscar()" value="Buscar relacionista por apellido nombre"  size="50"  width="50px">
+                                                         <img id="img_buscar_reclamo_complejo_rc1"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                                         <input id="count_receptor_complejo" type="hidden" name="count_receptor" value="{count_receptor}" test="RC">
+                                                         
+                                                    </td>
+                                               
+                                                    <td class="celdaSimple">
+                                                        <div id="reclamo_complejo_receptor">
+                                                            <!-- INICIO BLOQUE : rc_reclamo -->
+                                                            {rc}
+                                                            <img src="../../../img/trash.png" title="Eliminar" class="icono" style="margin-left:10px;vertical-align: middle;" onclick="borrar_receptor_complejo()" border="0" height="16" width="16">
+                                                            <input name="idreclamo_rc" id="idreclamo_rc" value="{idrc}---{idmodulo_rc}---0" type="hidden">
+                                                           <!-- FIN BLOQUE : rc_reclamo -->
+                                                        </div>
+                                                    </td>
+                                                         
+                                         
+                                    </tr>
+                                  
+                                    <tr>
+                                        <td class="celda_titulo">Responsable</td>
+                                        <td class="celdaSimple" colspan="3">
+
+                                            <table>
+                                                <tr>
+                                                    <td >
+                                                        <input type="hidden" id="nume_celda_reclamo_rc2_complejo" name="nume_celda_reclamo_rc2_complejo" value="{nume_celda_reclamo_rc2_complejo}" />
+                                                        <input type="hidden" id="nume_fila_reclamo_rc2_complejo" name="nume_fila_reclamo_rc2_complejo" value="{nume_fila_reclamo_rc2_complejo}" />
+
+
+                                                        <input type="text" class="buscar" name="reclamo_complejo_rc2_buscar" id="reclamo_complejo_rc2_buscar" onfocus="borrar_reclamo_complejo_rc2_buscar();
+            busqueda_rapida_reclamo_complejo_rc2_buscar()" value="Buscar relacionista por apellido paterno apellido materno nombre"  size="80"  width="80px">
+                                                        <img id="img_buscar_reclamo_complejo_rc2"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                                        <input type="hidden"  value="{cant_rc}" id="cant_complejo_rc2" name="count_rc" />
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                            <table width="100%" class="borde" id="reclamo_complejo_rc">
+                                                <!-- INICIO BLOQUE : tr_rc_reclamo -->
+                                                <tr>
+                                                    <!-- INICIO BLOQUE : td_rc_reclamo -->
+
+                                                    <td width="10%" id="reclamo_complejo_rc{celda_nume_fila_rc}{celda_nume_celda_rc}" align="right">
+                                                        {rc}
+                                                        <!-- INICIO BLOQUE : idreclamo_complejo_rc -->
+                                                        <input type="hidden" name="idreclamo_complejo_rc[]" id="idreclamo_complejo_rc{celda_nume_fila_rc}{celda_nume_celda_rc}" value={idreclamo_complejo_rc} />
+                                                        <!-- FIN BLOQUE : idreclamo_complejo_rc -->
+                                                    </td>
+                                                    <td width="10%" id="ereclamo_complejo_rc{celda_nume_fila_rc}{celda_nume_celda_rc}" align="left">                                                        
+                                                        <!-- INICIO BLOQUE : eliminar_rc_reclamo --> 
+                                                        <input id="idfecha{celda_nume_fila_rc}{celda_nume_celda_rc}"  type="text" name="fecha_complejo[]" value="{fecha}" size="10">
+                                                        <script type="text/javascript" >
+                                                            $("#idfecha{celda_nume_fila_rc}{celda_nume_celda_rc}").datepicker({changeYear: true, changeMonth: true});
+                                                        </script>
+
+                                                        <img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('reclamo_complejo_rc{celda_nume_fila_rc}{celda_nume_celda_rc}','cant_complejo_rc2')" >
+                                                        <!-- FIN BLOQUE : eliminar_rc_reclamo -->
+
+                                                    </td>
+                                                    <!-- FIN BLOQUE : td_rc_reclamo -->
+
+                                                </tr>
+                                                <!-- FIN BLOQUE : tr_rc_reclamo -->
+
+                                            </table></td>
+                                    </tr>
+                                 
+
+                                    <tr>
+                                        <td class="celda_titulo">Documentos</td>
+                                        <td class="celdaSimple" colspan="3">
+                                            
+                                            <div id="reclamo_complejo_archivo">
+                                                <div><input type='file' name='archivos[]' >(tama&ntilde;o m&aacute;ximo: {maximo} MB)</div><br/>
+                                            </div>
+                                            <a href="javascript:agregar_campo_archivo('reclamo_complejo')">Adjuntar otro Archivo (+) </a><br/><br/>
+                                            <table >
+                                             <!-- INICIO BLOQUE : archivo -->
+                                             <tr>
+                                                 <td id="archivo_{idreclamo_archivo}_{idmodulo_reclamo_archivo}" ><a href="javascript:populateIframe('frame1','reclamo','{ruta}')"  title="Descargar">{archivo}</a></td>
+                                                 <td><input type="hidden" name="idreclamo_archivo[]" id="idarchivo_{idreclamo_archivo}_{idmodulo_reclamo_archivo}" value="{idreclamo_archivo}***{idmodulo_reclamo_archivo}***{activo}"/> {fecha}</td>
+                                                 <td><img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('archivo_{idreclamo_archivo}_{idmodulo_reclamo_archivo}')" ><br/></td></tr>
+                                             <!-- FIN BLOQUE : archivo -->
+                                            </table>
+                                           </td> 
+                                    </tr>
+                                  
+                                    <tr>
+                                        <td class="celda_titulo"  >Historial</td>
+                                        <td colspan="3" class="celdaSimple" >
+                                            <!-- INICIO BLOQUE : evaluacion -->
+                                            <div style="padding: 2px;">
+                                            <table width="100%" class="celdaSimple" >
+                                            <tbody><tr>
+                                                 <td width="80%">
+                                                    <strong>{fecha_evaluacion}</strong> Evaluaci&oacute;n N&ordm; {idevaluacion}-{idmodulo_evaluacion}
+                                                </td>
+                                                <td width="20%" align="right">
+                                                    <!-- INICIO BLOQUE : editar_evaluacion -->
+                                                    <a href="javascript:modal_editar_evaluacion({idevaluacion},{idmodulo_evaluacion});" title="Editar evaluacion"><img src="../../../img/edit.png" alt="Editar"/></a>
+                                                    <!-- FIN BLOQUE : editar_evaluacion -->
+                                                    <!--
+                                                    <a href="javascript:eliminar_evaluacion({idevaluacion},{idmodulo_evaluacion});" title="Eliminar evaluacion"><img src="../../../img/trash.png" alt="Eliminar"/></a>
+                                                    -->
+                                                </td>                                             
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    {evaluacion}
+                                                </td>
+                                            </tr>
+                                            </tbody></table>
+                                            </div>
+                                            <!-- INICIO BLOQUE : apelacion -->
+                                            <div style="padding: 2px;">                                            
+                                                <table width="100%"  class="celdaApelacion">
+                                                    <tr>
+                                                        <td width="80%">
+                                                            <strong>{fecha_apelacion}</strong> Apelaci&oacute;n N&ordm; {idapelacion}-{idmodulo_apelacion}
+                                                        </td>
+                                                        <td width="20%" align="right">
+                                                            <!-- INICIO BLOQUE : editar_apelacion -->
+                                                            <a href="javascript:modal_editar_apelacion({idapelacion},{idmodulo_apelacion});" title="Editar apelacion"><img src="../../../img/edit.png" alt="Editar"/></a>
+                                                            <!-- FIN BLOQUE : editar_apelacion -->
+                                                            <!--
+                                                            <a href="javascript:eliminar_apelacion({idapelacion},{idmodulo_apelacion});" title="Eliminar apelacion"><img src="../../../img/trash.png" alt="Eliminar"/></a>
+                                                            -->
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            {apelacion}
+                                                        </td>
+
+                                                    </tr>
+                                                </table>                                                    
+                                            </div>
+                                            <!-- FIN BLOQUE : apelacion -->
+                                            <!-- INICIO BLOQUE : propuesta -->                                           
+                                                    <div style="padding: 2px;">
+                                                        <table width="100%"  class="celdaPropuesta">
+                                                            <tr>
+                                                                <td width="80%">
+                                                                    <strong>{fecha_propuesta}</strong> Acuerdo N&ordm; {idpropuesta}-{idmodulo_propuesta}
+                                                                </td>
+                                                                <td width="20%" align="right">
+                                                                    <!-- INICIO BLOQUE : editar_propuesta -->
+                                                                    <a href="javascript:modal_editar_propuesta({idpropuesta},{idmodulo_propuesta});" title="Editar acuerdo"><img src="../../../img/edit.png" alt="Editar"/></a>
+                                                                    <!-- FIN BLOQUE : editar_propuesta -->
+                                                                    <!--
+                                                                    <a href="javascript:eliminar_propuesta({idpropuesta},{idmodulo_propuesta},{idreclamo},{idmodulo_reclamo});" title="Eliminar acuerdo"><img src="../../../img/trash.png" alt="Eliminar"/></a>
+                                                                    -->
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    {propuesta}
+                                                                </td>
+
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                           
+                                            <!-- FIN BLOQUE : propuesta -->
+                                            <!-- FIN BLOQUE : evaluacion -->
+                                            
+                                            
+                                            
+                                            <!-- INICIO BLOQUE : nueva_evaluacion -->
+                                            <div><textarea name="evaluacion" id="evaluacion" cols="100" rows="5" ></textarea></div>
+                                            <!-- FIN BLOQUE : nueva_evaluacion -->
+                                            
+                                            <div style="margin:10px;text-align: center;">
+                                                <!-- INICIO BLOQUE : acuerdo -->
+                                                <div> <strong>&iquest;Hay Acuerdo&#63; </strong></div>
+                                                 <div id="radio_evaluacion">
+                                                     <input type="radio" id="radio_evaluacion_1" name="radio_evaluacion" value="1" /><label for="radio_evaluacion_1">&nbsp;&nbsp;&nbsp;&nbsp;S&iacute;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                     <input type="radio" id="radio_evaluacion_2" name="radio_evaluacion" value="0" /><label for="radio_evaluacion_2">&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                    
+                                                </div>
+                                                <!-- FIN BLOQUE : acuerdo -->
+                                                <!-- INICIO BLOQUE : apelacion -->
+                                                <div id="apelacion" style="padding-left: 50px;margin:10px;display:none;">
+                                                    <div> <strong>&iquest;Hay Apelaci&oacute;n&#63; </strong></div>
+                                                    <div id="radio_apelacion">
+                                                        <input type="radio" id="radio_evaluacion_3" name="radio_evaluacion" value="2" /><label for="radio_evaluacion_3">&nbsp;&nbsp;&nbsp;&nbsp;S&iacute;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                        <input type="radio" id="radio_evaluacion_4" name="radio_evaluacion" value="3" /><label for="radio_evaluacion_4">&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;</label>
+
+                                                   </div>
+                                                </div>
+                                                <!-- FIN BLOQUE : apelacion -->
+                                            </div>
+                                            
+                                        </td>
+                                    </tr>
+                                    <!-- INICIO BLOQUE : cierre -->
+                                    <tr>
+                                        <td class="celda_titulo">Cerrar Reclamo</td>
+                                        <td class="celdaSimple" align="center" width="40%">
+                                            <select name="idreclamo_estado" id="idreclamo_estado">
+                                                <option value=0 >&nbsp;Seleccione el motivo&nbsp;</option>
+                                                <option value=7 {selected7}>&nbsp;L&iacute;mite de tiempo&nbsp;</option>
+                                                <option value=8 {selected8}>&nbsp;Cerrado por otro&nbsp;</option>
+                                            </select>
+                                        </td>
+                                        <td class="celda_titulo"  colspan="2" >Fecha
+                                            <input type="text" name="fecha_cierre" id="comp_fecha_cierre"  value="{fecha_cierre}" size="10"/>
+                                        </td>
+                                    </tr>
+                                    <!-- FIN BLOQUE : cierre -->
+                                    <tr>
+                                        <td class="celda_titulo">Comentario</td>
+                                        <td colspan="3" class="celdaSimple">
+                                            <textarea name="comentario_reclamo" id="comentario_reclamo" cols="100" rows="5">{comentario_reclamo}</textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td colspan="3" align="center">
+                                            <div id="guardar_reclamo_complejo" style="margin:5px;">
+                                                
+                                                <!-- INICIO BLOQUE : reclamo_pdf -->
+                                                &nbsp;&nbsp;
+                                                
+                                                <a href='javascript:exportar_pdf_reclamo("frame5",{idreclamo},{idmodulo_reclamo},1)' title='Ver PDF'><img style="width:auto; height:auto;vertical-align: middle;" src='../../../img/pdf.png' alt='PDF'/>Reclamo Externo</a>
+                                                <a href='javascript:exportar_pdf_reclamo("frame5",{idreclamo},{idmodulo_reclamo},2)' title='Ver PDF'><img style="width:auto; height:auto;vertical-align: middle;" src='../../../img/pdf.png' alt='PDF'/>Reclamo Interno</a>
+                                                <a href='javascript:exportar_pdf_reclamo("frame5",{idreclamo},{idmodulo_reclamo},3)' title='Ver PDF'><img style="width:auto; height:auto;vertical-align: middle;" src='../../../img/pdf.png' alt='PDF'/>Historico Externo</a>
+                                                <a href='javascript:exportar_pdf_reclamo("frame5",{idreclamo},{idmodulo_reclamo},4)' title='Ver PDF'><img style="width:auto; height:auto;vertical-align: middle;" src='../../../img/pdf.png' alt='PDF'/>Historico Interno</a>
+
+                                                <!-- FIN BLOQUE : reclamo_pdf -->
+                                                
+                                                <div style="margin:10px;"><input type="submit"  id="reclamo_complejo_submit" value="Guardar"/></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </form>
+
+                                </div>
+
+<iframe id="frame5" style="display:none" src=""></iframe>
+                                
+
+<script type="text/javascript" >
+    $("#comp_fecha_reclamo").datepicker({changeYear: true, changeMonth: true});
+    
+    $("#comp_fecha_cierre").datepicker({changeYear: true, changeMonth: true});
+    
+    $('#radio_evaluacion input:radio').click(function() {
+        if ($(this).val() === '0') {
+            $("#apelacion").show();
+        }else{
+            $("#apelacion").hide();
+        } 
+      });
+  
+    $( "#radio_evaluacion" ).buttonset();
+    
+    $( "#radio_apelacion" ).buttonset();
+    
+    $("#buscar_reclamo_complejo_tag").focusout(function() {
+        $("#buscar_reclamo_complejo_tag").val("Buscar tag");
+    });
+
+     $("#reclamo_complejo_rc1_buscar").focusout(function() {
+        $("#reclamo_complejo_rc1_buscar").val("Buscar relacionista por apellido nombre");
+    });
+
+    $("#reclamo_complejo_previo_buscar").focusout(function() {
+        $("#reclamo_complejo_previo_buscar").val("Buscar reclamo por codigo");
+    });
+
+    $("#reclamo_complejo_rc2_buscar").focusout(function() {
+        $("#reclamo_complejo_rc2_buscar").val("Buscar relacionista por apellido paterno apellido materno nombre");
+    });
+
+    $("#reclamo_complejo_sh_buscar").focusout(function() {
+        $("#reclamo_complejo_sh_buscar").val("Buscar stakeholder por apellido paterno apellido materno nombre");
+    });
+
+    $("#reclamo_complejo_submit").button();
+
+    var idpersona = $("#idpersona").val();
+    var idmodulo = $("#idmodulo").val();
+    var url = '../../../programas/reclamo/reclamo/areclamo.php?idpersona=' + idpersona + '&idmodulo=' + idmodulo;
+    
+    //datastring = $("#guardar_reclamo_stakeholder").serialize();
+    
+    //url = url +'&'+datastring;
+    
+    //alert('URL: '+url);
+    $("#form_modal_reclamo").attr('action', url); 
+    
+    $('#form_modal_reclamo').ajaxForm({
+        beforeSubmit: function() {
+            //alert('Submitting...');
+            if ($("input[name='radio_evaluacion']:checked").length > 0){
+            // one ore more checkboxes are checked
+                $("#evaluacion").attr("minlength","2");
+                $("#evaluacion").attr("required","");
+                $("#form_modal_reclamo").validate({ignore:""});
+               
+            }
+        
+            if($("#form_modal_reclamo").valid()){
+                $("#guardar_reclamo_complejo").html('<img src="../../../img/bar-ajax-loader.gif">');
+                
+            }else{
+                return false;
+            }
+           
+        },
+        success: function(data) {
+         var obj = jQuery.parseJSON(data);
+           if (obj.op_stakeholder==4) {
+               
+                var idreclamo = $("#idreclamo").val();
+                
+                if (obj.success) {
+                    $("#reclamo_" + obj.idreclamo + "_" + obj.idmodulo_reclamo).html(obj.data);
+                    if(obj.error_archivo){
+                        $.jGrowl(obj.mensaje, {theme: 'amarillo'});
+                        alert('No se pudo cargar el archivo');
+                    }else{
+                        $.jGrowl(obj.mensaje, {theme: 'verde'});
+                    }
+                    
+                    if(obj.radio_evaluacion==1){
+                     $.ajax({
+                            url: '../../../programas/reclamo/propuesta/apropuesta.php?op_propuesta=ver_propuesta_stakeholder_complejo&idreclamo='+obj.idreclamo+'&idmodulo_reclamo='+obj.idmodulo_reclamo+'&idevaluacion='+obj.idevaluacion+'&idmodulo_evaluacion='+obj.idmodulo_evaluacion,
+                            beforeSend: function() {
+                                $("#pantalla_aux_principal").html('<img src="../../../img/bar-ajax-loader.gif">');
+                                $("#pantalla_aux_principal").center();
+                                //alert("idreclamo : "+obj.idreclamo);
+                            },
+                            success: function(datos) {
+                                $("#pantalla_aux_principal").html(datos);
+                                $("#pantalla_aux_principal").dialog('option', 'title', 'Registrar Acuerdo');
+                                $("#pantalla_aux_principal").center();
+                            }
+                        });
+                      }else if(obj.radio_evaluacion==2){
+                       $.ajax({
+                            url: '../../../programas/reclamo/apelacion/aapelacion.php?op_apelacion=ver_apelacion_stakeholder_complejo&idreclamo='+obj.idreclamo+'&idmodulo_reclamo='+obj.idmodulo_reclamo+'&idevaluacion='+obj.idevaluacion+'&idmodulo_evaluacion='+obj.idmodulo_evaluacion,
+                            beforeSend: function() {
+                                $("#pantalla_aux_principal").html('<img src="../../../img/bar-ajax-loader.gif">');
+                                $("#pantalla_aux_principal").center();
+                            },
+                            success: function(datos) {
+                                $("#pantalla_aux_principal").html(datos);
+                                $("#pantalla_aux_principal").dialog('option', 'title', 'Registrar Apelación');
+                                $("#pantalla_aux_principal").center();
+                            }
+                        });
+                      
+                      }else{
+                         $("#pantalla_aux_principal").dialog("close");
+                      }
+                    
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+                    $("#pantalla_aux_principal").dialog("close");
+                }
+            } else if (obj.op_stakeholder==1) {
+                $.ajax({
+                            url: '../../../programas/reclamo/propuesta/apropuesta.php?op_propuesta=ver_propuesta_stakeholder_complejo&idreclamo='+obj.idreclamo+'&idmodulo_reclamo='+obj.idmodulo_reclamo+'&idevaluacion='+obj.idevaluacion+'&idmodulo_evaluacion='+obj.idmodulo_evaluacion,
+                            beforeSend: function() {
+                                $("#pantalla_aux_principal").html('<img src="../../../img/bar-ajax-loader.gif">');
+                                $("#pantalla_aux_principal").center();
+                                //alert("idreclamo : "+obj.idreclamo);
+                            },
+                            success: function(datos) {
+                                $("#pantalla_aux_principal").html(datos);
+                                $("#pantalla_aux_principal").dialog('option', 'title', 'Registrar Acuerdo');
+                                $("#pantalla_aux_principal").center();
+                            }
+                        });
+                
+                if (obj.success) {
+                    $('#tabs').tabs('load', 1);
+                    $.jGrowl(obj.mensaje, {theme: 'verde'});
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }
+            }else if (obj.op_stakeholder==2) {
+                $.ajax({
+                            url: '../../../programas/reclamo/apelacion/aapelacion.php?op_apelacion=ver_apelacion_stakeholder_complejo&idreclamo='+obj.idreclamo+'&idmodulo_reclamo='+obj.idmodulo_reclamo+'&idevaluacion='+obj.idevaluacion+'&idmodulo_evaluacion='+obj.idmodulo_evaluacion,
+                            beforeSend: function() {
+                                $("#pantalla_aux_principal").html('<img src="../../../img/bar-ajax-loader.gif">');
+                                $("#pantalla_aux_principal").center();
+                            },
+                            success: function(datos) {
+                                $("#pantalla_aux_principal").html(datos);
+                                $("#pantalla_aux_principal").dialog('option', 'title', 'Registrar Apelación');
+                                $("#pantalla_aux_principal").center();
+                            }
+                        });
+                
+                if (obj.success) {
+                    $('#tabs').tabs('load', 1);
+                    $.jGrowl(obj.mensaje, {theme: 'verde'});
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }
+            }else {
+                $("#pantalla_aux_principal").dialog("close");
+                if (obj.success) {
+                    $('#tabs').tabs('load', 1);
+                    $.jGrowl(obj.mensaje, {theme: 'verde'});
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }
+            }
+        }
+    });
+
+
+$("#form_modal_reclamo").validate({ignore:""});
+
+
+</script> 

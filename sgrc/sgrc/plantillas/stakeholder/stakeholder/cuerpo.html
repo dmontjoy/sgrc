@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>.: SGRC {version} :.</title>
+        <link rel="stylesheet" href="../../../css/jquery-ui-1.10.3.css" />
+        <link rel="stylesheet" type="text/css" href="../../../css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/menu.css">
+        <link rel="stylesheet" type="text/css" href="../../../js/theme/default/style.css">
+
+         <script type="text/javascript" src="../../../js/lib/OpenLayers.js"></script>
+            <script src="../../../js/jquery-1.9.1.js"></script>
+            <script src="../../../js/jquery-ui-1.10.3.js"></script>
+            <script src="../../../js/jquery.ui.dialog.patch.js"></script>
+            <script type='text/javascript' src='../../../js/jquery.form.js'></script>
+            <script src="../../../js/datepicker_es.js"></script>
+            <script language="JavaScript" type="text/javascript" src="../../../js/tabla_dinamica_documento_identificacion.js"></script>
+            <script language="JavaScript" type="text/javascript" src="../../../js/tabla_dinamica_persona.js"></script>
+
+            <script language="JavaScript" type="text/javascript" src="../../../js/tabla_celda_dinamica.js"></script>
+            <script type="text/javascript" src="../../../js/funciones.js"></script>
+            <script type="text/javascript" src="../../../js/tabla_dinamica.js"></script>
+
+            <script type="text/javascript" src="../../../js/checkdate.js"></script>
+            <script src="../../../js/tag.js"></script>
+            <script src="../../../js/interaccion.js"></script>
+            <script src="../../../js/hogar.js"></script>
+            <script src="../../../js/reclamo.js"></script>
+            <script src="../../../js/persona.js"></script>
+            <script src="../../../js/calificacion.js"></script>
+            <script src="../../../js/reporte.js"></script>
+            <script src="../../../js/compromiso.js"></script>
+            <script src="../../../js/usuario.js"></script>
+            <script src="../../../js/migracion.js"></script>
+            <script src="../../../js/mapa.js"></script>
+             <script src="../../../js/predio.js"></script>
+
+            <style>
+                .ui-autocomplete-loading{
+                    background:white url('../../../css/images/ui-bg_glass_100_fdf5ce_1x400.png');
+                }
+                #tabs{
+                    width:100%;
+                }
+
+
+            </style>
+
+            <link rel="stylesheet" href="../../../css/jquery.jgrowl.css" type="text/css"/>
+            <style type="text/css">
+
+                div.jGrowl div.verde {
+                    background-color:       #AEF2AE;
+                    color:                  #008000;
+                }
+
+                div.jGrowl div.rojo {
+                    background-color:       #FACACA;
+                    color:                  #B22222;
+                }
+
+                div.jGrowl div.amarillo {
+                    background-color:       #FACACA;
+                    color:                  #B22222;
+                }
+            </style>
+
+            <script type="text/javascript" src="../../../js/jquery.jgrowl.js"></script>
+
+
+                <script src="../../../js/jquery.validate.js" type="text/javascript"></script>
+                <script src="../../../js/messages_es.js" type="text/javascript"></script>
+                <link href="../../../css/ui.jqgrid.css" media="screen" type="text/css" rel="stylesheet">
+                <link href="../../../css/ui.multiselect.css" media="screen" type="text/css" rel="stylesheet">
+                <script type="text/javascript" src="../../../js/i18n/grid.locale-es.js"></script>
+                <script type="text/javascript">
+                    $.jgrid.no_legacy_api = true;
+                    $.jgrid.useJSON = true;
+                </script>
+                <script type="text/javascript" src="../../../js/ui.multiselect.js"></script>
+                <script type="text/javascript" src="../../../js/jquery.jqGrid.js"></script>
+                <script type="text/javascript" src="../../../js/jquery.tablednd.js"></script>
+                <script type="text/javascript" src="../../../js/jquery.contextmenu.js"></script>
+                <script src="../../../js/jquery.flot.js" type="text/javascript" language="javascript"></script>
+                <script language="javascript" type="text/javascript" src="../../../js/jquery.flot.categories.js"></script>
+                <script type="text/javascript" src="../../../js/jquery.flot.time.js"></script>
+                <script type="text/javascript" src="../../../js/jshashtable-2.1.js"></script>
+                <script type="text/javascript" src="../../../js/jquery.numberformatter-1.2.3.min.js"></script>
+                <script type="text/javascript" src="../../../js/jquery.flot.stack.js"></script>
+                <script type="text/javascript" src="../../../js/jquery.flot.symbol.js"></script>
+                <script type="text/javascript" src="../../../js/jquery.flot.axislabels.js"></script>
+                <script src="../../../js/FormatDateTime.js" type="text/javascript" language="javascript"></script>
+
+                <script src="../../../js/highcharts.js"></script>
+                <script src="../../../js/modules/exporting.js"></script>
+
+
+
+                <script type="text/javascript">
+
+
+
+                    $(function() {
+
+
+
+
+                        $("#cargando").hide();
+                        {ver_mapa}
+                         $("#stakeholder_buscar").focusout(function() {
+                                $("#stakeholder_buscar").val("Buscar stakeholder por apellido paterno o materno o nombre");
+                            });
+                        $( "#menu_reporte" ).accordion({
+                                                heightStyle: "content",
+                                                collapsible: true
+                                                });
+
+
+
+
+                        $("#frm_registrar_voto").dialog({
+                            autoOpen: false,
+                            height: 420,
+                            width: 420,
+                            modal: true,
+                            buttons: [{
+                                id:"button-save",
+                                text:"Guardar",
+                                click: function() {
+
+                                    var idpersona = $("#idpersona_voto").val();
+                                    var idmodulo = $("#idmodulo_voto").val();
+                                    var active = $("#tabs").tabs("option", "active");
+                                    var valor1 = $("#dimension_1").val();
+                                    var valor2 = $("#dimension_2").val();
+                                    var valor3 = $("#dimension_3").val();
+                                    var fecha_voto = $("#fecha_voto").val();
+
+
+                                    var d = new Date();
+                                    var fecha = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+                                    if (fecha_voto != '') {
+                                        var tokens = fecha_voto.split("/");
+                                        fecha = tokens[2] + "-" + tokens[1] + "-" + tokens[0];
+                                    }
+
+                                    //alert("idpersona: "+idpersona+" idmodulo: "+idmodulo+"fecha: "+fecha
+                                    //    +" valor1: "+valor1+" valor2: "+valor2+" valor3: "+valor3);
+                                    if (valor1 > 0 && valor2 > 0 && valor3 > 0) {
+                                        $("#button-save").button("disable");
+                                        datastring = $("#guardar_calificacion_stakeholder").serialize();
+                                        $.ajax({
+                                            type: "POST",
+                                            url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=guardar_calificacion_stakeholder&idpersona=' + idpersona + '&idmodulo=' + idmodulo + '&fecha=' + fecha,
+                                            data: datastring,
+                                            dataType: 'json',
+                                            error: function(objeto, quepaso, otro) {
+                                                alert(otro);
+                                            },
+                                            success: function(data) {
+                                                //$("#calificacion_stakeholder").html(data);
+
+                                                $.jGrowl(data.mensaje, {theme: 'verde'});
+                                                var idpersona = $("#idpersona").val();
+                                                var idmodulo = $("#idmodulo").val();
+                                                $.ajax({
+                                                    url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=mostrar_calificacion_stakeholder&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                                                    success: function(data) {
+                                                        $("#calificacion_stakeholder").html(data);
+
+                                                    }
+                                                });
+                                                $("#button-save").button("enable");
+
+                                                $("#frm_registrar_voto").dialog("close");
+
+                                                if (active == 1) {
+                                                    $('#tabs').tabs('load', 1);
+                                                }
+                                            }
+                                        });
+
+
+                                        //alert('idtab: '+active);
+
+                                    } else {
+                                        alert("Debe seleccionar todas las dimensiones");
+                                    }
+
+                                }
+                            }
+                                ,{
+                                text:"Cancelar",
+                                click: function() {
+
+
+                                    $(this).dialog("close");
+
+                                }
+
+                            }]
+
+                        });
+
+                      $("#mostrar_historico").dialog({
+                            autoOpen: false,
+                            height: "auto",
+                            width: 600,
+                            modal: true
+                        });
+
+                        $("#stakeholder_buscar").autocomplete({//Usamos el ID de la caja de texto donde lo queremos
+                            dataType: "json",
+                            delay: 500,
+                            minLength: 3,
+                            source: function(request, response) {
+                                $.ajax({
+                                    dataType: 'json',
+                                    type: 'get',
+                                    data: {
+                                        busca_rapida_stakeholder: request.term
+                                    },
+                                    url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=busqueda_rapida_stakeholder_tag',
+                                    beforeSend: function() {
+                                        $("#img_buscar_sh").attr("src","../../../img/ajax-loader.png");
+
+                                    },
+                                    success: function(datos) {
+                                        //$("#mensaje").val(datos);
+                                        response($.map(datos, function(item) {
+                                            return{
+                                                label: item.label,
+                                                value: item.value
+                                            }
+                                        }));
+
+                                        $("#img_buscar_sh").attr("src","../../../img/serach.png");
+
+                                    }
+                                });
+                            },
+                            focus: function(event, ui) {
+                                //$("#stakeholder_buscar").val(ui.item.label);
+                                event.preventDefault();
+                                return false;
+                            },
+                            select: function(a, b) {
+                                $("#stakeholder_buscar").val("");
+
+                                if (b.item.value == 'nuevo_stake_holder') {
+                                    /*
+                                    $.ajax({
+                                        url: '../../../programas/persona/persona/apersona.php?idpersona_tipo=1&es_stakeholder=1',
+                                        success: function(datos) {
+                                            $("#idhtml_cabecera_stakeholder").html("");
+                                            $("#idhtml_tab_stakeholder").html(datos);
+                                            $("#fecha_nacimiento").datepicker({changeYear: true, changeMonth: true});
+
+
+                                        }
+                                    });
+                                    */
+                                } else {
+                                    if(b.item.value.indexOf('---tag.')==-1){
+                                       ver_cabecera_stakeholder(b.item.value);
+                                        ver_tab_stakeholder(b.item.value);
+                                    }else{
+                                        modal_reporte_estadistico_busca_rapida(b.item.value); 
+
+                                    }
+
+                                }
+
+                                return false;
+                            }
+                        });
+                    });
+
+
+
+                    function ver_cabecera_stakeholder(idpersona_compuesto) {
+                        if($("#pantalla_aux_principal").hasClass('ui-dialog-content') && $("#pantalla_aux_principal").dialog('isOpen')){
+                            $("#pantalla_aux_principal").dialog("close");
+                        }
+                        $.ajax({
+                            url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_cabecera_stakeholder&idpersona_compuesto=' + idpersona_compuesto,
+                            beforeSend: function() {
+                                $("#idhtml_cabecera_stakeholder").html('<br/><div style="margin:0px auto;text-align: center;"><img src="../../../img/bar-ajax-loader.gif"></div>');
+
+                            },
+                            success: function(datos) {
+
+                                $("#idhtml_cabecera_stakeholder").html(datos);
+                            }
+                        });
+
+                    }
+
+                    function ver_tab_stakeholder(idpersona_compuesto) {
+
+                        $.ajax({
+                            url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_tab_stakeholder&idpersona_compuesto=' + idpersona_compuesto,
+                            complete: function(r, b) {
+
+
+
+                            },
+                            success: function(datos) {
+                                $("#idhtml_tab_stakeholder").html(datos);
+                                $("#tabs").tabs({
+                                    beforeLoad: function(event, ui) {
+                                        ui.panel.html(
+                                                    '<br/><div style="margin:0px auto;text-align: center;"><img src="../../../img/bar-ajax-loader.gif"></div>'
+                                                    );
+
+                                        /*ui.jqXHR.error(function() {
+                                            ui.panel.html(
+                                                    "Ha ocurrido un error intente de nuevo."
+                                                    )
+                                        });*/
+                                    },
+                                    load: function(e, u) {
+                                        $("#fecha_nacimiento").datepicker({changeYear: true, changeMonth: true});
+                                        $("#fecha_interaccion").datepicker({changeYear: true, changeMonth: true});
+                                        $("#fecha_reclamo").datepicker({changeYear: true, changeMonth: true});
+
+                                    }
+                                });
+
+
+                                //console.log(datos);
+                            }
+                        });
+
+                    }
+
+
+
+                    function borrar_red_stakeholder() {
+
+                        $("#busqueda_rapida_red_stakeholder").val("");
+                    }
+
+
+                    function guardar_red_stakeholder(idpersona_compuesto_red) {
+
+                        idpersona = $("#idpersona").val();
+                        idmodulo = $("#idmodulo").val();
+
+                        $.ajax({
+                            url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=guardar_red_stakeholder&idpersona_compuesto_red=' + idpersona_compuesto_red + '&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                            dataType: "json",
+                            beforeSend: function() {
+                                $("#red_stakeholder").html('<img src="../../../img/loading.gif" />');
+
+                            },
+                            success: function(datos) {
+                                //$("#red_stakeholder").html(datos);
+                                if (datos.success) {
+                                    $.jGrowl(datos.mensaje, {theme: 'verde'});
+                                } else {
+                                    $.jGrowl(datos.mensaje, {theme: 'rojo'});
+                                }
+                                //console.log(datos);
+
+                                $.ajax({
+                                    url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_editar_red_stakeholder' + '&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                                    success: function(datos) {
+                                        $("#red_stakeholder").html(datos);
+
+                                        console.log(datos);
+                                    }
+                                });
+                            }
+                        });
+                        $("#busqueda_rapida_red_stakeholder").focus();
+
+
+                    }
+
+                    function busqueda_rapida_red_stakeholder() {
+                        $("#busqueda_rapida_red_stakeholder").autocomplete({//Usamos el ID de la caja de texto donde lo queremos
+                            dataType: "json",
+                            delay: 500,
+                            minLength: 3,
+                            source: function(request, response) {
+                                $.ajax({
+                                    dataType: 'json',
+                                    type: 'get',
+                                    data: {
+                                        busca_rapida_stakeholder: request.term
+                                    },
+                                    url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=busqueda_rapida_stakeholder',
+                                    success: function(datos) {
+                                        //$("#mensaje").val(datos);
+                                        response($.map(datos, function(item) {
+                                            return{
+                                                label: item.label,
+                                                value: item.value
+                                            }
+                                        }));
+
+                                    }
+                                });
+                            }, focus: function(event, ui) {
+                                //$("#stakeholder_buscar").val(ui.item.label);
+                                event.preventDefault();
+                                return false;
+                            }, select: function(a, b) {
+                                $("#busqueda_rapida_red_stakeholder").val("Buscar stakeholder por apellido paterno o materno o nombre");
+
+                                if (b.item.value == 'nuevo_stake_holder') {
+
+                                } else {
+                                    guardar_red_stakeholder(b.item.value);
+
+                                }
+
+                                return false;
+                            }
+                        });
+                    }
+
+                    function eliminar_red_stakeholder(idpersona_red_stakeholder, idmodulo_persona_red) {
+                        idpersona = $("#idpersona").val();
+                        idmodulo = $("#idmodulo").val();
+                        $.ajax({
+                            url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=eliminar_red_stakeholder&idpersona_red_stakeholder=' + idpersona_red_stakeholder + '&idpersona=' + idpersona + '&idmodulo=' + idmodulo + '&idmodulo_persona_red=' + idmodulo_persona_red,
+                            beforeSend: function() {
+                                $("#red_stakeholder").html('<img src="../../../img/loading.gif" />');
+
+                            },
+                            dataType: 'json',
+                            success: function(datos) {
+                                //$("#red_stakeholder").html(datos);
+                                if (datos.success) {
+                                    $.jGrowl(datos.mensaje, {theme: 'verde'});
+                                } else {
+                                    $.jGrowl(datos.mensaje, {theme: 'rojo'});
+                                }
+                                //console.log(datos);
+                                $.ajax({
+                                    url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_editar_red_stakeholder' + '&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                                    success: function(datos) {
+                                        $("#red_stakeholder").html(datos);
+
+                                        //console.log(datos);
+                                    }
+                                });
+                            }
+                        });
+                        $("#busqueda_rapida_red_stakeholder").focus();
+                    }
+
+
+                    function borrar_busqueda_rapida_stakeholder() {
+                        $("#stakeholder_buscar").val("");
+                    }
+
+
+
+
+                    function ver_nueva_persona(idpersona_tipo, es_stakeholder) {
+
+                        $.ajax({
+                            url: '../../../programas/persona/persona/apersona.php?idpersona_tipo=' + idpersona_tipo + '&es_stakeholder=' + es_stakeholder,
+                            beforeSend: function() {
+                                $("#idhtml_cabecera_stakeholder").html('<br/><div style="margin:0px auto;text-align: center;"><img src="../../../img/bar-ajax-loader.gif"></div>');
+                                $("#idhtml_tab_stakeholder").html("");
+
+                            },
+                            success: function(datos) {
+                                $("#idhtml_cabecera_stakeholder").html("");
+                                $("#idhtml_tab_stakeholder").html(datos);
+                                $("#fecha_nacimiento").datepicker({changeYear: true, changeMonth: true});
+
+
+                            }
+                        });
+
+                    }
+
+                    function nuevo_tag() {
+
+                        $.ajax({
+                            url: '../../../programas/tag/tag/atag.php?op_tag=buscar_tag',
+                            beforeSend: function() {
+                                $("#idhtml_tab_stakeholder").html('<img src="../../../img/loading.gif" />');
+
+                            },
+                            success: function(datos) {
+                                $("#idhtml_cabecera_stakeholder").html("");
+                                $("#idhtml_tab_stakeholder").html(datos);
+
+
+                            }
+                        });
+
+                    }
+
+
+
+
+
+
+
+                </script>
+                </head>
+
+                <body>
+
+
+                    <div id="pantalla_aux_principal">
+                    </div>
+                    <div id="frm_registrar_voto" title="Registrar Voto">
+
+                    </div>
+                    <div id="mostrar_historico" title="Historico">
+
+                    </div>
+
+                    <div id="principal">
+
+                        <div id="principal_cabecera">
+                        <div style="margin:auto;width:930px;">
+
+                            <div id="tabla_menu" style="float:left;width:790px;">
+                                <div style="float:left;color: #006600;font-weight: bold; width: 400px;">
+                                     <span  title="ultimo inicio de sesion: {sesion}">{quien} <!-- <img style="width:auto; height:auto;vertical-align: bottom;" src="../../../img/user.png" >--> </span>
+                                </div>
+                                <div style="position: relative;float:right;color: #006600;">
+                                                {fecha} {zona}
+                                </div>
+
+                                <div style="clear:left;float:left;position:relative">
+                                   <input  type="text" class="buscar" name="stakeholder_buscar" id="stakeholder_buscar"  onkeyup="" onfocus="borrar_busqueda_rapida_stakeholder()"  value="Buscar stakeholder por apellido paterno o materno o nombre">
+
+                                </div>
+                                <div style="float:right;position:relative;">
+
+
+                                                <a href="../stakeholder/astakeholder.php" onMouseOver="window.status = 'Actualizar la pagina';
+                                                    return true;"><img style="width:auto; height:auto;vertical-align: middle;" src="../../../img/refresh.png" > Inicio
+                                                </a>
+                                </div>
+                                   <div style="float:right;position:relative;">
+                                       <a href="../../../index.php?accion_login=salir&idproyecto={idproyecto}" target="_top"  onMouseOver="window.status = 'Cerrar la sesión actual';
+                return true;"><img style="width:auto; height:auto;vertical-align: middle;" src="../../../img/logout.png" > Cerrar Sesi&oacute;n</a>
+
+                                    </div>
+
+                              </div>
+                              <div style="float:left;">
+                                    <a href="#">
+                                        <img  src="../../../img/logo_fondo_scg_pq.png" alt="SCG">
+                                    </a>
+                                </div>
+                        </div>
+                        </div>
+                        <div id="cssmenu">
+
+                                        <ul>
+                                                    <li class='active'>
+                                                        <a  href="../stakeholder/astakeholder.php"><span>Interacci&oacute;n</span></a>
+                                                           <ul>
+                                                               <!-- INICIO BLOQUE : ver_buscar_interaccion -->
+                                                                <li>
+                                                                    <a href='javascript:ver_buscar_interaccion()'><span><img src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/> Buscar</span></a>
+                                                                </li>
+                                                               <!-- FIN BLOQUE : ver_buscar_interaccion -->
+                                                               <!-- INICIO BLOQUE : crear_interaccion -->
+                                                                <li>
+                                                                    <a href="javascript:vista_avanzada_interaccion(0);"><img src="../../../img/add-circle-green.png" style="width:auto; height:auto;vertical-align: middle;"/><span> Crear</span></a>
+                                                                </li>
+                                                                <!-- FIN BLOQUE : crear_interaccion -->
+                                                            </ul>
+
+                                                    </li>
+                                                    <li class='has-sub'>
+                                                        <a href="#" ><span>Stakeholder</span></a>
+
+                                                        <ul>
+
+                                                            <li>
+                                                                <a href="javascript:ver_buscar_persona(1, 1);"> <span><img src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/> Buscar</span> </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:ver_buscar_persona_prioridad(1, 1);"><span><img src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>  Buscar Prioridad </span></a>
+                                                            </li>
+                                                            <!-- INICIO BLOQUE : crear_sh -->
+                                                            <li>
+                                                                <a title="Registrar stakeholder" href="javascript:ver_nueva_persona(1,1);"><span><img src="../../../img/add-circle-green.png" style="width:auto; height:auto;vertical-align: middle;"/> Crear</span></a>
+                                                            </li>
+                                                            <!-- FIN BLOQUE : crear_sh -->
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:ver_buscar_predio()" ><span> Predio</span></a>
+                                                    </li>
+                                                    <li class='has-sub'>
+                                                        <a href="#" ><span>Reportes</span></a>
+                                                        <ul>
+                                                            <!-- INICIO BLOQUE : ver_stakeholder_estadistico -->
+                                                                <li>
+                                                                    <a href="javascript:modal_reporte_estadistico()"><span><img src="../../../img/diagrama.png" style="width:auto; height:auto;vertical-align: middle;"/> Estad&iacute;stico</span></a>
+                                                                </li>
+
+                                                            <!-- FIN BLOQUE : ver_stakeholder_estadistico -->
+                                                            <!-- INICIO BLOQUE : ver_interes_poder -->
+
+                                                                <li>
+                                                                    <a href="javascript:modal_reporte_interes_poder()"><span><img src="../../../img/estadistico.png" style="width:auto; height:auto;vertical-align: middle;"/> Stakeholder - Inter&eacute;s / Poder</span></a>
+                                                                </li>
+
+                                                            <!-- FIN BLOQUE : ver_interes_poder -->
+                                                            <!-- INICIO BLOQUE : ver_posicion_importancia -->
+
+                                                                <li>
+                                                                    <a href="javascript:modal_reporte_posicion_importancia()"><span><img src="../../../img/estadistico.png" style="width:auto; height:auto;vertical-align: middle;"/> Stakeholder - Posici&oacute;n / Importancia</span></a>
+                                                                                                            </li>
+
+                                                            <!-- FIN BLOQUE : ver_posicion_importancia -->
+                                                            <!-- INICIO BLOQUE : ver_posicion_tiempo -->
+
+                                                                <li>
+                                                                    <a href="javascript:modal_reporte_posicion_tiempo()"><span><img src="../../../img/estadistico.png" style="width:auto; height:auto;vertical-align: middle;"/> Stakeholder - Posici&oacute;n / Tiempo</span></a>
+                                                                                                            </li>
+
+                                                            <!-- FIN BLOQUE : ver_posicion_tiempo -->
+                                                            <!-- INICIO BLOQUE : ver_interaccion_tiempo -->
+
+                                                                <li>
+                                                                    <a href="javascript:modal_reporte_interaccion_tiempo()"><span><img src="../../../img/estadistico.png" style="width:auto; height:auto;vertical-align: middle;"/> Stakeholder - Interacci&oacute;n / Tiempo</span></a>
+                                                                                                            </li>
+
+                                                            <!-- FIN BLOQUE : ver_interaccion_tiempo -->
+
+
+                                                                <li>
+                                                                    <a href="javascript:ver_buscar_red()"><span><img src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/> Stakeholder - Redes   </span></a></li>
+
+                                                            <!-- INICIO BLOQUE : ver_reclamo_estadistico -->
+
+                                                                <li>
+                                                                    <a href="javascript:modal_reclamo_estadistico()"><span><img src="../../../img/diagrama.png" style="width:auto; height:auto;vertical-align: middle;"/> Reclamo - Estad&iacute;stico</span></a>
+                                                                </li>
+
+                                                            <!-- FIN BLOQUE : ver_reclamo_estadistico -->
+
+                                                                <li>
+                                                                    <a href="javascript:modal_reporte_tag_stakeholder_interaccion()"><span><img src="../../../img/estadistico.png" style="width:auto; height:auto;vertical-align: middle;"/> Tag - Stakeholder / Interacci&oacute;n</span></a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="javascript:modal_reporte_tag_interaccion_relevancia()"><span><img src="../../../img/estadistico.png" style="width:auto; height:auto;vertical-align: middle;"/> Tag por Relevancia</span></a>
+                                                                </li>
+
+
+
+                                                                <li>
+                                                                    <a href="javascript:ver_buscar_mapa()"><img src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                                                        <span>GPS-Mapa</span>
+                                                                    </a>
+                                                                </li>
+
+
+                                                            </ul>
+                                                    </li>
+                                            <li class='has-sub'><a href='#'><span> M&aacute;s </span></span></a>
+
+                                                      <ul>
+                                                          <li class='has-sub'>
+                                                            <a href="#" >
+                                                                <span>Compromiso</span>
+                                                            </a>
+                                                            <ul>
+                                                               <!-- INICIO BLOQUE : ver_buscar_compromiso -->
+
+                                                                    <li>
+                                                                        <a href="javascript:ver_buscar_compromiso()"><span>
+                                                                            <img src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>Buscar</span>
+                                                                        </a>
+                                                                    </li>
+
+                                                                <!-- FIN BLOQUE : ver_buscar_compromiso -->
+                                                            </ul>
+                                                        </li>
+                                                       <li class='has-sub'>
+                                                        <a href="#" >
+                                                            <span>Herramientas</span>
+                                                        </a>
+                                                        <ul>
+
+                                                            <li>
+                                                                <a href="javascript:modal_actualizar_clave({idusuario},{idmodulo_usuario})"><img src="../../../img/clave.png" style="width:auto; height:auto;vertical-align: middle;"/>Contrase&ntilde;a</a>
+                                                            </li>
+
+                                                            <!-- INICIO BLOQUE : ver_sincronizacion -->
+                                                            <li>
+                                                                    <a href="javascript:cargar_plantilla_sincronizacion()"><img src="../../../img/sincroniza.png" style="width:auto; height:auto;vertical-align: middle;"/> Sincronizar</a>
+                                                             </li>
+                                                            <!-- FIN BLOQUE : ver_sincronizacion -->
+                                                            <!-- INICIO BLOQUE : ver_rol -->
+                                                            <li>
+                                                                <a href="javascript:ver_crear_rol()"><img src="../../../img/add.png" style="width:auto; height:auto;vertical-align: middle;"/>Roles</a>
+                                                            </li>
+                                                            <!-- FIN BLOQUE : ver_rol -->
+                                                            <li>
+                                                            <a href="javascript:ver_buscar_persona(2, 1);"><img src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>Buscar</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                          <li class='has-sub'>
+                                                                <a href="#" >
+                                                                    <span>Tag</span>
+                                                                </a>
+                                                                <ul>
+                                                                    <li>
+                                                                        <a href="javascript:ver_buscar_tag();"><span><img src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/> Buscar </span></a>
+                                                                    </li>
+                                                                    <!-- INICIO BLOQUE : crear_tag -->
+                                                                    <li>
+                                                                        <a title="Registrar tag" href="javascript:ver_crear_tag();"><span> <img src="../../../img/add-circle-green.png" style="width:auto; height:auto;vertical-align: middle;"/> Crear</span></a>
+                                                                    </li>
+                                                                    <!-- FIN BLOQUE : crear_tag -->
+
+                                                                </ul>
+
+                                                            </li>
+                                                          <li class='has-sub'>
+                                                              <a href="#" ><span>Reclamo</span></a>
+                                                                <ul>
+                                                                      <!-- INICIO BLOQUE : ver_reclamo_buscar -->
+
+                                                                        <li>
+                                                                            <a href="javascript:ver_buscar_reclamo()">
+                                                                                <img src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                                                                <span>Buscar</span>
+                                                                            </a>
+                                                                        </li>
+
+                                                                    <!-- FIN BLOQUE : ver_reclamo_buscar -->
+                                                                    <!-- INICIO BLOQUE : crear_reclamo -->
+                                                                    <li>
+                                                                        <a  href="javascript:vista_avanzada_reclamo(0);">
+                                                                            <img src="../../../img/add-circle-green.png" style="width:auto; height:auto;vertical-align: middle;"/><span> Crear</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <!-- FIN BLOQUE : crear_reclamo -->
+
+                                                                </ul>
+                                                             </li>
+
+                                                          <li>
+                                                                <a href="#" >Rel.Comunitario</a>
+                                                                <ul>
+                                                                    <li>
+                                                                        <a href="javascript:ver_buscar_persona(0, 1);"><img src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/><span> Buscar</span> </a>
+                                                                    </li>
+                                                                    <!-- INICIO BLOQUE : crear_rc -->
+                                                                    <li>
+                                                                        <a href="javascript:ver_nueva_persona(1,2);"> <img src="../../../img/add-circle-green.png" style="width:auto; height:auto;vertical-align: middle;"/> <span>Crear</span></a>
+                                                                    </li>
+                                                                    <!-- FIN BLOQUE : crear_rc -->
+
+                                                                </ul>
+                                                        </li>
+                                                      </ul>
+
+                                                    </li>
+
+                                                </ul>
+
+                        </div>
+
+
+
+
+                        <div id="cuerpo">
+                            <table width="90%" align="center">
+                                <tr>
+                                    <td valign="top" width="100%" align="center">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td name="idhtml_cabecera_stakeholder" id="idhtml_cabecera_stakeholder" valign="top" width="100%" align="center">
+                                        <input type="hidden" name="idpersona" id="idpersona" value="{idpersona}" />
+                                        <input type="hidden" name="idmodulo" id="idmodulo" value="{idmodulo}" />
+                                        <div id="bloque_interaccion">
+                                            {cuerpo_interaccion}
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td name="idhtml_tab_stakeholder" id="idhtml_tab_stakeholder" valign="top" align="center">
+
+                                    </td>
+                                    <td name="idhtml_ventana_stakeholder" id="idhtml_ventana_stakeholder">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+
+                   <iframe id="frame1" style="display:none"></iframe>
+                </body>
+                </html>

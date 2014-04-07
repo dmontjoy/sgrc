@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SCG - Stakeholder </title>
+        <link rel="stylesheet" href="../../../js/jquery-ui.css" />
+        <script src="../../../js/jquery-1.8.2.js"></script>
+    	<script src="../../../js/jquery-ui.js"></script>
+		<script type="text/javascript" src="../../../js/tabla_dinamica.js"></script>  
+        
+        	<link rel="stylesheet" type="text/css" href="../../../css/estilo.css">
+
+        
+        
+     <script language="JavaScript" type="text/javascript" src="../../../js/tabla_dinamica_documento_identificacion.js"></script>
+     <script language="JavaScript" type="text/javascript" src="../../../js/tabla_dinamica_persona.js"></script> 
+
+   	<link rel="stylesheet" type="text/css" href="../../../css/dhtmlcalendar/skins/aqua/theme.css" media="all" title="Aqua" />
+    
+	<script type="text/javascript" src="../../../js/dhtmlcalendar/calendar.js"></script>
+    <script type="text/javascript" src="../../../js/dhtmlcalendar/calendar-es.js"></script>
+    <script type="text/javascript" src="../../../js/dhtmlcalendar/calendar-setup.js"></script>
+	<script type="text/javascript" src="../../../js/tabla_dinamica.js"></script>
+
+    <script type="text/javascript" src="../../../js/checkdate.js"></script>
+        <style>
+			.ui-autocomplete-loading{
+			background:white url('../../../css/images/ui-bg_glass_100_fdf5ce_1x400.png');	
+			}
+		</style>
+        
+		<script type="text/javascript">
+		$(function(){
+				
+                $("#stakeholder_buscar").autocomplete({ //Usamos el ID de la caja de texto donde lo queremos
+                dataType: "json",
+				delay: 500,
+                minLength: 3,
+				source: function(request, response){
+						 $.ajax({
+						dataType: 'json',
+						type:'get',
+						data:{
+							busca_rapida_stakeholder: request.term
+						}, 
+						url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=busqueda_rapida_stakeholder',
+						success: function(datos){
+							//$("#mensaje").val(datos);
+							response($.map(datos,function(item){
+							 return{
+							  label:item.label,
+							  value:item.value
+							 }
+							}));
+					   
+						}
+					   });			
+				},
+				focus:function(event, ui){
+					//$("#stakeholder_buscar").val(ui.item.label);
+					event.preventDefault();
+					return false;
+				},      
+                select: function (a, b) {
+					$("#stakeholder_buscar").val("Buscar stakeholder por apellido paterno apellido materno nombre");
+
+					if(b.item.value=='nuevo_stake_holder'){
+						alert("entra");
+					}else{
+                	ver_cabecera_stakeholder(b.item.value);
+					ver_tab_stakeholder(b.item.value);
+				
+					}
+
+               return false;
+              }          
+            });		
+		
+		});
+		 function mostrar_editar_tag(){s
+		 		$('#tabla_editar_tag').show();
+				$('#tabla_persona_tag').hide();
+
+		 }
+      	 
+		 function mostrar_tag(){
+		 		$('#tabla_persona_tag').show();
+			   $('#tabla_editar_tag').hide();
+
+		 }
+         
+        function llamadaPhp(){
+         $.ajax({
+            url: 'dto/saludo.php',
+            success: function(datos){
+                $("#mensaje").val(datos);
+           
+            }
+           });
+        }
+        
+        
+         function ver_cabecera_stakeholder(idpersona_compuesto){
+         $.ajax({
+            url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_cabecera_stakeholder&idpersona_compuesto='+idpersona_compuesto,
+            success: function(datos){
+                $("#idhtml_cabecera_stakeholder").html(datos);
+				$('#tabla_editar_tag').hide();
+             
+            }
+           });
+		   
+
+
+        }
+        
+		  function ver_tab_stakeholder(idpersona_compuesto){
+		  
+         $.ajax({
+            url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_tab_stakeholder&idpersona_compuesto='+idpersona_compuesto,
+            success: function(datos){
+                $("#idhtml_tab_stakeholder").html(datos);
+				$("#tabs").tabs({
+				
+				});
+					//console.log(datos);
+            }
+           });
+		   // $("#stakeholder_buscar").focus();
+
+
+        }
+	
+		function borrar_red_stakeholder(){
+			
+			 $("#busqueda_rapida_red_stakeholder").val("");
+		}
+	
+	
+		function guardar_red_stakeholder(idpersona_compuesto_red){
+			
+				idpersona=$("#idpersona").val();
+				idmodulo=$("#idmodulo").val();
+				
+	         $.ajax({
+            url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=guardar_red_stakeholder&idpersona_compuesto_red='+idpersona_compuesto_red+'&idpersona='+idpersona+'&idmodulo='+idmodulo,
+            success: function(datos){
+               // $("#idhtml_tab_stakeholder").html(datos);
+
+					console.log(datos);
+            }
+           });
+		   $("#busqueda_rapida_red_stakeholder").focus();	
+		
+		
+		}
+	
+        function busqueda_rapida_red_stakeholder(){
+         		var busqueda_rapida_red_stakeholder=$("#busqueda_rapida_red_stakeholder").val();
+				
+                $("#busqueda_rapida_red_stakeholder").autocomplete({ //Usamos el ID de la caja de texto donde lo queremos
+                dataType: "json",
+				delay: 300,
+                minLength: 3,
+				source:'../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=busqueda_rapida_stakeholder&busca_rapida_stakeholder='+stakeholder_buscar,         
+                select: function (a, b) {
+					$("#busqueda_rapida_red_stakeholder").val("Buscar stakeholder por apellido paterno apellido materno nombre");
+
+					if(b.item.value=='nuevo_stake_holder'){
+						alert("entra");
+					}else{
+                		guardar_red_stakeholder(b.item.value);
+				
+				}
+
+               return false;
+              }          
+            });
+        }	
+	
+        function busqueda_rapida_stakeholder(){
+
+        }
+        
+		
+		function borrar_busqueda_rapida_stakeholder(){
+			  $("#stakeholder_buscar").val("");
+		}	
+
+
+		function borrar_tag(){
+			  $("#tag_buscar").val("");
+		}	
+
+
+        function guardar_tag_stakeholder(idtag_compuesto){
+			idpersona=$("#idpersona").val();
+			idmodulo=$("#idmodulo").val();
+         $.ajax({
+            url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=guardar_tag_stakeholder&idtag_compuesto='+idtag_compuesto+'&idpersona='+idpersona+'&idmodulo='+idmodulo,
+            success: function(datos){
+                $("#subbloque_editar_tag").html(datos);
+           
+            }
+           });
+		    $("#tag_buscar").focus();
+        }
+
+
+		
+					
+		function busqueda_rapida_tag(){
+		
+		        var tag_buscar=$("#tag_buscar").val();
+				var	idpersona=$("#idpersona").val();
+				var idmodulo=$("#idmodulo").val();
+			
+                $("#tag_buscar").autocomplete({ //Usamos el ID de la caja de texto donde lo queremos
+                dataType: "json",
+                minLength: 3,
+                source: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_tag&busca_rapida_tag='+tag_buscar,
+                select: function (a, b) {
+				$("#tag_buscar").val("");
+                guardar_tag_stakeholder(b.item.value);
+               return false;
+              }          
+            });
+		
+		}	
+		
+			function eliminar_tag_stakeholder(idpersona_tag){
+				idpersona=$("#idpersona").val();
+				idmodulo=$("#idmodulo").val();
+			 $.ajax({
+				url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=eliminar_tag_stakeholder&idpersona_tag='+idpersona_tag+'&idpersona='+idpersona+'&idmodulo='+idmodulo,
+				success: function(datos){
+					$("#subbloque_editar_tag").html(datos);
+			   
+				}
+			   });
+				$("#tag_buscar").focus();
+			}	
+
+			
+    
+	
+	        function busqueda_rapida_organizacion(tabla,fila,adatos,nume_fila){
+         		var txtSearch=$("#txtSearch").val();
+				
+                $("#txtSearch").autocomplete({ //Usamos el ID de la caja de texto donde lo queremos
+                dataType: "json",
+				delay: 300,
+                minLength: 3,
+				source:'../../../programas/persona/persona/apersona_organizacion.php?op_persona_organizacion=busqueda_rapida&busca='+txtSearch,         
+                select: function (a, b) {
+					if(b.item.value=='nueva_organizacion'){
+					}else{
+						agregafila(tabla,fila,b.item.value,adatos,nume_fila)
+
+					}
+					$("#txtSearch").focus();
+					$("#txtSearch").val("");
+               return false;
+                 }     
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+	<table width="100%">
+    		<tr>
+            	<td>
+                	<div class="buscar" >
+                	<input type="text" class="buscar" name="stakeholder_buscar" id="stakeholder_buscar"    onkeyup="" onfocus="borrar_busqueda_rapida_stakeholder()" value="Buscar stakeholder por apellido paterno apellido materno nombre"  size="80"  width="100px">
+                    <img src="../../../img/serach.png" />
+                	</div>
+	               	  
+	          	</td>
+			</tr>
+            <tr>
+                <td >
+                	<table>
+                    		<tr>
+                            	<td name="idhtml_cabecera_stakeholder" id="idhtml_cabecera_stakeholder">
+                            	
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td name="idhtml_tab_stakeholder" id="idhtml_tab_stakeholder">
+                                		
+                    
+                                        
+                                        
+                                </td>
+                                <td name="idhtml_ventana_stakeholder" id="idhtml_ventana_stakeholder">
+                       
+                                </td>
+                            </tr>
+                    </table>
+                </td>
+            </tr>
+    </table>
+
+</body>
+</html>

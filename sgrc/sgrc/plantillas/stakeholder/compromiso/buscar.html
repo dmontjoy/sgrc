@@ -1,0 +1,184 @@
+
+
+<form id="form_buscar_compromiso" onsubmit="buscar_compromiso();return false;">
+    
+    
+    <table  class="bloque" cellpadding="4" cellspacing="4" width="710px">
+        <thead>
+        <td colspan="4"> Stakeholder - Buscar Compromiso</td>
+        </thead>
+     <tr>
+            <td class="celda_titulo">C&oacute;digo</td>
+            <td class="celda_titulo" colspan="3">
+                
+                <input type="text" name="idcompromiso" size="5" >
+                -
+                <input type="text" name="idmodulo_compromiso" size="5" >
+                          
+            </td>
+      </tr>  
+
+      <tr>
+
+            <td class="celda_titulo">Estado
+            </td>
+            <td class="celdaSimple">
+                <!-- INICIO BLOQUE : compromiso_estado -->
+                    <input type="checkbox" name="idcompromiso_estado[]" value="{idcompromiso_estado}" >{compromiso_estado}                
+                    <!-- FIN BLOQUE : compromiso_estado -->         
+                
+             </td>
+             <td class="celda_titulo">
+                Prioridad
+              </td>
+             <td class="celdaSimple">                
+                    <!-- INICIO BLOQUE : compromiso_prioridad -->
+                    <input type="checkbox" name="idcompromiso_prioridad[]" value="{idcompromiso_prioridad}" >{compromiso_prioridad}                
+                    <!-- FIN BLOQUE : compromiso_prioridad -->                
+            </td>
+        </tr>
+        <tr>
+            <td class="celda_titulo">
+            <label for="from">Del</label>
+            </td>
+            <td class="celda_titulo">
+            <input type="text" id="ifecha1" name="fecha_del" value=""/>
+            
+            </td>
+
+
+            <td class="celda_titulo">
+            <label for="to">Al</label>
+            </td>
+           <td class="celda_titulo"> 
+            <input type="text" id="ifecha2" name="fecha_al" value=""/>
+            
+            </td>
+        </tr>
+
+               <tr>
+                    <td class="celda_titulo">Relacionista</td>
+                    <td class="celdaSimple" colspan="3">
+
+                        <table>
+                            <tr>
+                                <td >
+                                    <input type="hidden" id="nume_celda_interaccion_rc" name="nume_celda_interaccion_rc" value="0" />
+                                    <input type="hidden" id="nume_fila_interaccion_rc" name="nume_fila_interaccion_rc" value="0" />
+
+
+                                    <input type="text" class="buscar" name="interaccion_rc_buscar" id="interaccion_rc_buscar" onfocus="borrar_interaccion_rc_buscar();
+busquedarapida_interaccion_rc_buscar()" value="Buscar relacionista por apellido paterno apellido materno nombre"  size="80"  width="80px">
+                                    <img id="img_buscar_interaccion_rc"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                    <input type="hidden" test="RC" value="0" id="cant_rc" name="cant_rc" />
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table width="100%" class="borde" id="interaccion_rc">
+                  
+
+                        </table></td>
+                    </tr> 
+                     <tr>
+                        <td class="celda_titulo">Stakeholder</td>
+                        <td class="celdaSimple" colspan="3">
+                            <table>
+                                <tr>
+                                    <td >
+                                        <input type="hidden" id="nume_celda_interaccion_sh" name="nume_celda_interaccion_sh" value="0" />
+                                        <input type="hidden" id="nume_fila_interaccion_sh" name="nume_fila_interaccion_sh" value="0" />
+                                        <input type="text" class="buscar" name="interaccion_sh_buscar" id="interaccion_sh_buscar" onfocus="borrar_interaccion_sh_buscar();
+        busquedarapida_interaccion_sh_buscar()" value="Buscar stakeholder por apellido paterno apellido materno nombre"  size="80"  width="100px">
+                                        <img id="img_buscar_interaccion_sh"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                        <input type="hidden" test="SH" value="0" id="cant_sh" name="cant_sh" />
+                                    </td>
+                                </tr>
+
+                            </table>
+                    <table width="100%" class="borde" id="interaccion_sh">
+                     
+                    </table>
+
+                </td>
+            </tr>
+              <tr>
+                <td class="celda_titulo">Compromiso</td>
+                <td colspan="3" class="celdaSimple">
+                    <input type="text" name="compromiso" id="comp_compromiso"  size="80"  width="80px">
+                </td>
+            </tr>
+     
+                <tr>
+         
+                    <td class="celdaSimple" colspan="4" align="center">
+                   <input id="compromiso_buscar_submit" type="submit" value="Buscar" />
+                   <input type="hidden" id="fid_string" name="fid_string" value="" />
+                    </td>
+                </tr>
+      </table>
+
+</form>
+
+<br/>
+<iframe id="frame4" style="display:none" src=""></iframe>
+<div id="resultado_compromiso">
+</div>
+
+<script type="text/javascript" >
+    $("#compromiso_buscar_submit").button();
+    
+        $("#buscar_interaccion_tag").blur(function() {
+            $("#buscar_interaccion_tag").val("Buscar tag");
+        });
+        $("#interaccion_rc_buscar").focusout(function() {
+            $("#interaccion_rc_buscar").val("Buscar relacionista por apellido paterno apellido materno nombre");
+        });
+
+        $("#interaccion_sh_buscar").focusout(function() {
+            $("#interaccion_sh_buscar").val("Buscar stakeholder por apellido paterno apellido materno nombre");
+        });
+        $("#ifecha1").datepicker({
+                defaultDate: "+1w",
+                changeYear: true,
+                changeMonth: true,
+                numberOfMonths: 1,
+                onClose: function(selectedDate) {
+                    $("#hfecha2").datepicker("option", "minDate", selectedDate);
+                }
+            });
+            $("#ifecha2").datepicker({
+                defaultDate: "+1w",
+                changeYear: true,
+                changeMonth: true,
+                numberOfMonths: 1,
+                onClose: function(selectedDate) {
+                    $("#hfecha1").datepicker("option", "maxDate", selectedDate);
+                }
+            });
+
+            var d = new Date();
+            var YYYY = d.getFullYear();
+            var mm = d.getMonth() + 1;
+            var dd = d.getDate();
+            var dia="";
+            var mes="";
+            
+            if(dd<10){
+                dia="0"+dd;
+            }else{
+                dia=""+dd;
+            }
+        
+            if(mm<10){
+                mes="0"+mm;
+            }else{
+                mes=""+mm;
+            }
+
+            $("#ifecha1").val("01" + "/" + mes + "/" + YYYY);
+            $("#ifecha2").val(dia + "/" + mes + "/" + YYYY);
+
+            
+            
+</script> 

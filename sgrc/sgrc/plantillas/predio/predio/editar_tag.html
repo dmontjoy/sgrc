@@ -1,0 +1,126 @@
+
+<form id="form_modal_predio_tag" enctype="multipart/form-data" accept-charset="utf-8">
+    <input type="hidden" id="op_predio" name="op_predio" value="guardar_predio_tag" />
+        <table >
+            <tr>
+                <td>
+                    <input type="hidden" id="nume_celda_predio_tag" name="nume_celda_predio_tag" value="{nume_celda_predio_tag}" />
+                    <input type="hidden" id="nume_fila_predio_tag" name="nume_fila_predio_tag" value="{nume_fila_predio_tag}" />
+                    <input class="buscar" type="text" name="busca_rapida_tag" id="busca_rapida_tag" onfocus="borrar_predio_tag(); busqueda_rapida_predio_tag(2);" value=" Buscar tag" size="40">
+                    <img id="img_buscar_tag"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                </td>
+            </tr>
+            <tr>
+                <td id="subbloque_editar_tag">
+
+                    <table id="tabla_predio_tag_complejo">
+                        
+                                                <!-- INICIO BLOQUE : tr_editar_tag -->
+                                                <tr>
+                                                    <!-- INICIO BLOQUE : td_editar_tag -->
+
+                                                    <td width="10%" id="predio_complejo_tag{celda_nume_fila}{celda_nume_celda}" style="vertical-align:top">
+                                                         {tag}
+                                                    </td>
+                                                    <td id="spredio_complejo_tag{celda_nume_fila}{celda_nume_celda}" style="vertical-align:top">
+                                                        <!-- INICIO BLOQUE : spinner_tag -->
+                                                        <input id="spinner_{celda_nume_fila}{celda_nume_celda}" name="orden_complejo_tag[]" style="width:20px;"/>
+                                                        
+                                                        <script type="text/javascript">
+                                                        $( "#spinner_{celda_nume_fila}{celda_nume_celda}" ).spinner({
+                                                            spin: function( event, ui ) {
+                                                            if ( ui.value < 0 ) {
+                                                              $( this ).spinner( "value", 0 );
+                                                              return false;
+                                                            } 
+                                                          }
+                                                        });
+                                                        $( "#spinner_{celda_nume_fila}{celda_nume_celda}").spinner( "value", {prioridad} );
+                                                        </script>
+                                                        <!-- FIN BLOQUE : spinner_tag -->
+                                                        &nbsp;
+                                                    </td>
+                                                    <td id="epredio_complejo_tag{celda_nume_fila}{celda_nume_celda}" style="vertical-align:top">
+                                                        <!-- INICIO BLOQUE : eliminar_tag -->
+                                                        <input type="hidden" name="idpredio_complejo_tag[]" id="idpredio_complejo_tag{celda_nume_fila}{celda_nume_celda}" value={predio_complejo_tag} />
+                                                        <img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('predio_complejo_tag{celda_nume_fila}{celda_nume_celda}')" >
+                                                        <!-- FIN BLOQUE : eliminar_tag -->
+                                                        &nbsp;
+                                                    </td>
+                                                    <!-- FIN BLOQUE : td_editar_tag -->
+
+                                                </tr>
+                                                <!-- FIN BLOQUE : tr_editar_tag -->         
+                                               
+                     </table>                                                   
+                </td>              
+            </tr>
+             <tr>
+                                      
+                <td colspan="4" align="center">
+                    <div id="guardar_tag_complejo">
+                        <input type="submit"  id="tag_complejo_submit" value="Guardar"/>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+</form>   
+<script type="text/javascript" >
+    
+    $("#tag_complejo_submit").button();
+    
+     $("#busca_rapida_tag").blur(function() {
+            $("#busca_rapida_tag").val("Buscar tag");
+        });
+    
+    var idpredio = $("#idpredio").val();
+    var idmodulo_predio = $("#idmodulo_predio").val();
+    var url = '../../../programas/predio/predio/apredio.php?idpredio=' + idpredio + '&idmodulo_predio=' + idmodulo_predio;
+    
+    //datastring = $("#guardar_interaccion_stakeholder").serialize();
+    
+    //url = url +'&'+datastring;
+    
+    //alert('URL: '+url);
+    $("#form_modal_predio_tag").attr('action', url); 
+    
+    $('#form_modal_predio_tag').ajaxForm({
+        beforeSubmit: function() {
+            //alert('Submitting...');
+            if($("#form_modal_predio_tag").valid()){
+                $("#guardar_tag_complejo").html('<img src="../../../img/bar-ajax-loader.gif">');
+                
+            }else{
+                return false;
+            }
+        },
+        success: function(data) {
+         var obj = jQuery.parseJSON(data);
+           
+                $("#pantalla_aux_principal").dialog("close");
+                if (obj.success) {
+                    $.ajax({
+                        url: '../../../programas/predio/predio/apredio.php?op_predio=ver_tag_predio&idpredio=' + idpredio + '&idmodulo_predio=' + idmodulo_predio,                                     
+                        beforeSend: function() {
+                           $("#tabla_predio_tag").attr("src","../../../img/ajax-loader.png");
+
+                       },
+                        success: function(datos) {
+                            
+                            $("#tabla_predio_tag").html(datos);
+
+                        }
+                    });
+                    $.jGrowl(obj.mensaje, {theme: 'verde'});
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }
+            
+        }
+    });
+
+
+$("#form_modal_stakeholder").validate({ignore:""});
+</script>

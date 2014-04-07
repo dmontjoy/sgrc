@@ -1,0 +1,31 @@
+
+                            
+<!-- INICIO BLOQUE : item_reclamo -->
+       <div class="reclamo_{idreclamo}_{idmodulo_reclamo}" >
+        <table width="100%"  class="celdaSimple" >
+            <tr>
+              <td width="60%">
+                  <strong>{fecha_reclamo}</strong>
+                </td>
+                <td width="40%" align="right" >
+                    <a href='javascript:exportar_pdf_reclamo("frame1",{idreclamo},{idmodulo_reclamo},4)' title='Ver PDF'><img src='../../../img/pdf.png' alt='PDF'/></a>
+                    <!-- INICIO BLOQUE : editar_reclamo -->
+                    <a href="javascript:modal_reclamo({idreclamo},{idmodulo_reclamo});" title="Editar reclamo"><img src="../../../img/edit.png" alt="Editar"/></a>
+                    <!-- FIN BLOQUE : editar_reclamo -->
+                    <!-- INICIO BLOQUE : eliminar_reclamo -->
+                    <a href="javascript:eliminar_reclamo({idreclamo},{idmodulo_reclamo});" title="Eliminar reclamo"><img src="../../../img/trash.png" alt="Eliminar"/></a>
+                    <!-- FIN BLOQUE : eliminar_reclamo -->
+                </td>
+            </tr>
+             <tr>
+              <td colspan="2">
+                {reclamo}
+                </td>
+
+            </tr>
+        </table>
+        </div>
+<!-- FIN BLOQUE : item_reclamo -->
+  
+<a href="javascript:cuerpo_ver_mas_reclamo({limite})">{ver_mas}</a>
+

@@ -1,0 +1,283 @@
+
+
+<div id="persona_div">
+    <form id="form_persona" onsubmit="guardar_persona({es_stakeholder});return false;"  accept-charset="utf-8">
+        <input type="hidden" name="op_persona" id="op_persona" value="{op_persona}" />
+        <input type="hidden" name="idpersona" id="idpersona" value="{idpersona}" />
+        <input type="hidden" name="idmodulo" id="idmodulo" value="{idmodulo}" />
+        <input type="hidden" name="es_stakeholder" id="es_stakeholder" value="{es_stakeholder}" />
+
+        <table  cellpadding="4" cellspacing="4" width="690px" {clase}>
+            <{tr}>
+                <td colspan="4" {clase_celda}> Datos personales - RC</td>
+            </{tr}>
+             <tr>
+                <td class="celda_titulo">Tipo</td>
+                <td colspan="3" class="celdaSimple">
+
+                    <select name="idpersona_tipo" id="idpersona_tipo"  onchange="{cambiar_tipo_persona}">
+                        <!-- INICIO BLOQUE : persona_tipo -->
+                        <option {selected} value="{idtipo}" >{tipo}</option>
+                        <!-- FIN BLOQUE : persona_tipo -->
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td width="250px" class="celda_titulo">Apellido Paterno</td>
+                <td colspan="3" class="celdaSimple">
+                    <input type="text" minlength="2" required name="apaterno" id="apaterno"  size='60' value="{apaterno}"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="celda_titulo">Apellido Materno</td>
+                <td colspan="3" class="celdaSimple">
+                    <input type="text" name="amaterno" id="amaterno"  size='60' value="{amaterno}"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="celda_titulo">Nombre</td>
+                <td colspan="3" class="celdaSimple">
+                    <input type="text" minlength="2" required name="nombre" id="nombre"  size='60' value="{nombre}"/>
+                </td>
+            </tr>
+           
+
+            <tr>
+
+            <input type="hidden" value='{nume_fila_documento_identificacion}' id="nume_fila_documento_identificacion" name="nume_fila_documento_identificacion" />
+            <td colspan="4" >
+                <table id="persona_documento_identificacion" name="persona_documento_identificacion" width="100%">
+                    <tr id="trpersona_documento_identificacion">
+                    <input type="hidden" name="idpersona_documento_identificacion[0]" id="idpersona_documento_identificacion0"  value="{idpersona_documento_identificacion}" size='25'/>
+
+                    <td class="celda_titulo">Doct. identificaci&oacute;n</td>
+                    <td class="celdaSimple">
+                        <select name="select_documento_identificacion[0]" id="select_documento_identificacion[0]">
+                            <!-- INICIO BLOQUE : documento_identificacion -->
+                            <option {selected} value="{iddocumento_identificacion}">{documento_identificacion}</option>
+                            <!-- FIN BLOQUE : documento_identificacion -->
+
+                        </select>
+
+                    </td>
+                    <td class="celda_titulo">N&uacute;mero documento</td>
+                    <td class="celdaSimple">
+                        <input type="text" name="numero_documento[0]" id="numero_documento0"  value="{numero_documento}" size='25'/>
+
+                    </td>
+                    <td width="5%" class="celdaSimple">&nbsp;
+
+                    </td>
+
+                    </tr>
+                    <!-- INICIO BLOQUE : item_documento_identificacion -->
+                    <input type="hidden" name="idpersona_documento_identificacion[{i}]" id="idpersona_documento_identificacion{i}"  value="{idpersona_documento_identificacion}" size='25'/>
+
+
+                    <tr id="trpersona_documento_identificacion{i}" class="renglon">
+
+                        <td class="celda_titulo">Doct. identificaci&oacute;n</td>
+
+                        <td class="celdaSimple">
+                            <select name="select_documento_identificacion[{i}]" id="select_documento_identificacion{i}">
+                                <!-- INICIO BLOQUE : item_tipo_documento_identificacion -->
+                                <option {selected} value="{iddocumento_identificacion}">{documento_identificacion}</option>
+                                <!-- FIN BLOQUE : item_tipo_documento_identificacion -->
+
+                            </select>
+
+                        </td>
+                        <td class="celda_titulo">N&uacute;mero documento</td>
+                        <td class="celdaSimple">
+                            <input type="text" name="numero_documento[{i}]" id="numero_documento{i}"  value="{numero_documento}" size='25'/>
+
+                        </td>
+
+                        <td class="celdaSimple">
+                            <img src="../../../img/trash.png" title="Eliminar" id='tr{i}' name='tr{i}' class="icono" onclick="disminuye_celda_documento_identificacion_editar('persona_documento_identificacion', 'persona_documento_identificacion{i}')" />
+                        </td>
+                    </tr>
+                    <!-- FIN BLOQUE : item_documento_identificacion -->
+
+
+                </table>
+            </td>
+
+
+
+            </tr>
+            <tr>
+                <td colspan="4">
+
+
+                    <a href="javascript:agregafila_identificacion('persona_documento_identificacion', 'trpersona_documento_identificacion', 'nume_fila_documento_identificacion', 'numero_documento')">
+                        documento identificaci&oacute;n (+)
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td class="celda_titulo" colspan="2">Fecha de nacimiento&nbsp;&nbsp;
+
+
+                    <input type="text" name="fecha_nacimiento" id="fecha_nacimiento" size="9" value="{fecha_nacimiento}" onfocus="this.select();" onblur="validDate(this, 'dd/mm/yyyy')" onkeyup="setDate(this, 'dd/mm/yyyy', 'es')">
+                </td>
+                <td class="celda_titulo" colspan="2">Sexo&nbsp;&nbsp;
+
+                    <input name="sexo" type="radio" value="1" {checkedM}>M
+                    <input name="sexo" type="radio" value="0" {checkedF}>F
+
+                </td>
+            </tr>
+            <tr>
+                <td class="celda_titulo">Estado civil</td>
+              
+                                        <td colspan="3" class="celdaSimple">
+                            <select name="idestado_civil" id="idestado_civil">
+                                <!-- INICIO BLOQUE : estado_civil -->
+                                <option {selected} value="{idestado_civil}">{estado_civil}</option>
+                                <!-- FIN BLOQUE : estado_civil -->
+
+                            </select>
+
+                        </td>
+                
+                
+            </tr>
+            <tr>
+            <input type="hidden" value='{nume_fila_direccion}' id="nume_fila_direccion" name="nume_fila_direccion" />
+
+            <td class="celda_titulo">Direcci&oacute;n</td>
+            <td class="celdaSimple" colspan="3">
+                <table id="persona_direccion" name="persona_direccion">
+                    <tr id="tr_direccion" name="tr_direccion">
+                        <td>
+                            <input type="hidden" name="idpersona_direccion[0]" id="idpersona_direccion0" value="{idpersona_direccion}" />
+                            <input type="text" name="persona_direccion[0]" id="persona_direccion0" value="{persona_direccion}" size="60"/>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+
+                    <!-- INICIO BLOQUE : direccion -->
+                    <input type="hidden" name="idpersona_direccion[{i}]" id="idpersona_direccion{i}" value="{idpersona_direccion}"/>
+
+                    <tr id="trpersona_direccion{i}" class="renglon">
+
+                        <td  id="tdpersona_direccion{i}" class="celdaSimple">
+
+                            <input type='text' name='persona_direccion[{i}]' id='persona_direccion{i}' size='60' value='{persona_direccion}' />
+                        </td>
+
+                        <td  id="etdpersona_direccion{i}" class="celdaSimple">
+                            <img src="../../../img/trash.png" title="Eliminar" id='tr{i}' name='tr{i}' class="icono" onclick="disminuye_celda_persona_editar('persona_direccion', 'persona_direccion{i}')" /></td>
+                    </tr>
+                    <!-- FIN BLOQUE : direccion -->
+
+                </table>
+                <a href="javascript:agrega_celda_persona('persona_direccion', 'persona_direccion', 'nume_fila_direccion')">direcci&oacute;n(+)</a>
+            </td>
+
+
+
+            </tr>
+            <tr>
+            <input type="hidden" value='{nume_fila_telefono}' id="nume_fila_telefono" name="nume_fila_telefono" />
+            <td class="celda_titulo">Telef&oacute;no</td>
+            <td class="celdaSimple" colspan="3">
+                <table id="persona_telefono" name="persona_telefono">
+                    <tr id="tr_telefono" name="tr_telefono">
+                        <td>
+                            <input type="hidden" name="idpersona_telefono[0]" id="idpersona_telefono0" value="{idpersona_telefono}"/>
+
+                            <input type="text" name="persona_telefono[0]" id="persona_telefono0" value="{persona_telefono}" size="60"/>
+                        </td>
+                        <td width="5%">&nbsp;
+
+                        </td>
+                    </tr>
+
+
+                    <!-- INICIO BLOQUE : telefono -->
+                                        <input type="hidden" name="idpersona_telefono[{i}]" id="idpersona_telefono{i}" value="{idpersona_telefono}"/>
+
+                    <tr id="trpersona_telefono{i}" class="renglon">
+
+                        <td id="tdpersona_telefono{i}"class="celdaSimple">
+
+
+                            <input type='text' name='persona_telefono[{i}]' id='persona_telefono{i}' size='60' value='{persona_telefono}' />
+                        </td>
+
+                        <td id="etdpersona_telefono{i}"  class="celdaSimple">
+                            <img src="../../../img/trash.png" title="Eliminar" id='tr{i}' name='tr{i}' class="icono" onclick="disminuye_celda_persona_editar('persona_telefono', 'persona_telefono{i}')" /></td>
+                    </tr>
+                    <!-- FIN BLOQUE : telefono -->
+                </table>
+                <a href="javascript:agrega_celda_persona('persona_telefono', 'persona_telefono', 'nume_fila_telefono')" >telef&oacute;no(+)</a>
+            </td>
+            <tr>
+            <input type="hidden" value='{nume_fila_mail}' id="nume_fila_mail" name="nume_fila_mail" />
+            <td class="celda_titulo">Email</td>
+            <td class="celdaSimple" colspan="3">
+                <table id="persona_mail" name="persona_mail">
+                    <tr id="tr_email" name="tr_mail">
+                        <td>
+                            <input type="hidden" name="idpersona_mail[0]" id="idpersona_mail0" value="{idpersona_mail}"/>
+
+                            <input type='email' required name="persona_mail[0]" id="persona_mail0" value="{persona_mail}" size="60"/>
+                        </td>
+                        <td >
+
+                        </td>
+                    </tr>
+                    <!-- INICIO BLOQUE : mail -->
+                   <input type="hidden" name="idpersona_mail[{i}]" id="idpersona_mail{i}" value="{idpersona_mail}"/>
+
+                    <tr id="trpersona_mail{i}" class="renglon">
+
+                        <td id="tdpersona_mail{i}"  class="celdaSimple">
+
+                            <input type='email' required name='persona_mail[{i}]' id='persona_mail{i}' size='60' value='{persona_mail}' />
+                        </td>
+
+                        <td id="etdpersona_mail{i}" class="celdaSimple">
+                            <img src="../../../img/trash.png" title="Eliminar" id='tr{i}' name='tr{i}' class="icono" onclick="disminuye_celda_persona_editar('persona_mail', 'persona_mail{i}')" /></td>
+                    </tr>
+                    <!-- FIN BLOQUE : mail -->
+                </table>
+                <a href="javascript:agrega_celda_persona('persona_mail', 'persona_mail', 'nume_fila_mail')">email(+)</a>
+            </td>
+            </tr>
+
+            <tr>
+                <td class="celda_titulo">Background</td>
+                <td colspan="3" class="celdaSimple"><label for="comentario2"></label>
+                    <textarea name="background" id="background" cols="50" rows="9">{background}</textarea></td>
+            </tr>
+            <tr>
+                <td class="celda_titulo">Comentario</td>
+                <td colspan="3" class="celdaSimple"><label for="comentario2"></label>
+                    <textarea name="comentario" id="comentario" cols="50" rows="3">{comentario}</textarea></td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <!-- INICIO BLOQUE : editar_rc -->
+                    <button id="btn_guardar_persona_rc" style="margin:5px;" onclick="validar_nombre('rc');return false;">Guardar</button>
+                    <!-- FIN BLOQUE : editar_rc -->
+                </td>
+                
+            </tr>
+        </table>
+
+    </form>
+
+</div>
+
+<script type="text/javascript" >
+
+      $("#form_persona").validate();
+      $("#btn_guardar_persona_rc").button();
+
+    
+</script> 

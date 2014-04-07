@@ -1,0 +1,128 @@
+
+
+<form id="form_buscar_persona" onsubmit="buscar_persona();return false;" >
+    <input type="hidden" name="es_stakeholder" id="es_stakeholder" value="{es_stakeholder}" />
+    
+    <table  class="bloque" cellpadding="4" cellspacing="4" width="710px">
+        <thead>
+        <td colspan="4"> Buscar {donde}</td>
+        </thead>
+
+        <tr>
+            <td width="130px" class="celda_titulo">Apellido Paterno</td>
+            <td  class="celdaSimple">
+                <input type="text" name="apaterno" id="apaterno"  size='80' value="{apaterno}"/>
+            </td>
+        </tr>
+        <tr>
+            <td  class="celda_titulo">Apellido Materno</td>
+            <td class="celdaSimple">
+                <input type="text" name="amaterno" id="amaterno"  size='80' value="{amaterno}"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="celda_titulo">Nombre</td>
+            <td class="celdaSimple">
+                <input type="text" name="nombre" id="nombre"  size='80' value="{nombre}"/>
+            </td>
+        </tr>
+        
+         <!-- INICIO BLOQUE : persona_tipo -->
+        <tr>
+                <td class="celda_titulo">Tipo</td>
+                <td colspan="3" class="celdaSimple">
+
+                    <select name="idpersona_tipo" id="idpersona_tipo"  onchange="cambiar_busqueda_persona()">
+                        <!-- INICIO BLOQUE : persona_tipo_opcion -->
+                        <option {selected} value="{idtipo}" >{tipo}</option>
+                        <!-- FIN BLOQUE : persona_tipo_opcion -->
+                        <option {selected_todos} value="0" >TODOS</option>
+                    </select> 
+                    <!-- INICIO BLOQUE : filtro -->
+                    <input type="checkbox" name="filtro" id="filtro"  size='80' value="1" /> Incluir {tipo}
+                    <!-- FIN BLOQUE : filtro -->
+                </td>
+            </tr>
+        <!-- FIN BLOQUE : persona_tipo -->
+        <!-- INICIO BLOQUE : persona_tag -->
+         <tr>
+                        <td class="celda_titulo">Tag</td>
+                        <td class="celda_titulo" colspan="3">
+                            <table>
+                                <tr>
+                                    <td >
+                                        <input type="hidden" id="nume_celda_interaccion_tag" name="nume_celda_interaccion_tag" value="0" />
+                                        <input type="hidden" id="nume_fila_interaccion_tag" name="nume_fila_interaccion_tag" value="0" />
+
+                                        <input class="buscar ui-autocomplete-input" type="text" name="buscar_interaccion_complejo_tag" id="buscar_interaccion_tag" onfocus="borrar_interaccion_tag();
+busqueda_rapida_interacccion_tag(2);" value=" Buscar tag" size="80" style="background-color: rgb(255, 255, 204); ">
+                                        <img id="img_buscar_sh_rc"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <table width="200" class="borde" id="interaccion_tag">
+                               
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- FIN BLOQUE : persona_tag -->
+                    <!-- INICIO BLOQUE : persona_criterio -->
+                     <tr>
+                        <td class="celda_titulo">Aplicar Criterio</td>
+                        <td class="celdaSimple" >
+                            <select name="criterio">
+                                <option value="AND" >Todos</option>
+                                <option value="OR" >Alguno</option>                                
+                            </select>
+                            <a href="javascript:agregar_criterio_sh()">Agregar criterio (+)</a>
+                            <div id="condicion">
+                                <input type="hidden" name="condiciones" id="condiciones" value="1"/>
+                                <div id="condicion_1" style="display:none;">
+                                    <br/>
+                                    <select name="dimensiones[]">
+                                        <option value="0">Importancia</option>
+                                    <!-- INICIO BLOQUE : dimension -->
+                                        <option value="{iddimension}">{dimension}</option>
+                                    <!-- FIN BLOQUE : dimension -->
+                                    </select>
+                                    <select name="operadores[]">
+                                        <option value="<"> menor que </option>                                    
+                                        <option value="<="> menor igual que </option>
+                                        <option value="="> igual a </option>
+                                        <option value="<>"> diferente de </option>
+                                        <option value=">="> mayor igual que </option>
+                                        <option value=">"> mayor que </option>                                    
+                                    </select>
+                                    <select name="puntajes[]">                                        
+                                    <!-- INICIO BLOQUE : puntaje -->
+                                        <option value="{puntaje}">{puntaje}</option>
+                                    <!-- FIN BLOQUE : puntaje -->
+                                    </select>
+                                    
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- FIN BLOQUE : persona_criterio -->
+                <tr>
+         
+                    <td class="celdaSimple" colspan="2" align="center">
+                   <input id="btn_buscar_persona" type="submit" value="Buscar" />
+                   <input type="hidden" id="fid_string" name="fid_string" value="" />
+                    </td>
+                </tr>
+      </table>
+
+</form>
+
+<br/>
+<iframe id="frame2" style="display:none" src=""></iframe>
+<div id="resultado_persona">
+</div>
+
+
+<script type="text/javascript" >
+        $("#btn_buscar_persona").button();
+</script>
+

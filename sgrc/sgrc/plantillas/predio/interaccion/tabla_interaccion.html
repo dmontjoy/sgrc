@@ -1,0 +1,96 @@
+
+
+
+    <table width="100%" class="bloque">
+        <tr>
+        <td colspan="2" align="center">
+
+
+            <table width="100%">
+                <tr>
+
+                    <td align="center" style="vertical-align:middle" >
+                        <span style="line-height: 25px;">{titulo} {numero} {de} {total}</span>
+
+                        <!-- INICIO BLOQUE : ver_organizacion -->
+                        <span style="float:right;">
+                        <button  id="boton_filtro_organizacion" type="button" onclick="ver_organizacion_stakeholder({idpersona},{idmodulo},{idpersona_tipo})">Ver Organizaciones</button>
+                        </span>
+                        <!-- FIN BLOQUE : ver_organizacion -->
+                        <!-- INICIO BLOQUE : ver_filtro -->
+                        <span style="float:right;">
+                        <button  id="boton_filtro" type="button" onclick="aplicar_filtro_sh({idpersona},{idmodulo},{idpersona_tipo})">Aplicar Filtro</button>
+                        </span>
+                        <!-- FIN BLOQUE : ver_filtro -->
+                     </td>
+                    <!-- INICIO BLOQUE : enlaces -->
+                    <td align="center">{nombre}</td>
+                    <td align="center">
+                    <a class="button-link" href="javascript:ver_bloque_reclamo(30, {idpersona}, {idmodulo}, 1, 2, 1)">Reclamos</a>
+                    <a class="button-link" href="javascript:ver_bloque_compromiso(30, {idpersona}, {idmodulo}, 1, 2, 1)">Compromisos</a>
+                    <a class="button-link-active" href="javascript:ver_bloque_stakeholder(30, {idpersona}, {idmodulo}, 1, 2, 1)">Interacciones</a>
+                    </td>
+                    <td align="right" width="130px">
+                        <!-- INICIO BLOQUE : crear_interaccion -->
+                        <a title="Registrar interaccion" href="javascript:vista_avanzada_interaccion(0);"> <img src="../../../img/add-circle-green.png" style="width:auto; height:auto;vertical-align: middle;"/> Interacci&oacute;n - Crear</a>
+                        <!-- FIN BLOQUE : crear_interaccion -->
+                        <!-- INICIO BLOQUE : crear_reclamo -->
+                            <a title="Registrar reclamo" href="javascript:vista_avanzada_reclamo(0);"> <img src="../../../img/add-circle-green.png" style="width:auto; height:auto;vertical-align: middle;"/> Reclamo - Crear</a>
+                        <!-- FIN BLOQUE : crear_reclamo -->
+                        &nbsp;
+                    </td>
+                    <!-- FIN BLOQUE : enlaces -->
+                </tr>
+            </table>
+
+
+        </td>
+        </tr>
+</table>
+
+        {bloque_interaccion}
+        <!-- INICIO BLOQUE : ver_mas -->
+        <a class="show-more" href="javascript:ver_mas_interaccion({inicio},{idpersona},{idmodulo},{presenta},{persona},{modo})">Ver m&aacute;s...</a>
+       <!-- FIN BLOQUE : ver_mas -->
+       <!-- INICIO BLOQUE : mensaje -->
+       <div class="show-more">No se hallaron resultados</div>
+       <!-- FIN BLOQUE : mensaje -->
+
+        <script type="text/javascript" >
+
+    $( ".tooltip" ).tooltip({
+        content: function(){
+            var element = $( this );
+            var text = element.attr( "data" );
+             return "<img class='map' src='" + text +
+            "' alt='' border='1' height='50px'>";
+        }});
+
+    $("#boton_filtro_organizacion").button({icons: {secondary: "ui-icon-gear"}});
+    $("#boton_filtro").button({icons: {secondary: "ui-icon-search"}});
+
+    $( ".boton_ocultar" ).button({
+                        icons: {
+                        primary: "ui-icon-newwin",
+                        secondary: "ui-icon-plus"
+                        }}) .click(function() {
+                            var options;
+                            if ( $( this ).text() === "Mostrar" ) {
+                                options = {
+                                    label: "Ocultar",
+                                    icons: {
+                                    primary: "ui-icon-newwin",secondary: "ui-icon-minus"
+                                    }
+                                };
+                            } else {
+                                options = {
+                                    label: "Mostrar",
+                                    icons: {
+                                    primary: "ui-icon-newwin",secondary: "ui-icon-plus"
+                                    }
+                                };
+                            }
+                            $( this ).button( "option", options );
+                            });
+
+</script>

@@ -1,0 +1,167 @@
+
+    <form id="form_modal_propuesta" enctype="multipart/form-data" accept-charset="utf-8">
+        <input type="hidden" id="idmodulo_evaluacion" name="idmodulo_evaluacion" value="{idmodulo_evaluacion}" />
+        <input type="hidden" id="idevaluacion" name="idevaluacion" value="{idevaluacion}" />
+         <input type="hidden" id="idmodulo_propuesta" name="idmodulo_propuesta" value="{idmodulo_propuesta}" />
+        <input type="hidden" id="idpropuesta" name="idpropuesta" value="{idpropuesta}" />
+        <input type="hidden" id="op_propuesta" name="op_propuesta" value="{op_propuesta}" />
+ 	<input type="hidden" name="persona" id="persona" value="0" />
+        <input type="hidden" name="persona" id="presenta" value="0" />
+            <div id="enlace_mostrar_reclamo_complejo" style="display:none;"> <a href="javascript:habilitar_mostrar_reclamo()">Mostrar Reclamo [ + ] </a></div>
+            <div id="enlace_ocultar_reclamo_complejo" > <a href="javascript:habilitar_mostrar_reclamo()">Ocultar Reclamo [ - ] </a></div>
+            <div id="reclamo_stakeholder_complejo" >
+                                {reclamo_cabecera}
+            </div>
+                                <table>
+                                    <tr>
+                                        <td class="celda_titulo" bgcolor="#FFFFCC" >Acuerdo</td>
+                                        <td colspan="3" class="celdaSimple" bgcolor="#FFFFCC">
+                                            <div><textarea minlength="2" required name="propuesta" id="propuesta" cols="100" rows="5" >{propuesta}</textarea></div>                                          
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="celda_titulo" bgcolor="#FFFFCC" >Fecha</td>
+                                        <td colspan="3" class="celdaSimple" bgcolor="#FFFFCC">
+                                            <input type="text" name="fecha_propuesta" id="fecha_propuesta"  value="{fecha_propuesta}" size="10"/>
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td class="celda_titulo" bgcolor="#FFFFCC">Documentos</td>
+                                        <td class="celdaSimple" colspan="3" bgcolor="#FFFFCC">
+                                            
+                                            <div id="propuesta_archivo">
+                                                <div><input type='file' name='archivos[]' >(tama&ntilde;o m&aacute;ximo: {maximo} MB)</div><br/>
+                                            </div>
+                                            <a href="javascript:agregar_campo_archivo('propuesta')">Adjuntar otro Archivo (+) </a><br/><br/>
+                                            <table >
+                                             <!-- INICIO BLOQUE : archivo -->
+                                             <tr>
+                                                 <td id="archivo_{idpropuesta_archivo}_{idmodulo_propuesta_archivo}" ><a href="javascript:populateIframe('frame5','propuesta','{ruta}')"  title="Descargar">{archivo}</a></td>
+                                                 <td><input type="hidden" name="idpropuesta_archivo[]" id="idarchivo_{idpropuesta_archivo}_{idmodulo_propuesta_archivo}" value="{idpropuesta_archivo}***{idmodulo_propuesta_archivo}***{activo}"/> {fecha}</td>
+                                                 <td><img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('archivo_{idpropuesta_archivo}_{idmodulo_propuesta_archivo}')" ><br/></td></tr>
+                                             <!-- FIN BLOQUE : archivo -->
+                                            </table>
+                                           </td> 
+                                    </tr>
+                                    <tr>
+                                        <td class="celda_titulo" bgcolor="#FFFFCC" >Estado</td>
+                                        <td colspan="3" class="celdaSimple" bgcolor="#FFFFCC">
+                                             <div style="margin:10px;text-align: center;">                                                
+                                                 <div id="radio_estado">
+                                                     <input type="radio" id="radio_estado_1" name="radio_estado" value="5" {checked5}/><label for="radio_estado_1">&nbsp;&nbsp;&nbsp;&nbsp;Se cumpli&oacute;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                     <input type="radio" id="radio_estado_2" name="radio_estado" value="4" {checked4}/><label for="radio_estado_2">&nbsp;&nbsp;&nbsp;&nbsp;Pendiente&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                     <input type="radio" id="radio_estado_3" name="radio_estado" value="6" {checked6}/><label for="radio_estado_3">&nbsp;&nbsp;&nbsp;&nbsp;No se puede cumplir&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                </div>
+                                             </div>
+                                            <div><textarea name="comentario_realizado" id="comentario_realizado" cols="100" rows="5" style="{estilo}" >{comentario_realizado}</textarea></div>                                          
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td colspan="3" align="center">
+                                            <div id="guardar_reclamo_complejo" style="margin:5px;">
+                                                <input type="submit"  id="propuesta_submit" value="Guardar"/>
+                                                <!-- INICIO BLOQUE : reclamo_pdf -->
+                                                &nbsp;&nbsp;
+                                                <a href='javascript:exportar_pdf_reclamo("frame5",{idreclamo},{idmodulo_reclamo})' title='Ver PDF'><img style="width:auto; height:auto;vertical-align: middle;" src='../../../img/pdf.png' alt='PDF'/>Ver PDF</a> 
+                                                <!-- FIN BLOQUE : reclamo_pdf -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </form>
+
+                                
+
+<iframe id="frame5" style="display:none" src=""></iframe>
+                                
+
+
+<script type="text/javascript" >
+    
+    $( "#radio_estado" ).buttonset();
+    
+    $('#radio_estado input:radio').click(function() {
+        if ($(this).val() === '4') {
+            $("#comentario_realizado").hide();
+        }else{
+            $("#comentario_realizado").show();
+        } 
+      });
+    
+    var from = $("#fecha_reclamo").html().split("/");
+    
+    $("#fecha_propuesta").blur();
+    $("#fecha_propuesta").datepicker({changeYear: true,minDate: new Date(from[2], from[1] - 1, from[0]), changeMonth: true});
+    
+    // getter
+    //var minDate = $( "#fecha_propuesta" ).datepicker( "option", "minDate" );
+    
+    //alert('minDate : '+from[2] +'-'+ from[1] +'-'+ from[0]);
+    
+    $("#propuesta_submit").button();
+
+    var idpersona = $("#idpersona").val();
+    var idmodulo = $("#idmodulo").val();
+    var url = '../../../programas/reclamo/propuesta/apropuesta.php?idpersona=' + idpersona + '&idmodulo=' + idmodulo;
+    
+    //datastring = $("#guardar_reclamo_stakeholder").serialize();
+    
+    //url = url +'&'+datastring;
+    
+    //alert('URL: '+url);
+    $("#form_modal_propuesta").attr('action', url); 
+    
+    $('#form_modal_propuesta').ajaxForm({
+        beforeSubmit: function() {
+           
+        
+            if($("#form_modal_propuesta").valid()){
+                $("#guardar_reclamo_complejo").html('<img src="../../../img/bar-ajax-loader.gif">');
+                
+            }else{
+                return false;
+            }
+           
+        },
+        success: function(data) {
+         var obj = jQuery.parseJSON(data);
+        
+           if (obj.op_stakeholder) {
+                $("#pantalla_aux_principal").dialog("close");
+                
+                
+                if (obj.success) {
+                    
+                    $(".propuesta_" + obj.idpropuesta + "_" + obj.idmodulo_propuesta).html(obj.data);
+                    if(obj.error_archivo){
+                        $.jGrowl(obj.mensaje, {theme: 'amarillo'});
+                        alert('No se pudo cargar el archivo');
+                    }else{
+                        $.jGrowl(obj.mensaje, {theme: 'verde'});
+                    }
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }
+            } else {
+                $("#pantalla_aux_principal").dialog("close");
+                if (obj.success) {
+                    $('#tabs').tabs('load', 1);
+                    $.jGrowl(obj.mensaje, {theme: 'verde'});
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }
+            }
+        
+        
+        
+        }
+    });
+
+
+$("#form_modal_propuesta").validate({ignore:""});
+
+
+</script> 

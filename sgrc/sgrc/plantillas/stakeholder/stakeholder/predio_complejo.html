@@ -1,0 +1,160 @@
+
+<div id="predio_stakeholder_complejo" >
+
+    <form id="form_modal_predio" enctype="multipart/form-data" accept-charset="utf-8">
+        
+        <input type="hidden" id="idpredio" name="idpredio" value="{idpredio}" />
+        <input type="hidden" id="idmodulo_predio" name="idmodulo_predio" value="{idmodulo_predio}" />
+        <input type="hidden" id="op_stakeholder" name="op_stakeholder" value="{op_stakeholder}" /> 	
+     
+                              <table>
+                                    <tr>
+                                           <td class="celda_titulo">Tags</td> 
+                                           <td class="celdaSimple">
+
+                                                <input type="text" class="buscar"  name="buscar_predio_tag" id="buscar_predio_tag" onfocus="borrar_predio_sh_tag();
+                            busqueda_rapida_sh_predio_tag(1);" value=" Buscar tag" size="20"  >
+                                                    <img id="img_buscar_predio"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                                    <input type="hidden" id="nume_celda_predio_tag" name="nume_celda_predio_tag" value="{nume_celda_predio_tag_complejo}" />
+                                                    <input type="hidden" id="nume_fila_predio_tag" name="nume_fila_predio_tag" value="{nume_fila_predio_tag_complejo}" />
+
+                                            </td>
+                                            <td class="celdaSimple" colspan="2">
+                                                <table id="predio_tag"  width="100%">
+                                                    <!-- INICIO BLOQUE : tr_tag_predio -->
+                                                <tr>
+                                                    <!-- INICIO BLOQUE : td_tag_predio -->
+
+                                                    <td width="10%" id="predio_complejo_tag{celda_nume_fila}{celda_nume_celda}" style="vertical-align:top">
+                                                        {tag}
+
+
+                                                    </td>
+                                                    <td id="spredio_complejo_tag{celda_nume_fila}{celda_nume_celda}" style="vertical-align:top">
+                                                        <!-- INICIO BLOQUE : spinner_tag_predio -->
+                                                        <input id="spinner_{celda_nume_fila}{celda_nume_celda}" name="orden_complejo_tag[]" style="width:20px;"/>
+                                                        
+                                                        <script type="text/javascript">
+                                                        $( "#spinner_{celda_nume_fila}{celda_nume_celda}" ).spinner({
+                                                            spin: function( event, ui ) {
+                                                            if ( ui.value < 0 ) {
+                                                              $( this ).spinner( "value", 0 );
+                                                              return false;
+                                                            } 
+                                                          }
+                                                        });
+                                                        $( "#spinner_{celda_nume_fila}{celda_nume_celda}").spinner( "value", {prioridad} );
+                                                        </script>
+                                                        <!-- FIN BLOQUE : spinner_tag_predio -->
+                                                        &nbsp;
+                                                    </td>
+                                                    <td id="epredio_complejo_tag{celda_nume_fila}{celda_nume_celda}" style="vertical-align:top">
+                                                        <!-- INICIO BLOQUE : eliminar_tag_predio -->
+                                                        <input type="hidden" name="idpredio_complejo_tag[]" id="idpredio_complejo_tag{celda_nume_fila}{celda_nume_celda}" value={predio_complejo_tag} />
+                                                        <img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('predio_complejo_tag{celda_nume_fila}{celda_nume_celda}')" >
+                                                        <!-- FIN BLOQUE : eliminar_tag_predio -->
+                                                        &nbsp;
+                                                    </td>
+                                                    <!-- FIN BLOQUE : td_tag_predio -->
+
+                                                </tr>
+                                                <!-- FIN BLOQUE : tr_tag_predio -->
+                                                </table>
+                                            </td>
+
+                                        </tr>                                        
+                                    <tr>
+                                        <td class="celda_titulo">Documentos</td>
+                                        <td class="celdaSimple" colspan="3">
+                                            
+                                            <div id="predio_complejo_archivo">
+                                                <div><input type='file' name='archivos[]' >(tama&ntilde;o m&aacute;ximo: {maximo} MB)</div><br/>
+                                            </div>
+                                            <a href="javascript:agregar_campo_archivo('predio_complejo')">Adjuntar otro Archivo (+) </a><br/><br/>
+                                            <table >
+                                             <!-- INICIO BLOQUE : archivo -->
+                                             <tr>
+                                                 <td id="archivo_{idpredio_archivo}_{idmodulo_predio_archivo}" ><a href="javascript:populateIframe('frame1','predio','{ruta}')"  title="Descargar">{archivo}</a></td>
+                                                 <td><input type="hidden" name="idpredio_archivo[]" id="idarchivo_{idpredio_archivo}_{idmodulo_predio_archivo}" value="{idpredio_archivo}***{idmodulo_predio_archivo}***{activo}"/> {fecha}</td>
+                                                 <td><img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('archivo_{idpredio_archivo}_{idmodulo_predio_archivo}')" ><br/></td></tr>
+                                             <!-- FIN BLOQUE : archivo -->
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="celda_titulo">Comentario</td>
+                                        <td colspan="3" class="celdaSimple">
+                                            <textarea name="comentario_predio" id="comentario_predio" cols="100" rows="5">{comentario_predio}</textarea></td>
+                                    </tr>
+                                    <tr>
+                                      
+                                        <td colspan="4" align="center">
+                                            <div id="guardar_predio_complejo">
+                                                <input type="submit"  id="predio_complejo_submit" value="Guardar"/>                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </form>
+
+                                </div>
+<iframe id="frame5" style="display:none" src=""></iframe>
+                                
+
+
+<script type="text/javascript" >
+    
+    
+
+    $("#predio_complejo_submit").button();
+
+    
+    
+    var url = '../../../programas/stakeholder/stakeholder/astakeholder.php';
+    
+    //datastring = $("#guardar_interaccion_stakeholder").serialize();
+    
+    //url = url +'&'+datastring;
+    
+    //alert('URL: '+url);
+    $("#form_modal_predio").attr('action', url); 
+    
+    $('#form_modal_predio').ajaxForm({
+        beforeSubmit: function() {
+            //alert('Submitting...');
+            if($("#form_modal_predio").valid()){
+                $("#guardar_predio_complejo").html('<img src="../../../img/bar-ajax-loader.gif">');
+                
+            }else{
+                return false;
+            }
+        },
+        success: function(data) {                                
+        
+         var obj = jQuery.parseJSON(data);
+           if (obj.op_stakeholder) {
+                $("#pantalla_aux_principal").dialog("close");
+                                
+                if (obj.success) {
+                    
+                    if(obj.error_archivo){
+                        $.jGrowl(obj.mensaje, {theme: 'amarillo'});
+                        alert('No se pudo cargar el archivo');
+                    }else{
+                        $.jGrowl(obj.mensaje, {theme: 'verde'});
+                        $('#tabs').tabs('load', 3);
+                    }
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }
+            } 
+                
+        }
+    });
+
+
+$("#form_modal_predio").validate({ignore:""});
+
+
+</script> 

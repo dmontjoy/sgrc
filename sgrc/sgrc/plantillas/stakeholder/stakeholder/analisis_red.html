@@ -1,0 +1,28 @@
+
+                       
+<div style="float:left;padding-top:4px;margin-right:5px;">              
+<a href="javascript:mostrar_legend(1)">Leyenda</a>
+</div>
+<div id="legend_1" style="display:none;float:left;">
+    {legend}
+    <a href="javascript:cerrar_legend(1)">Cerrar</a>
+</div>
+<div style="float:left;margin-left:5px;">
+<label>Rango</label>
+<select name="rango_fecha" id="rango_fecha" onChange="cargar_analisis_red()">
+	<option value="1">Semanal</option>
+	<option value="4">Mensual</option>
+	<option value="8">Bimestral</option>
+	<option value="12">Trimestral</option>
+</select>
+</div>
+<div id="ajax_loader"></div>
+<div style="clear:both;"></div>
+<div id="analisis_red">{analisis_red}</div>
+
+
+<a href="javascript:mostrar_legend(2)">Leyenda</a>
+<div id="legend_2" style="display:none;">
+    {legend}
+    <a href="javascript:cerrar_legend(2)">Cerrar</a>
+</div>

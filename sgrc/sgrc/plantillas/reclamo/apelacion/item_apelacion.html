@@ -1,0 +1,19 @@
+<table width="100%" class="celdaApelacion">
+    <tbody><tr>
+        <td width="80%">
+            <strong>{fecha_apelacion}</strong> Apelaci&oacute;n Nº {idapelacion}-{idmodulo_apelacion}
+        </td>
+        <td width="20%" align="right">
+            
+            <a title="Editar apelacion" href="javascript:modal_editar_apelacion({idapelacion},{idmodulo_apelacion});"><img alt="Editar" src="../../../img/edit.png"></a>
+            <a title="Eliminar apelacion" href="javascript:eliminar_apelacion({idapelacion},{idmodulo_apelacion});"><img alt="Eliminar" src="../../../img/trash.png"></a>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="2">
+            {apelacion}
+        </td>
+
+    </tr>
+</tbody></table>

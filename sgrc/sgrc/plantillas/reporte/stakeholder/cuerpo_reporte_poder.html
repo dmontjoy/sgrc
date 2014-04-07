@@ -1,0 +1,57 @@
+<table width="100%" class="bloque">
+        <thead>
+        <td align="center" colspan="2">
+            Stakeholder - Inter&eacute;s/Poder
+        </td>
+        </thead>
+</table>
+<br/>
+<form id="form_modal_poder" accept-charset="utf-8" onsubmit="buscar_reporte_poder();return false;">
+<table style="margin-left:60px;">
+    <tr>
+        <td>Tag
+            <input type="hidden" id="nume_celda_interaccion_tag_complejo" name="nume_celda_interaccion_tag_complejo" value="{nume_celda_interaccion_tag_complejo}" />
+            <input type="hidden" id="nume_fila_interaccion_tag_complejo" name="nume_fila_interaccion_tag_complejo" value="{nume_fila_interaccion_tag_complejo}" />
+
+            <input type="text"  class="buscar" name="buscar_interaccion_complejo_tag" id="buscar_interaccion_complejo_tag" onfocus="borrar_interaccion_complejo_tag();
+busqueda_rapida_interacccion_complejo_tag();" value="Buscar tag" size="60"   style="background-color: rgb(255, 255, 204); ">
+            <img id="img_complejo_buscar_sh_rc"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/><input type="submit"  value="Buscar"/>
+        </td>
+    </tr>
+
+</table>
+<table style="margin-left:60px;" width="200" class="borde" id="interaccion_complejo_tag">
+
+    <!-- INICIO BLOQUE : tr_tag_interaccion -->
+    <tr>
+        <!-- INICIO BLOQUE : td_tag_interaccion -->
+
+        <td width="10%" id="interaccion_complejo_tag{celda_nume_fila}{celda_nume_celda}">
+            {tag}
+        </td>
+        <td id="einteraccion_complejo_tag{celda_nume_fila}{celda_nume_celda}" >
+            <!-- INICIO BLOQUE : eliminar_tag_interaccion -->
+            <input type="hidden" name="idinteraccion_complejo_tag[]" id="idinteraccion_complejo_tag{celda_nume_fila}{celda_nume_celda}" value={interaccion_complejo_tag} />
+            <img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('interaccion_complejo_tag{celda_nume_fila}{celda_nume_celda}')" >
+            <!-- FIN BLOQUE : eliminar_tag_interaccion -->
+            &nbsp;
+        </td>
+        <!-- FIN BLOQUE : td_tag_interaccion -->
+
+    </tr>
+    <!-- FIN BLOQUE : tr_tag_interaccion -->
+
+
+</table>
+</form>
+<div id="reporte_poder">
+<div id="diagrama" style="width:300px;height: 340px;background:url('../../../img/diagrama_5x5.png') no-repeat 0px 0px; text-align: left; ">
+    <div style="position:relative;top:10px;left:20px;width:50px;">Inter&eacute;s</div>
+    <div style="position:relative;top:290px;left:280px;width:50px;">Poder</div>
+    <div style="position:relative;top:50px;left:220px;width:50px;"><a style="font-size: 24px;" href="javascript:cargar_stakeholders(4,5,2,4,5,3)">{IQ}</a></div>
+    <div style="position:relative;top:20px;left:80px;width:50px;"><a style="font-size: 24px;" href="javascript:cargar_stakeholders(0,3,2,4,5,3)">{IIQ}</a></div>
+    <div style="position:relative;top:120px;left:80px;width:50px;"><a style="font-size: 24px;" href="javascript:cargar_stakeholders(0,3,2,0,3,3)">{IIIQ}</a></div>
+    <div style="position:relative;top:90px;left:220px;width:50px;"><a style="font-size: 24px;" href="javascript:cargar_stakeholders(4,5,2,0,3,3)">{IVQ}</a></div>
+</div>
+</div>
+<div id="listado"></div>

@@ -1,0 +1,46 @@
+<form id="formulario_tag">
+<table>
+<tr>
+    <td class="celda_titulo" width="20%">Tag </td>
+    <td class="celdaSimple"><input minlength="3" type="text" required  name="tag" id="input_tag" value="{tag}" /></td>
+</tr>
+<tr>
+	<td class="celda_titulo" width="20%">
+
+       Anidar
+  
+    </td>
+	<td class="celdaSimple">
+            <select name="idtag_padre_compuesto" id="idtag_padre_compuesto" >		
+                <option value=""> -- Tag Inicial -- </option>
+                <!-- INICIO BLOQUE : tag -->
+                <option value="{idtag}_{idmodulo_tag}" {selected}>{tag}</option>
+                <!-- FIN BLOQUE : tag -->
+            </select>
+
+	</td>
+</tr>
+ <tr>
+	<td class="celda_titulo" width="20%">
+
+       Habilitar
+  
+    </td>
+	<td class="celdaSimple">
+            <!-- INICIO BLOQUE : tag_entidad -->
+            <input type="hidden" name="idtag_entidad[]" id="idtag_entidad_{idtag_entidad}" value={valor} />
+            <input type="checkbox" name="entidad[]" id="tag_entidad_{idtag_entidad}" onclick="actualiza_valor('tag_entidad_{idtag_entidad}')" value="{idtag_entidad}" {checked}>{entidad}                
+            <!-- FIN BLOQUE : tag_entidad -->   
+
+	</td>
+</tr>
+</table>
+		
+</form>
+
+<script type="text/javascript" >
+          
+  $("#formulario_tag").validate();
+
+    
+</script> 

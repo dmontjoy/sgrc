@@ -1,0 +1,488 @@
+
+<div id="ver_buscar_mapa">
+    <script defer="defer" type="text/javascript">
+            var map;            
+            var layers;
+            var query_layers;
+            var select_layers;
+            var layerData;
+            var selectControl;
+            layerData = new Array();
+			//var aux, retorna las capas a partir de un xml, captura la informacion
+            layers = new Array();
+			//todas las capas como objeto de openlayer
+            query_layers = new Array();
+			//A que capas o capas donde quiere consultar datos
+            select_layers = new Array();
+			// variable axuliar, capas visibles o no son visibles
+			// capas visibles en un momento determinado, concatenacion de nombre de capas visibles en un momento determinado.
+			// solo los nombres de las capas
+            
+            
+            // pink tile avoidance
+            OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
+            // make OL compute scale according to WMS spec
+            OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
+        
+            $(function() {
+                // if this is just a coverage or a group of them, disable a few items,
+                // and default to jpeg format
+                format = 'image/gif';
+                
+                var myStyle;
+                var point_style;
+                //limites maximos
+                var bounds = new OpenLayers.Bounds(
+                    {frontera}
+                );
+                //limites que vas a mostrar
+                var _bounds = new OpenLayers.Bounds(
+                    {enfoque}
+                );
+                
+                //parametros de la creacion del objeto mapa
+				//allOverLyas, no capa base
+				//Control, control del mapa
+                var options = {
+                    allOverlays: true,
+                    controls: [],
+                    maxExtent: bounds,
+                    maxResolution: {resolucion},
+                    projection: "{proyeccion}",
+                    units: '{unidad}'
+                };
+                
+              
+                map = new OpenLayers.Map('map', options);
+                
+                
+                
+                <!-- INICIO BLOQUE : capa --> 
+                
+                query_layers[{i}]='{nombre}';
+                //cuadrito azul
+                layers[{i}] = new OpenLayers.Layer.WMS(
+                    "{nombre}", "../../../../geoserver/wms",
+                    {
+                        LAYERS: '{nombre}',
+                        STYLES: '',
+                        transparent: true,
+                        format: format
+                    },
+                    {
+                        singleTile: true, 
+                        ratio: 1,
+                        isBaseLayer: {base},
+                        yx : {'{proyeccion}' : false}
+                    } 
+                );
+                //empiza cargar
+                layers[{i}].events.register('loadstart', this, onloadstart);
+				//termina de cargar
+                layers[{i}].events.register('loadend', this, onloadend);
+                
+                <!-- FIN BLOQUE : capa -->
+                
+                
+                // no bloque concurrentes, capa wms imagenes del servidor; gml, wfs xml
+                <!-- INICIO BLOQUE : gml --> 
+                
+               query_layers[{i}]='{nombre}';
+                // a nivel de htdocs
+                layerData[{i}] =  {
+                    name: "{nombre}",
+                    url: "../../../../geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName={nombre}&outputFormat=json"
+                };
+                
+                
+                myStyle = {fill: true};
+                
+                point_style = $.extend(myStyle,OpenLayers.Feature.Vector.style['default']);
+                //borde y llenado
+                point_style.fillColor="{color}";
+                point_style.strokeColor = "{stroke}";
+                
+                layers[{i}]=new OpenLayers.Layer.Vector(
+                        layerData[{i}].name, {
+                            protocol: new OpenLayers.Protocol.HTTP({
+                                url: layerData[{i}].url,
+                                format: new OpenLayers.Format.GeoJSON()
+                            }),
+                            strategies: [new OpenLayers.Strategy.Fixed()],
+                            // empty style map, will be populated in setLayerStyles
+                            styleMap: new OpenLayers.StyleMap(),
+                            style: point_style
+                        }
+                    );
+                //layers[{i}].style.fillColor= "{color}";
+                
+                
+                    
+                  //agraga el click
+					select_layers.push(layers[{i}]);
+					layers[{i}].events.on({
+						"featureselected": function(e) {
+							//showStatus("selected feature "++" on Vector Layer 1");
+							/*
+							var html;
+							jQuery.each(e.feature, function(i, val) {
+								html += i + " : " + val+" ";
+							  });
+							alert(html);
+							*/
+							if($("#pantalla_aux_principal").hasClass('ui-dialog-content') && $("#pantalla_aux_principal").dialog('isOpen')){
+								ver_predio_stakeholders(e.feature.fid);
+							}else{
+								modal_ver_predio_stakeholders(e.feature.fid);
+							}
+
+						},
+						"featureunselected": function(e) {
+							//...
+							console.log(e.feature.id);
+
+						}
+					});
+                    
+                    
+    
+                <!-- FIN BLOQUE : gml --> 
+                
+                myStyle = {fill: true};
+                
+                point_style = $.extend(myStyle,OpenLayers.Feature.Vector.style['default']);
+                
+                //point_style.fillOpacity=1;
+                point_style.strokeWidth=2;
+                point_style.strokeColor="#000000";
+                
+                layers[{i}] = new OpenLayers.Layer.Vector("Resultado",{style:point_style}); 
+                
+                selectControl = new OpenLayers.Control.SelectFeature(
+                    select_layers,
+                    {
+                        clickout: true, toggle: false,
+                        multiple: false, hover: false,
+                        toggleKey: "ctrlKey", // ctrl key removes from selection
+                        multipleKey: "shiftKey" // shift key adds to selection
+                    }
+                );
+            
+                
+                //layers[{i}].setVisibility(false);                  
+                map.addLayers(layers);
+                
+                map.addControl(selectControl);
+                selectControl.activate();
+                map.addControl(new OpenLayers.Control.Navigation());
+                map.addControl(new OpenLayers.Control.PanZoomBar());
+                map.addControl(new OpenLayers.Control.ScaleLine());
+                //map.addControl(overview);
+                map.addControl(new OpenLayers.Control.Scale(document.getElementById('scale')));
+                
+                map.addControl(new OpenLayers.Control.MousePosition({element: document.getElementById('location')}));
+                map.addControl(new OpenLayers.Control.LayerSwitcher());
+                map.zoomToExtent(_bounds);
+
+            });
+        
+            
+            
+            var _id;
+            
+            function consultaGisPredio(fid, id){
+                _id = id;
+                $("#"+_id).html("<img src='../../../img/bar-ajax-loader.gif' />");  
+                
+                var params = {
+                        REQUEST: "GetFeature",
+                        SERVICE: "WFS",
+                        outputFormat: 'json',
+                        typeName: ''+$("#capas").val(),  
+                        featureID: fid,
+                        VERSION: '1.0.0'};
+                                                            
+                    OpenLayers.loadURL('../../../../geoserver/ows', params, this, setHTMLPredio, setHTMLPredio);
+                    
+    
+    
+           }
+       
+           // sets the HTML provided into the nodelist element
+            function setHTMLPredio(response){
+            
+                var geojson = JSON.parse(response.responseText);
+                
+                //alert(response.responseText);
+                var tam = Object.size(geojson.features);  
+                if(tam>0){
+                    //ver_predio_stakeholders(geojson.features[0].id);
+                    var html = "";
+                    for(var i=0;i<tam;i++){
+                            var n=geojson.features[i].id.split(".");
+                            html += "<table class='featureInfo'><tr><th>"+n[0]+"</th></tr><tr><td><ul>";
+                            html += "<li><b>fid : </b> " + geojson.features[i].id+"</li>";
+                        jQuery.each(geojson.features[i].properties, function(i, val) {
+                            html += "<li><b>" +i + " : </b> " + val+"</li>";
+                          });
+                          html +="</ul></td></tr></table>";
+                    }
+                  
+                  
+                  $("#" + _id).html(html);
+                     
+                }else{
+                    
+                    $("#"+_id).html('No se se selecciono predio.');                
+                }
+                                                               
+            };
+            
+            function setHTMLVector(response){
+                var geojson_format = new OpenLayers.Format.GeoJSON();
+                //console.log(response.responseText);
+                             
+                layers[{i}].addFeatures(geojson_format.read(response.responseText));
+                
+                
+                 
+                //$("#resultado_persona").html(datos);
+                
+                
+            };
+        
+            function aplicar_intensidad(flag){
+                    var html='';
+                    jQuery.each(gis_entidad, function(i, val) {
+                            var nivel;
+                            var porcentaje;
+                            var radio;
+                            
+                            
+                            
+                            if (val!== undefined) {
+                                porcentaje = (val*100/total_entidad);
+                            
+                                if(porcentaje<33){
+                                    nivel=3;
+                                    radio=11;
+                                }else if(porcentaje<66){
+                                    nivel=4;
+                                    radio=9;
+                                }else{
+                                    nivel=5;
+                                    radio=7;
+                                }
+                                //html += '' +i + " : " + val+" "+porcentaje+" "+nivel;
+                                if(!flag){
+                                    nivel=1;
+                                    radio=7;
+                                }
+                            
+                                layers[{i}].getFeatureByFid(i).style.strokeWidth=nivel;                                
+                                layers[{i}].getFeatureByFid(i).style.pointRadius = radio;
+                                layers[{i}].redraw();
+                            }
+                        
+                            
+                            
+                          });
+                    //alert(html);
+                }
+                
+            
+            // sets the HTML provided into the nodelist element
+            function setHTMLEntidad(response){
+                //console.log(response.responseText);
+                var geojson = JSON.parse(response.responseText);
+                
+                  
+                if(Object.size(geojson.features)>0){
+                    if($("#pantalla_aux_principal").hasClass('ui-dialog-content') && $("#pantalla_aux_principal").dialog('isOpen')){
+                        ver_predio_stakeholders(geojson.features[0].id);
+                    }else{
+                        modal_ver_predio_stakeholders(geojson.features[0].id);
+                    }
+                    
+                     
+                }else{
+                    if($("#pantalla_aux_principal").hasClass('ui-dialog-content') && $("#pantalla_aux_principal").dialog('isOpen')){
+                        $("#nodelist").html('No se se selecciono predio.');   
+                    }
+                                 
+                }
+                                                               
+            };
+                                                      
+            function updateFilter(){
+				// almaceno los id de los objetos geograficos separados por como
+                var filter = $("#fid_string_query").val();
+
+                layers[{i}].destroyFeatures();   
+                
+                if(filter!=""){
+                
+                 var params = {
+                        REQUEST: "GetFeature",
+                        SERVICE: "WFS",
+                        outputFormat: 'json',
+                        typeName: '{capas}',  
+                        featureID: filter,
+                        VERSION: '1.0.0'};
+                    
+                    
+                    OpenLayers.loadURL('../../../../geoserver/ows', params, this, setHTMLVector, setHTMLVector);
+                    
+                    }
+            }
+        
+       
+        
+        function log(msg) {
+            document.getElementById("output").innerHTML = msg ;
+        }
+
+        function onloadstart(evt) {
+            
+            var msg = '<img src="../../../img/bar-ajax-loader.gif" style="width:auto; height:auto;vertical-align: middle;">';
+            log (msg);
+        };
+
+        function onloadend(evt) {
+            
+            var msg = '';
+            log (msg);
+        };
+
+            
+         updateFilter();   
+           
+        </script>
+    
+   <style type="text/css">
+            
+            /* Toolbar styles */
+            #toolbar {
+                position: relative;
+                padding-bottom: 0.5em;
+                display: none;
+            }
+            
+            #toolbar ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            
+            #toolbar ul li {
+                float: left;
+                padding-right: 1em;
+                padding-bottom: 0.5em;
+            }
+            
+            #toolbar ul li a {
+                font-weight: bold;
+                font-size: smaller;
+                vertical-align: middle;
+                color: black;
+                text-decoration: none;
+            }
+
+            #toolbar ul li a:hover {
+                text-decoration: underline;
+            }
+            
+            #toolbar ul li * {
+                vertical-align: middle;
+            }
+
+            /* The map and the location bar */
+            #map {
+                clear: both;
+                position: relative;
+                width: 400px;
+                height: 500px;
+                border: 1px solid black;
+                background-color: #FFF;
+            }
+            
+            #wrapper {
+                width: 357px;
+            }
+            
+            #location {
+                float: right;
+            }
+            
+            #options {
+                position: absolute;
+                left: 13px;
+                top: 7px;
+                z-index: 3000;
+            }
+
+            /* Styles used by the default GetFeatureInfo output, added to make IE happy */
+            table.featureInfo, table.featureInfo td, table.featureInfo th {
+                border: 1px solid #ddd;
+                border-collapse: collapse;
+                margin: 0;
+                padding: 0;
+                font-size: 90%;
+                padding: .2em .1em;
+            }
+            
+            table.featureInfo th {
+                padding: .2em .2em;
+                font-weight: bold;
+                background: #eee;
+            }
+            
+            table.featureInfo td {
+                background: #fff;
+            }
+            
+            table.featureInfo tr.odd td {
+                background: #eee;
+            }
+            
+            table.featureInfo caption {
+                text-align: left;
+                font-size: 100%;
+                font-weight: bold;
+                padding: .2em .2em;
+            }
+        </style>
+    
+        
+        <div id="seleccionar_mapa">
+            <span>
+            <strong>Seleccionar mapa:</strong><select id="idmapa" name="idmapa" onchange="recargar_mapa();">
+            <!-- INICIO BLOQUE : mapa --> 
+            <option value="{idmapa}" {selected} >{nombre}</option>
+            <!-- FIN BLOQUE : mapa --> 
+            </select>
+            </span>
+            <!-- INICIO BLOQUE : intensidad --> 
+             <span>
+                Mostrar intensidad <input type="checkbox" id="intensidad" value="1" name="intensidad" onclick="recargar_intensidad();">
+            </span>
+            <!-- FIN BLOQUE : intensidad --> 
+        </div>        
+            <input type="hidden" name="capas" id="fid_string_query" value="{fid_string}" />
+            <input type="hidden" name="capas" id="capas" value="{capas}" />
+        
+        <div style="width:400px;height: 20px;">&nbsp;<span id="output"></span>&nbsp;</div>         
+        <div id="map" class="olMap">
+            
+        </div>
+       
+        <div id="wrapper">
+            <div id="location">-286317.59290, 8589468.23704</div>
+            <div id="scale">Scale = 1 : 28M</div>
+        </div>
+        <div id="nodelist">
+       
+        </div>
+        
+    
+</div>              

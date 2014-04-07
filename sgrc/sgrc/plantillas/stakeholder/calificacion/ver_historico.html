@@ -1,0 +1,30 @@
+<form id="form_historico">                
+<table  align="center">
+    <tr>
+        <td>
+        <label for="from">Del</label>
+        <input type="text" id="hfecha1" name="fecha_del" value=""/>
+        
+        </td>
+    
+    
+        <td>
+        <label for="to">Al</label>
+        <input type="text" id="hfecha2" name="fecha_al" value=""/>
+      
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center">
+            <button id="boton_filtro" type="button" onClick="buscar_calificacion()">Buscar</button>
+        </td>
+    </tr>
+</table>
+</form>
+
+<div id="tabla_historico" style="margin:10px;"></div>
+    
+<script type="text/javascript" >
+     $("#boton_filtro").button();
+     buscar_calificacion();
+</script>

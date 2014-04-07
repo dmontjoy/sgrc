@@ -1,0 +1,79 @@
+  <table width="100%" class="bloque">
+        <thead>
+        <td align="center" colspan="2">
+            Stakeholder - Interacci&oacute;n/Tiempo
+        </td>
+        </thead>
+</table>
+<br/>
+<table>
+    <tr>
+        <td>
+
+            <input type="text" class="buscar" name="reclamo_rc1_buscar" id="reclamo_rc1_buscar" onfocus="borrar_reclamo_rc1_buscar();
+busqueda_rapida_persona_buscar()" value="Buscar persona por apellido nombre"  size="50"  width="50px">
+             <img id="img_buscar_reclamo_rc1"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+             <input id="count_receptor" type="hidden" name="count_receptor" value="{count_receptor}" test="RC">
+        </td>
+        <td>
+        <div id="reclamo_receptor">
+         </div>
+        </td>
+    </tr>
+</table>
+<div>
+Durante el siguiente periodo de tiempo:  
+<select name="rango_interaccion_tiempo" id="rango_interaccion_tiempo" onChange="cambiar_rango_interaccion_tiempo()">	
+        <option value="day" >		
+		dias				
+	</option>
+        <option value="week" >		
+		semanas				
+	</option>
+        <option value="month" >		
+		meses			
+	</option>
+        <option value="year" >		
+		a&ntilde;os
+	</option>
+</select>
+<input type="checkbox" id="check" /><label id="ver_tag" for="check">Con Tag</label>
+</div>
+<br/>
+<script>
+    $( "#check" ).button();
+    $( "#check" ).bind('change', function(){
+        if($(this).is(':checked')){
+            // box was checked
+            $("#rango_interaccion_tiempo").attr("onChange","cambiar_rango_interaccion_tiempo_tag()");
+            cambiar_rango_interaccion_tiempo_tag();
+            $("#ver_tag span").html("Sin Tag");
+        }else{
+            $("#rango_interaccion_tiempo").attr("onChange","cambiar_rango_interaccion_tiempo()");
+            cambiar_rango_interaccion_tiempo();
+            $("#ver_tag span").html("Con Tag");
+        }
+    });
+</script>
+
+<div id="placeholder" ></div>
+
+
+
+   
+
+<script type="text/javascript">
+    
+    $("#reclamo_rc1_buscar").blur(function() {
+            $("#reclamo_rc1_buscar").val("Buscar persona por apellido nombre");
+        });
+    
+    
+$(function () {
+    
+    cambiar_rango_interaccion_tiempo();
+
+    
+
+});
+</script>

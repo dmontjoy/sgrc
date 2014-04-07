@@ -1,0 +1,6 @@
+INSERT INTO
+                  tag(idtag,idmodulo_tag,tag,activo,idusu_c,idmodulo_c,fecha_c,fecha_a,idtag_padre,idmodulo_tag_padre,nivel,cantidad_hijos,ruta)
+                VALUES(42,1,'otro',1,1,1,'2014-03-18','2014-03-18',NULL,NULL,0,0,'/');;
+INSERT INTO
+                  tag(idtag,idmodulo_tag,tag,activo,idusu_c,idmodulo_c,fecha_c,fecha_a,idtag_padre,idmodulo_tag_padre,nivel,cantidad_hijos,ruta)
+                VALUES(43,1,'dame dos',1,1,1,'2014-03-18','2014-03-18',NULL,NULL,0,0,'/');;

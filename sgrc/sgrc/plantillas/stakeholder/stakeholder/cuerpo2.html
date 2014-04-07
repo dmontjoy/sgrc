@@ -1,0 +1,1413 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>SCG - Stakeholder </title>
+        <link rel="stylesheet" href="../../../js/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="../../../css/estilo.css">
+
+
+            <script src="../../../js/jquery-1.8.2.js"></script>
+            <script src="../../../js/jquery-ui-1.9.1.js"></script>
+            <script src="../../../js/datepicker_es.js"></script>
+            <script language="JavaScript" type="text/javascript" src="../../../js/tabla_dinamica_documento_identificacion.js"></script>
+            <script language="JavaScript" type="text/javascript" src="../../../js/tabla_dinamica_persona.js"></script>
+
+            <script language="JavaScript" type="text/javascript" src="../../../js/tabla_celda_dinamica.js"></script>
+            <script type="text/javascript" src="../../../js/funciones.js"></script>
+            <script type="text/javascript" src="../../../js/tabla_dinamica.js"></script>
+
+            <script type="text/javascript" src="../../../js/checkdate.js"></script>
+            <style>
+                .ui-autocomplete-loading{
+                    background:white url('../../../css/images/ui-bg_glass_100_fdf5ce_1x400.png');
+                }
+                #tabs{
+                    width:700px;
+                }
+
+
+            </style>
+
+            <link rel="stylesheet" href="../../../css/jquery.jgrowl.css" type="text/css"/>
+
+            <script type="text/javascript" src="../../../js/jquery.jgrowl.js"></script>
+
+            <link rel="stylesheet" type="text/css" href="../../../css/jquery.dataTables.css">
+        
+        <script type="text/javascript" language="javascript" src="../../../js/jquery.dataTables.js"></script>
+
+            <script type="text/javascript" language="javascript" src="../../../js/mysgrc.js"></script>
+
+            <script type="text/javascript">
+
+
+
+                $(function() {
+
+                    $( "#create-form" ).dialog({
+                        autoOpen: false,
+                        height: 120,
+                        width: 250,
+                        modal: true,
+                        buttons:{
+                            "Guardar":function(){
+                                //$( this ).dialog( "close" );
+                                var tag = $("#crea_tag").val();
+                                $.ajax({
+                                    url: '../../../programas/tag/tag/atag.php?op_tag=guardar_tag&tag='+tag,
+                                    success: function(datos){
+                                        $("#crea_tag").val("");
+                                        $( "#create-form" ).dialog( "close" );
+                                       $.jGrowl("Hello world!");
+                                     
+                                    }
+                                });
+
+                            },
+                            "Cancelar":function(){
+                                $( this ).dialog( "close" );
+                            }
+                        }
+                        
+                });
+
+                    $( "#edit-form" ).dialog({
+                        autoOpen: false,
+                        height: 150,
+                        width: 200,
+                        modal: true,
+                        buttons:{
+                            "Guardar":function(){
+                                var tag = $("#actualiza_tag").val();
+                                var idtag = $("#id_tag").val();
+                                var idmodulo = $("#id_modulo").val();
+
+                                
+
+                                $.ajax({
+                                      url: '../../../programas/tag/tag/atag.php?op_tag=editar_tag&idtag='+idtag+'&idmodulo_tag='+idmodulo+'&tag='+tag,
+                                      success: function(data) {
+                                       
+                                        //alert(" tag:"+tag+" idtag:"+idtag+" idmodulo:"+idmodulo);                                                    
+                                        //alert('Load was performed.');
+                                        var idpersona_tag=$("#idpersona").val();
+                                        refrescar_tag_stakeholder(idpersona_tag);
+                                        $( "#edit-form" ).dialog( "close" );
+                                        //location.reload(true);
+
+                                      }
+                                    });
+                            },
+                            "Cancel":function(){
+                                 $( this ).dialog( "close" );
+                            }
+                            
+                        }
+                });
+
+                    $( "#frm_registrar_voto" ).dialog({
+
+                    autoOpen: false,
+
+                    height: 420,
+
+                    width: 420,
+
+                    modal: true,
+
+                    buttons: {
+
+                        "Guardar": function() {
+
+                              var idpersona=$("#idpersona_voto").val();
+                              var idmodulo=$("#idmodulo_voto").val();
+                              var active = $( "#tabs" ).tabs( "option", "active" );     
+                              var valor1=$("#dimension_1").val();
+                              var valor2=$("#dimension_2").val();
+                              var valor3=$("#dimension_3").val();
+                              var fecha_voto=$("#fecha_voto").val();
+                              
+                              
+                              var d = new Date();
+                              var fecha =  d.getFullYear()+ "-" + (d.getMonth()+1) + "-" + d.getDate();
+                              if(fecha_voto !=''){
+                                var tokens=fecha_voto.split("/");
+                                fecha=tokens[2]+"-"+tokens[1]+"-"+tokens[0];
+                              }
+                
+                              //alert("idpersona: "+idpersona+" idmodulo: "+idmodulo+"fecha: "+fecha
+                              //    +" valor1: "+valor1+" valor2: "+valor2+" valor3: "+valor3);
+                                if(valor1>0 && valor2>0 && valor3>0){
+                                    datastring=$("#guardar_calificacion_stakeholder").serialize();
+                                    $.ajax({
+                                      type:"POST",
+                                      url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=guardar_calificacion_stakeholder&idpersona='+idpersona+'&idmodulo='+idmodulo+'&fecha='+fecha,
+                                      data: datastring,                                   
+                                      success: function(data) {
+                                        //$("#calificacion_stakeholder").html(data);
+                                         var idpersona=$("#idpersona").val();
+                                        var idmodulo=$("#idmodulo").val();
+                                        $.ajax({
+                                              
+                                              url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=mostrar_calificacion_stakeholder&idpersona='+idpersona+'&idmodulo='+idmodulo,
+                                                              
+                                              success: function(data) {
+                                                $("#calificacion_stakeholder").html(data);
+                                              }
+                                            });
+                                        
+                                        $( "#frm_registrar_voto" ).dialog( "close" );
+                                        
+                                        if(active==1){
+                                            $('#tabs').tabs('load', 1);
+                                        }
+                                      }
+                                    });
+
+                                
+                                //alert('idtab: '+active);
+                                    
+                                }else{
+                                    alert("Debe seleccionar todas las dimensiones");
+                                }
+
+                            }
+
+                        ,
+                        "Cancelar": function() {
+
+                           
+                              $( this ).dialog( "close" );
+
+                            }
+
+                        }
+
+                        
+
+                        
+
+                });
+
+                $( "#mostrar_historico" ).dialog({
+
+                    autoOpen: false,
+
+                    height: 400,
+
+                    width: 600,
+
+                    modal: true
+
+                        
+
+                        
+
+                }); 
+ 
+
+
+
+
+                    $("#stakeholder_buscar").autocomplete({//Usamos el ID de la caja de texto donde lo queremos
+                        dataType: "json",
+                        delay: 500,
+                        minLength: 3,
+                        source: function(request, response) {
+                            $.ajax({
+                                dataType: 'json',
+                                type: 'get',
+                                data: {
+                                    busca_rapida_stakeholder: request.term
+                                },
+                                url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=busqueda_rapida_stakeholder',
+                                success: function(datos) {
+                                    //$("#mensaje").val(datos);
+                                    response($.map(datos, function(item) {
+                                        return{
+                                            label: item.label,
+                                            value: item.value
+                                        }
+                                    }));
+
+                                }
+                            });
+                        },
+                        focus: function(event, ui) {
+                            //$("#stakeholder_buscar").val(ui.item.label);
+                            event.preventDefault();
+                            return false;
+                        },
+                        select: function(a, b) {
+                            $("#stakeholder_buscar").val("Buscar stakeholder por apellido paterno apellido materno nombre");
+
+                            if (b.item.value == 'nuevo_stake_holder') {
+                                $.ajax({
+                                    url: '../../../programas/persona/persona/apersona.php',
+                                    success: function(datos) {
+                                        $("#idhtml_cabecera_stakeholder").html("");
+                                        $("#idhtml_tab_stakeholder").html(datos);
+                                        $("#fecha_nacimiento").datepicker({changeYear: true, changeMonth: true});
+
+
+                                    }
+                                });
+                            } else {
+                                ver_cabecera_stakeholder(b.item.value);
+                                ver_tab_stakeholder(b.item.value);
+
+                            }
+
+                            return false;
+                        }
+                    });
+                });
+
+                function mostrar_editar_tag() {
+                    $('#tabla_editar_tag').show();
+                    $('#tabla_persona_tag').hide();
+
+                }
+
+
+                function mostrar_tag() {
+                    $('#tabla_persona_tag').show();
+                    $('#tabla_editar_tag').hide();
+
+                }
+
+
+                function ver_cabecera_stakeholder(idpersona_compuesto) {
+                    $.ajax({
+                        url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_cabecera_stakeholder&idpersona_compuesto=' + idpersona_compuesto,
+                        success: function(datos) {
+                            $("#idhtml_cabecera_stakeholder").html(datos);
+                            $('#tabla_editar_tag').hide();
+
+                        }
+                    });
+
+                }
+
+                function ver_tab_stakeholder(idpersona_compuesto) {
+
+                    $.ajax({
+                        url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_tab_stakeholder&idpersona_compuesto=' + idpersona_compuesto,
+                        complete: function(r, b) {
+
+
+
+                        },
+                        success: function(datos) {
+                            $("#idhtml_tab_stakeholder").html(datos);
+                            $("#tabs").tabs({
+                                beforeLoad: function(event, ui) {
+
+                                    ui.jqXHR.error(function() {
+                                        ui.panel.html(
+                                                "Ha ocurrido un error intente de nuevo."
+                                                )
+                                    });
+                                },
+                                load: function(e, u) {
+                                    $("#fecha_nacimiento").datepicker({changeYear: true, changeMonth: true});
+                                    $("#fecha_interaccion").datepicker({changeYear: true, changeMonth: true});
+
+                                }
+                            });
+
+
+                            //console.log(datos);
+                        }
+                    });
+
+                }
+
+
+
+                function borrar_red_stakeholder() {
+
+                    $("#busqueda_rapida_red_stakeholder").val("");
+                }
+
+                function guardar_persona() {
+
+                    op_persona = $("#op_persona").val();
+                    datastring = $("#form_persona").serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: '../../../programas/persona/persona/apersona.php?es_stakeholder=1',
+                        data: datastring,
+                        error: function(objeto, quepaso, otro) {
+                            //alert('q');
+                        },
+                        success: function(datos) {
+                            //console.log(datos);
+                            if (op_persona == 'guardar') {
+                                $("#idhtml_tab_stakeholder").html(datos);
+                            } else {
+                                $("#persona_div").html(datos);
+                            }
+
+                        }
+                    });
+
+                }
+                function guardar_red_stakeholder(idpersona_compuesto_red) {
+
+                    idpersona = $("#idpersona").val();
+                    idmodulo = $("#idmodulo").val();
+
+                    $.ajax({
+                        url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=guardar_red_stakeholder&idpersona_compuesto_red=' + idpersona_compuesto_red + '&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                        success: function(datos) {
+                            $("#red_stakeholder").html(datos);
+
+                            console.log(datos);
+                        }
+                    });
+                    $("#busqueda_rapida_red_stakeholder").focus();
+
+
+                }
+
+                function busqueda_rapida_red_stakeholder() {
+                    $("#busqueda_rapida_red_stakeholder").autocomplete({//Usamos el ID de la caja de texto donde lo queremos
+                        dataType: "json",
+                        delay: 500,
+                        minLength: 3,
+                        source: function(request, response) {
+                            $.ajax({
+                                dataType: 'json',
+                                type: 'get',
+                                data: {
+                                    busca_rapida_stakeholder: request.term
+                                },
+                                url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=busqueda_rapida_stakeholder',
+                                success: function(datos) {
+                                    //$("#mensaje").val(datos);
+                                    response($.map(datos, function(item) {
+                                        return{
+                                            label: item.label,
+                                            value: item.value
+                                        }
+                                    }));
+
+                                }
+                            });
+                        }, focus: function(event, ui) {
+                            //$("#stakeholder_buscar").val(ui.item.label);
+                            event.preventDefault();
+                            return false;
+                        }, select: function(a, b) {
+                            $("#busqueda_rapida_red_stakeholder").val("Buscar stakeholder por apellido paterno apellido materno nombre");
+
+                            if (b.item.value == 'nuevo_stake_holder') {
+
+                            } else {
+                                guardar_red_stakeholder(b.item.value);
+
+                            }
+
+                            return false;
+                        }
+                    });
+                }
+
+                function eliminar_red_stakeholder(idpersona_red_stakeholder) {
+                    idpersona = $("#idpersona").val();
+                    idmodulo = $("#idmodulo").val();
+                    $.ajax({
+                        url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=eliminar_red_stakeholder&idpersona_red_stakeholder=' + idpersona_red_stakeholder + '&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                        success: function(datos) {
+                            $("#red_stakeholder").html(datos);
+                            console.log(datos);
+                        }
+                    });
+                    $("#busqueda_rapida_red_stakeholder").focus();
+                }
+
+
+                function borrar_busqueda_rapida_stakeholder() {
+                    $("#stakeholder_buscar").val("");
+                }
+
+
+                function borrar_tag() {
+                    $("#tag_buscar").val("");
+                }
+
+
+                function guardar_tag_stakeholder(idtag_compuesto) {
+                    idpersona = $("#idpersona").val();
+                    idmodulo = $("#idmodulo").val();
+                    $.ajax({
+                        url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=guardar_tag_stakeholder&idtag_compuesto=' + idtag_compuesto + '&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                        success: function(datos) {
+                            $("#subbloque_editar_tag").html(datos);
+
+                        }
+                    });
+                    $("#tag_buscar").focus();
+                }
+
+                function busqueda_rapida_tag() {
+
+                    var idpersona = $("#idpersona").val();
+                    var idmodulo = $("#idmodulo").val();
+
+                    $("#tag_buscar").autocomplete({//Usamos el ID de la caja de texto donde lo queremos
+                        dataType: "json",
+                        delay: 500,
+                        minLength: 3,
+                        source: function(request, response) {
+                            $.ajax({
+                                dataType: 'json',
+                                type: 'get',
+                                data: {
+                                    busca_rapida_tag: request.term
+                                },
+                                url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_tag',
+                                success: function(datos) {
+                                    //$("#mensaje").val(datos);
+                                    response($.map(datos, function(item) {
+                                        return{
+                                            label: item.label,
+                                            value: item.value
+                                        }
+                                    }));
+
+                                }
+                            });
+                        },
+                        focus: function(event, ui) {
+                            event.preventDefault();
+                            return false;
+                        },
+                        select: function(a, b) {
+                            $("#tag_buscar").val("");
+                            //alert(b.item.value);
+                            guardar_tag_stakeholder(b.item.value);
+                            return false;
+                        }
+                    });
+
+                }
+
+                function eliminar_tag_stakeholder(idpersona_tag) {
+                    idpersona = $("#idpersona").val();
+                    idmodulo = $("#idmodulo").val();
+                    $.ajax({
+                        url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=eliminar_tag_stakeholder&idpersona_tag=' + idpersona_tag + '&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                        success: function(datos) {
+                            $("#subbloque_editar_tag").html(datos);
+
+                        }
+                    });
+                    $("#tag_buscar").focus();
+                }
+
+
+
+
+                function busqueda_rapida_organizacion(tabla, fila, adatos, nume_fila) {
+
+                    $("#txtSearch").autocomplete({//Usamos el ID de la caja de texto donde lo queremos
+                        dataType: "json",
+                        delay: 500,
+                        minLength: 3,
+                        source: function(request, response) {
+                            $.ajax({
+                                dataType: 'json',
+                                type: 'get',
+                                data: {
+                                    busca: request.term
+                                },
+                                url: '../../../programas/persona/persona/apersona_organizacion.php?op_persona_organizacion=busqueda_rapida',
+                                success: function(datos) {
+                                    //$("#mensaje").val(datos);
+                                    response($.map(datos, function(item) {
+                                        return{
+                                            label: item.label,
+                                            value: item.value
+                                        }
+                                    }));
+
+                                }
+                            });
+                        },
+                        focus: function(event, ui) {
+                            event.preventDefault();
+                            return false;
+                        },
+                        select: function(a, b) {
+                            if (b.item.value == 'nueva_organizacion') {
+                            } else {
+                                agregafila(tabla, fila, b.item.value, adatos, nume_fila)
+
+                            }
+                            $("#txtSearch").focus();
+
+                            $("#txtSearch").val("");
+                            return false;
+                        }
+                    });
+
+                }
+
+                //interaccion
+
+
+                function borrar_tag_interaccion() {
+                    $("#tag_buscar_interaccion").val("");
+                }
+
+                function borrar_interaccion_complejo_tag() {
+                    $("#buscar_interaccion_complejo_tag").val("");
+                }
+
+                function busqueda_rapida_interacccion_complejo_tag() {
+                    var idpersona = $("#idpersona").val();
+                    var idmodulo = $("#idmodulo").val();
+
+
+                    $("#buscar_interaccion_complejo_tag").autocomplete({//Usamos el ID de la caja de texto donde lo queremos
+                        dataType: "json",
+                        delay: 500,
+                        minLength: 3,
+                        source: function(request, response) {
+                            $.ajax({
+                                dataType: 'json',
+                                type: 'get',
+                                data: {
+                                    busca_rapida_tag: request.term
+                                },
+                                url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_tag',
+                                success: function(datos) {
+                                    //$("#mensaje").val(datos);
+                                    response($.map(datos, function(item) {
+                                        return{
+                                            label: item.label,
+                                            value: item.value
+                                        }
+                                    }));
+
+                                }
+                            });
+                        },
+                        focus: function(event, ui) {
+                            event.preventDefault();
+                            return false;
+                        },
+                        select: function(a, b) {
+                            $("#buscar_interaccion_complejo_tag").val("");
+                            agrega_celda('interaccion_complejo_tag', b.item, 'idinteraccion_complejo_tag', 'nume_celda_interaccion_tag_complejo', 'nume_fila_interaccion_tag_complejo');
+                            return false;
+                        }
+                    });
+                }
+
+
+
+
+                function busqueda_rapida_interacccion_tag() {
+
+                    var idpersona = $("#idpersona").val();
+                    var idmodulo = $("#idmodulo").val();
+                    $("#tag_buscar_interaccion").autocomplete({//Usamos el ID de la caja de texto donde lo queremos
+                        dataType: "json",
+                        delay: 500,
+                        minLength: 3,
+                        source: function(request, response) {
+                            $.ajax({
+                                dataType: 'json',
+                                type: 'get',
+                                data: {
+                                    busca_rapida_tag: request.term
+                                },
+                                url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_tag',
+                                success: function(datos) {
+                                    //$("#mensaje").val(datos);
+                                    response($.map(datos, function(item) {
+                                        return{
+                                            label: item.label,
+                                            value: item.value
+                                        }
+                                    }));
+
+                                }
+                            });
+                        },
+                        focus: function(event, ui) {
+                            event.preventDefault();
+                            return false;
+                        },
+                        select: function(a, b) {
+                            $("#tag_buscar_interaccion").val("");
+                            //guardar_tag_interaccion(b.item.value);
+                            agrega_celda('tag_interaccion', b.item, 'idinteraccion_complejo_tag', 'nume_celda_tag_interaccion', 'nume_fila_tag_interaccion')
+                            return false;
+                        }
+                    });
+                }
+
+                function guardar_interaccion_stakeholder() {
+                    var idpersona = $("#idpersona").val();
+                    var idmodulo = $("#idmodulo").val();
+
+                    datastring = $("#guardar_interaccion_stakeholder").serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: '../../../programas/stakeholder/stakeholder/astakeholder.php?idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                        data: datastring,
+                        error: function(objeto, quepaso, otro) {
+                            //alert('q');
+                        },
+                        success: function(datos) {
+                            //console.log(datos);
+                            $("#interaccion_stakeholder").html(datos);
+                        }
+                    });
+
+                }
+
+                function actualizar_interaccion_stakeholder() {
+                    var idpersona = $("#idpersona").val();
+                    var idmodulo = $("#idmodulo").val();
+
+                    datastring = $("#form_modal_interaccion").serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: '../../../programas/stakeholder/stakeholder/astakeholder.php?idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                        data: datastring,
+                        error: function(objeto, quepaso, otro) {
+                        },
+                        success: function(datos) {
+                            var idinteraccion = $("#idinteraccion").val();
+
+                            if (idinteraccion == "") {
+
+
+                                $("#interaccion_stakeholder").html(datos);
+                            } else {
+
+                                $("#modal_interaccion").html(datos);
+                                $("#modal_interaccion").dialog({
+                                    autoOpen: false,
+                                    height: "auto",
+                                    width: "auto",
+                                    modal: true,
+                                    create: function(event, ui) {
+                                        $("#comp_fecha_interaccion").blur();
+                                        $("#comp_fecha_interaccion").datepicker({changeYear: true, changeMonth: true});
+
+
+                                    },
+                                    open: function(event, ui) {
+                                        $("#comp_fecha_interaccion").blur();
+                                        //$("#comp_interaccion").focus();
+                                    },
+                                    close: function(event, ui) {
+                                        $("#modal_interaccion").dialog("destroy");
+                                    },
+                                });
+                                $("#modal_interaccion").dialog("open");
+                            }
+                        }
+                    });
+                }
+                function modal_interaccion(idinteraccion, idmodulo_interaccion) {
+
+                    var idpersona = $("#idpersona").val();
+                    var idmodulo = $("#idmodulo").val();
+
+                    $.ajax({
+                        url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_interaccion_stakolder_complejo&idinteraccion=' + idinteraccion + '&idmodulo_interaccion=' + idmodulo_interaccion + '&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                        success: function(datos) {
+                            $("#modal_interaccion").html(datos);
+                            $("#modal_interaccion").dialog({
+                                title: "Interacci&oacute;n",
+                                autoOpen: false,
+                                height: "auto",
+                                width: "auto",
+                                modal: true,
+                                create: function(event, ui) {
+                                    $("#comp_fecha_interaccion").blur();
+                                    $("#comp_fecha_interaccion").datepicker({changeYear: true, changeMonth: true});
+
+
+                                },
+                                open: function(event, ui) {
+                                    $("#comp_fecha_interaccion").blur();
+                                    //$("#comp_interaccion").focus();
+                                },
+                                close: function(event, ui) {
+                                    $("#modal_interaccion").dialog("destroy");
+                                },
+                            });
+                            $("#modal_interaccion").dialog("open");
+                        }
+                    });
+                }
+
+                function modal_editar_compromiso(idcompromiso, idmodulo_compromiso) {
+                    var idpersona = $("#idpersona").val();
+                    var idmodulo = $("#idmodulo").val();
+                    $.ajax({
+                        url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_editar_compromiso_stakeholder&idcompromiso=' + idcompromiso + '&idmodulo_compromiso=' + idmodulo_compromiso + '&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                        success: function(datos) {
+                            $("#modal_interaccion").html(datos);
+                            $("#modal_interaccion").dialog({
+                                title: "Compromiso",
+                                autoOpen: false,
+                                height: "auto",
+                                width: "auto",
+                                modal: true,
+                                create: function(event, ui) {
+                                    $("#fecha_compromiso").blur();
+                                    $("#fecha_compromiso").datepicker({changeYear: true, changeMonth: true});
+
+
+                                },
+                                open: function(event, ui) {
+                                    $("#fecha_compromiso").blur();
+                                    //$("#comp_interaccion").focus();
+                                },
+                                close: function(event, ui) {
+                                    $("#modal_interaccion").dialog("destroy");
+                                },
+                            });
+                            $("#modal_interaccion").dialog("open");
+                        }
+                    });
+                }
+                function modal_nuevo_compromiso(idinteraccion, idmodulo_interaccion) {
+                    var idpersona = $("#idpersona").val();
+                    var idmodulo = $("#idmodulo").val();
+                    $.ajax({
+                        url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_compromiso_stakeholder&idinteraccion=' + idinteraccion + '&idmodulo_interaccion=' + idmodulo_interaccion + '&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                        success: function(datos) {
+                            $("#modal_interaccion").html(datos);
+                            $("#modal_interaccion").dialog({
+                                title: "Compromiso",
+                                autoOpen: false,
+                                height: "auto",
+                                width: "auto",
+                                modal: true,
+                                create: function(event, ui) {
+                                    $("#fecha_compromiso").blur();
+                                    $("#fecha_compromiso").datepicker({changeYear: true, changeMonth: true});
+
+
+                                },
+                                open: function(event, ui) {
+                                    $("#fecha_compromiso").blur();
+                                    //$("#comp_interaccion").focus();
+                                },
+                                close: function(event, ui) {
+                                    $("#modal_interaccion").dialog("destroy");
+                                },
+                            });
+                            $("#modal_interaccion").dialog("open");
+                        }
+                    });
+                }
+
+
+                function borrar_interaccion_rc_buscar() {
+
+                    $("#interaccion_rc_buscar").val("");
+                }
+
+                function busquedarapida_interaccion_rc_buscar() {
+
+                    $("#interaccion_rc_buscar").autocomplete({//Usamos el ID de la caja de texto donde lo queremos
+                        dataType: "json",
+                        delay: 500,
+                        minLength: 3,
+                        source: function(request, response) {
+                            $.ajax({
+                                dataType: 'json',
+                                type: 'get',
+                                data: {
+                                    busca_rapida_stakeholder: request.term
+                                },
+                                url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=busqueda_rapida_stakeholder',
+                                success: function(datos) {
+                                    //$("#mensaje").val(datos);
+                                    response($.map(datos, function(item) {
+                                        return{
+                                            label: item.label,
+                                            value: item.value
+                                        }
+                                    }));
+
+                                }
+                            });
+                        },
+                        focus: function(event, ui) {
+                            //$("#stakeholder_buscar").val(ui.item.label);
+                            event.preventDefault();
+                            return false;
+                        },
+                        select: function(a, b) {
+                            $("#interaccion_rc_buscar").val("Buscar stakeholder por apellido paterno apellido materno nombre");
+
+                            if (b.item.value == 'nuevo_stake_holder') {
+                                alert("entra");
+                            } else {
+                                agrega_celda('interaccion_complejo_rc', b.item, 'idinteraccion_complejo_rc', 'nume_celda_interaccion_rc_complejo', 'nume_fila_interaccion_rc_complejo')
+                                return false;
+
+                            }
+
+                            return false;
+                        }
+                    });
+                }
+
+                function borrar_interaccion_sh_buscar() {
+
+                    $("#interaccion_sh_buscar").val("");
+                }
+
+                function busquedarapida_interaccion_sh_buscar() {
+
+                    $("#interaccion_sh_buscar").autocomplete({//Usamos el ID de la caja de texto donde lo queremos
+                        dataType: "json",
+                        delay: 500,
+                        minLength: 3,
+                        source: function(request, response) {
+                            $.ajax({
+                                dataType: 'json',
+                                type: 'get',
+                                data: {
+                                    busca_rapida_stakeholder: request.term
+                                },
+                                url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=busqueda_rapida_stakeholder',
+                                success: function(datos) {
+                                    //$("#mensaje").val(datos);
+                                    response($.map(datos, function(item) {
+                                        return{
+                                            label: item.label,
+                                            value: item.value
+                                        }
+                                    }));
+
+                                }
+                            });
+                        },
+                        focus: function(event, ui) {
+                            event.preventDefault();
+                            return false;
+                        },
+                        select: function(a, b) {
+                            $("#interaccion_sh_buscar").val("Buscar stakeholder por apellido paterno apellido materno nombre");
+
+                            if (b.item.value == 'nuevo_stake_holder') {
+                                alert("entra");
+                            } else {
+                                agrega_celda('interaccion_complejo_sh', b.item, 'idinteraccion_complejo_sh', 'nume_celda_interaccion_sh_complejo', 'nume_fila_interaccion_sh_complejo')
+                                return false;
+
+                            }
+
+                            return false;
+                        }
+                    });
+                }
+
+                function cambiar_pantalla_interaccion() {
+                    var interaccion_simple = $("#interaccion_simple").val();
+
+                    var idpersona = $("#idpersona").val();
+                    var idmodulo = $("#idmodulo").val();
+
+                    if (interaccion_simple == 1) {
+                        $.ajax({
+                            url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_interaccion_stakolder_complejo&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                            success: function(datos) {
+                                $("#interaccion_stakeholder_simple").html(datos);
+
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_interaccion_stakeholder&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                            success: function(datos) {
+                                $("#interaccion_stakeholder_simple").html(datos);
+
+                            }
+                        });
+
+                    }
+
+
+                }
+
+                function actualizar_compromiso_stakeholder() {
+
+                    var idpersona = $("#idpersona").val();
+                    var idmodulo = $("#idmodulo").val();
+
+                    datastring = $("#form_modal_compromiso").serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=guardar_compromiso_stakeholder&idpersona=' + idpersona + '&idmodulo=' + idmodulo,
+                        data: datastring,
+                        error: function(objeto, quepaso, otro) {
+                            //alert('q');
+                        },
+                        success: function(datos) {
+                            $("#modal_interaccion").html(datos);
+                            $("#modal_interaccion").dialog({
+                                autoOpen: false,
+                                height: "auto",
+                                width: "auto",
+                                modal: true,
+                                create: function(event, ui) {
+
+
+
+                                },
+                                open: function(event, ui) {
+
+                                },
+                                close: function(event, ui) {
+                                    $("#modal_interaccion").dialog("destroy");
+                                },
+                            });
+                            $("#modal_interaccion").dialog("open");
+                        }
+                    });
+
+                }
+
+
+                function borrar_compromiso_rc_buscar() {
+
+                    $("#compromiso_rc_buscar").val("");
+                }
+
+                function busquedarapida_compromiso_rc_buscar() {
+
+                    $("#compromiso_rc_buscar").autocomplete({//Usamos el ID de la caja de texto donde lo queremos
+                        dataType: "json",
+                        delay: 500,
+                        minLength: 3,
+                        source: function(request, response) {
+                            $.ajax({
+                                dataType: 'json',
+                                type: 'get',
+                                data: {
+                                    busca_rapida_stakeholder: request.term
+                                },
+                                url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=busqueda_rapida_stakeholder',
+                                success: function(datos) {
+                                    //$("#mensaje").val(datos);
+                                    response($.map(datos, function(item) {
+                                        return{
+                                            label: item.label,
+                                            value: item.value
+                                        }
+                                    }));
+
+                                }
+                            });
+                        },
+                        focus: function(event, ui) {
+                            event.preventDefault();
+                            return false;
+                        },
+                        select: function(a, b) {
+                            $("#compromiso_rc_buscar").val("Buscar stakeholder por apellido paterno apellido materno nombre");
+
+                            if (b.item.value == 'nuevo_stake_holder') {
+                                alert("entra");
+                            } else {
+                                agrega_celda('compromiso_rc', b.item, 'idcompromiso_rc', 'nume_celda_compromiso_rc', 'nume_fila_compromiso_rc')
+                                return false;
+
+                            }
+
+                            return false;
+                        }
+                    });
+                }
+
+                function borrar_compromiso_sh_buscar() {
+
+                    $("#compromiso_sh_buscar").val("");
+                }
+
+                function busquedarapida_compromiso_sh_buscar() {
+
+                    $("#compromiso_sh_buscar").autocomplete({//Usamos el ID de la caja de texto donde lo queremos
+                        dataType: "json",
+                        delay: 500,
+                        minLength: 3,
+                        source: function(request, response) {
+                            $.ajax({
+                                dataType: 'json',
+                                type: 'get',
+                                data: {
+                                    busca_rapida_stakeholder: request.term
+                                },
+                                url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=busqueda_rapida_stakeholder',
+                                success: function(datos) {
+                                    //$("#mensaje").val(datos);
+                                    response($.map(datos, function(item) {
+                                        return{
+                                            label: item.label,
+                                            value: item.value
+                                        }
+                                    }));
+
+                                }
+                            });
+                        },
+                        focus: function(event, ui) {
+                            event.preventDefault();
+                            return false;
+                        },
+                        select: function(a, b) {
+                            $("#compromiso_sh_buscar").val("Buscar stakeholder por apellido paterno apellido materno nombre");
+
+                            if (b.item.value == 'nuevo_stake_holder') {
+                                alert("entra");
+                            } else {
+                                agrega_celda('compromiso_sh', b.item, 'idcompromiso_sh', 'nume_celda_compromiso_sh', 'nume_fila_compromiso_sh')
+                                return false;
+
+                            }
+
+                            return false;
+                        }
+                    });
+                }
+				
+				function cargar_stakeholders(x1,y1,z1,x2,y2,z2){
+
+	var idmodulo=1;
+	$.ajax({
+			  url: '../../../programas/reporte/stakeholder/areporte.php?op_reporte=listar_sh_cuadrante&x1='+x1+'&x2='+x2+'&y1='+y1+'&y2='+y2+'&z1='+z1+'&z2='+z2,
+			  success: function(data) {
+			    $("#listado").html(data);
+			    
+			    
+
+
+			  }
+			});
+
+}
+
+			function modal_reporte_posicion_importancia(){
+				 $.ajax({
+                         url: '../../../programas/reporte/stakeholder/areporte.php?op_reporte=posicion_importancia',
+                        success: function(datos) {
+                            $("#pantalla_aux_principal").html(datos);
+                            $("#pantalla_aux_principal").dialog({
+                                title: "Inter&eacute;s/Poder",
+                                autoOpen: false,
+                                height: "auto",
+                                width: "auto",
+                                modal: true,
+                                create: function(event, ui) {
+  
+                                },
+                                open: function(event, ui) {
+                                },
+                                close: function(event, ui) {
+                                },
+                            });
+                            $("#pantalla_aux_principal").dialog("open");
+                        }
+                    });			
+			
+			
+			}
+			function modal_reporte_interes_poder() {     
+            
+                    $.ajax({
+                         url: '../../../programas/reporte/stakeholder/areporte.php?op_reporte=interes_poder',
+                        success: function(datos) {
+                            $("#pantalla_aux_principal").html(datos);
+                            $("#pantalla_aux_principal").dialog({
+                                title: "Inter&eacute;s/Poder",
+                                autoOpen: false,
+                                height: "auto",
+                                width: "auto",
+                                modal: true,
+                                create: function(event, ui) {
+  
+                                },
+                                open: function(event, ui) {
+                                },
+                                close: function(event, ui) {
+                                },
+                            });
+                            $("#pantalla_aux_principal").dialog("open");
+                        }
+                    });
+                }
+				
+				
+				function nuevo_stakeholder(){
+				
+										  $.ajax({
+								url: '../../../programas/persona/persona/apersona.php',
+								success: function(datos) {
+									$("#idhtml_cabecera_stakeholder").html("");
+									$("#idhtml_tab_stakeholder").html(datos);
+									$("#fecha_nacimiento").datepicker({changeYear: true, changeMonth: true});
+
+
+								}
+							});
+				
+				}
+				
+								function nuevo_tag(){
+				
+										  $.ajax({
+								url: '../../../programas/tag/tag/atag.php?op_tag=buscar_tag',
+								success: function(datos) {
+									$("#idhtml_cabecera_stakeholder").html("");
+									$("#idhtml_tab_stakeholder").html(datos);
+
+
+								}
+							});
+				
+				}
+            </script>
+    </head>
+
+    <body>
+        <div id="create-form" title="Crear Tag">
+        <form>
+        <label>Etiqueta:</label>
+            <input type="text" name="crea_tag" id="crea_tag" value="" />
+        
+        </form>
+    </div>
+        <div id="edit-form" title="Editar Tag">
+    <form>
+        <label>Etiqueta:</label>
+        <input type="text" name="actualiza_tag" id="actualiza_tag" value="" />
+        <input type="hidden" name="id_tag" id="id_tag" value=""/>
+        <input type="hidden" name="id_modulo" id="id_modulo" value=""/>
+        <input type="hidden" name="id_tab" id="id_tab" value=""/>
+    </form>
+</div>
+<div id="pantalla_aux_principal">
+</div>
+   <div id="frm_registrar_voto" title="Registrar Voto">              
+
+    </div>
+    <div id="mostrar_historico" title="Historico">              
+
+    </div>
+
+    <div id="principal">
+   
+   
+        	<div id="principal_cabecera">
+            <img id="fondo_cabecera" alt="fondo_cabecera" src="../../../img/fondo_menu_scg2.png" />
+                    <div id="tabla_menu">
+                    
+                        <table>
+                            <tr>
+                            <td>
+                                 {quien}
+                            </td>
+                            <td>
+                                <ul id="menu_secundario">
+                                    <li>
+                                    <a href="">Ayuda</a>
+                                    </li>
+                                </ul>
+                            </td>
+                            </tr>
+                            <tr>
+    
+    
+                        <tr>
+                            <td>
+                                <ul id="menu_opciones" style="width: 680px;">
+                                    <li >
+                                    <a href="#">Relaccionista Comunitario</a>
+                                    </li>
+                                    <li >
+                                    <a href="#">Stakeholder</a>
+                                    </li>
+                                    <li>
+                                    <a href="#">Tag</a>
+                                    </li>
+                                    <li>
+                                    <a href="#">Usuario</a>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                               
+                                                   <ul  id="menu_secundario">
+                                                           <li>
+                                                    <a href="javascript: actualiza()" onMouseOver="window.status='Actualizar la pagina'; return true;">Actualizar
+                                        </a>
+                                                 
+                                                    </li>
+                                                    <li>
+                                                   <a href="../../../index.php?accion_login=salir" target="_top"  onMouseOver="window.status='Cerrar la sesión actual'; return true;">Cerrar Sesi&oacute;n</a>
+                                                    </li>
+                    
+                                                </ul>
+                                           
+                            </td>
+                        </tr>                        
+                        </table>
+                    </div>
+           
+            
+   
+                     
+                    <div id="principal_logo">
+                        <a href="#">
+                        <img  src="../../../img/logo_fondo_scg_pq.jpg" alt="SCG">
+                        </a>
+                    </div>
+           
+        </div>
+        
+        <div id="div_buscar_stakeholder">
+       		<table >
+        					<tr>
+                               <td>
+                                    <div class="buscar" >
+                                                                <img src="../../../img/serach.png" />
+                                        <input type="text" class="buscar" name="stakeholder_buscar" id="stakeholder_buscar"    onkeyup="" onfocus="borrar_busqueda_rapida_stakeholder()" value="Buscar stakeholder por apellido paterno apellido materno nombre"  size="80"  width="100px">
+                                            
+                                    </div>
+        
+                        	</td>
+                        <td>
+                            <ul id="menu_opciones">
+                           
+                            	<li>
+                                <a href="#" onclick="nuevo_stakeholder();"> <img src="../../../img/add.png" />SH</a>
+                                </li>
+                                <li>
+                               <a href="#" onclick="nuevo_tag();"> <img src="../../../img/add.png" />Tag</a>
+                                </li>
+                               
+                            </ul>
+                        </td>
+                    	</tr>
+                       </table>
+        </div>
+    
+        <div id="menu_izquierdo">
+            <table>
+            	<thead>
+                	<td>
+                    	Compromisos
+                    </td>
+                </thead>
+            	<tr>
+                	<td>
+                    
+                		<table>
+                        	<tr>
+                   					<td>
+                                    
+                                    01/01/2012
+                                    </td>         
+                            
+                            </tr>
+                        	<tr>
+                            	<td class="celdaSimple">
+                                	Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso
+                                </td>
+                            </tr>
+                         	<tr>
+                   					<td>
+                                    
+                                    01/01/2012
+                                    </td>         
+                            
+                            </tr>
+                        	<tr>
+                            	<td class="celdaSimple">
+                                	Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso
+                                </td>
+                            </tr>
+                         	<tr>
+                   					<td>
+                                    
+                                    01/01/2012
+                                    </td>         
+                            
+                            </tr>
+                        	<tr>
+                            	<td class="celdaSimple">
+                                	Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso Detalle compromiso
+                                </td>
+                            </tr>                                                      
+                        </table>
+                    
+                                     
+                    
+                    
+                    
+                    </td>
+                </tr>
+
+            
+            </table>
+        </br>
+     		<table>
+            	<thead>
+                	<td>
+                    	Reportes
+                    </td>
+                </thead>
+                 <tr>
+                	<td class="celdaSimple">
+                    	<a href="">Stakeholder - General</a>                   
+                    </td>
+                </tr>
+            	<tr>
+                	<td class="celdaSimple">
+                    	<a href="#" onclick="modal_reporte_interes_poder()">Stakeholder - Inter&eacute;s/Poder</a>     
+                    </td>
+                </tr>
+                <tr>
+                    <td class="celdaSimple">
+                    	<a href="#" onclick="modal_reporte_posicion_importancia()">Stakeholder - Posici&oacute;n/Importancia</a></td>
+                </tr>
+            
+            </table>
+        
+        </div>
+   		<div id="cuerpo">
+                           <table>
+                        <tr>
+                            <td name="idhtml_cabecera_stakeholder" id="idhtml_cabecera_stakeholder">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td name="idhtml_tab_stakeholder" id="idhtml_tab_stakeholder">
+                            </td>
+                            <td name="idhtml_ventana_stakeholder" id="idhtml_ventana_stakeholder">
+                            </td>
+                        </tr>
+                    </table>
+        </div>
+   
+    </div>
+
+
+    </body>
+</html>

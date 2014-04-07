@@ -1,0 +1,131 @@
+
+                       
+              
+                        <div id="red_stakeholder">
+                        <table  class="bloque" cellpadding="4" cellspacing="4" width="100%" >
+                                         <tr>
+                                            <td width="100%" class="celdaSimple">
+                                                <!-- INICIO BLOQUE : crear_red_stakeholder -->
+                                                <div style="padding-left: 5px;padding-bottom: 5px">
+                                                <input type="text" class="buscar" name="busqueda_rapida_red_stakeholder" id="busqueda_rapida_red_stakeholder"  onfocus="borrar_red_stakeholder();busqueda_rapida_red_stakeholder();"   value=" Buscar stakeholder por apellido paterno apellido materno nombre" size="70"  width="70px">
+                                                <img src="../../../img/serach.png" />
+                                                </div>
+                                                <!-- FIN BLOQUE : crear_red_stakeholder -->  
+                                            </td>
+                                        </tr>
+                                       <!-- INICIO BLOQUE : detalle_red -->
+
+                                        <tr>
+                                        	<td width="100%" class="celdaSimple">
+                                                       
+                                            				<table width="70%" border="0" style="float:left;">
+                                                                    <tr>
+                                                                    		
+                                                                        <td width="100%">
+                                                                        	<table width="100%">
+                                                                            <tr>
+                                                                            	<td width="80%">
+                                                                            		<a href="javascript:cargar_stakeholder('{idpersona}---{idmodulo}---{idpersona_tipo}')"> {nombre_stakeholder}</a>
+                                                                            	</td>
+                                                                            	<td>
+                                                                                	<img src="{imagen}" alt="" border="1" height="50px"/>
+                                                                                </td>
+                                                                            </tr>
+                                                                            
+                                                                            
+                                                                            </table>
+                                                                        	
+                                                                           
+                                                                        	
+                                                                            
+                                                                            
+                                                                        </td>
+                                                                        
+                                                                        
+                                                                    </tr>
+                                                                    <!-- INICIO BLOQUE : organizacion -->
+                                                            
+                                                                    <tr>
+                                                                        <td>
+                                                                        En {organizacion} es {cargo}
+                                                                        </td>
+                                                                    </tr>
+                                                                     <!-- FIN BLOQUE : organizacion -->
+                                                            
+                                                                    <tr>
+                                                                        <td id="tabla_persona_tag">
+                                                                            <table>
+                                                                                <tr>
+                                                                                <td width="100%">
+                                                                                    <table>
+                                                                                          <!-- INICIO BLOQUE : tr_tag -->
+                                                                                        <tr>
+                                                                                                                  <!-- INICIO BLOQUE : td_tag -->
+                                                                    
+                                                                                            <td>
+                                                                                            {tag}
+                                                                                            </td>
+                                                                                                                  <!-- FIN BLOQUE : td_tag -->
+                                                                    
+                                                                                        </tr>
+                                                                                          <!-- FIN BLOQUE : tr_tag -->  
+                                                                                    </table>
+                                                                                </td>
+                                                                                
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </table>
+
+                                                                <table width="25%" style="float:left;">
+                                                                                        <!-- INICIO BLOQUE : tr_calificacion -->
+                                                                                        <tr>
+                                                                                            <td align="right">
+                                                                                                <img src="{posicion}" />
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <table>
+                                                                                                    <!-- INICIO BLOQUE : tr_dimension -->
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            {dimension}
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <img src="{valor}"/>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <!-- FIN BLOQUE : tr_dimension -->  
+
+                                                                                                </table>
+                                                                                            </td>
+                                                                                            <td valign="top">
+                                                                                                <!-- INICIO BLOQUE : eliminar_red_stakeholder -->
+                                                                                                <a href="#" onclick="eliminar_red_stakeholder({idpersona_red_stakeholder},{idmodulo_persona_red})">Eliminar</a>
+                                                                                                <!-- FIN BLOQUE : eliminar_red_stakeholder -->
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td align="center">
+                                                                                               <a href="javascript:mostrar_registrar_voto({idpersona},{idmodulo})"> Votar</a>
+                                                                                            </td>
+                                                                                            <td align="center" >
+                                                                                               <a href="javascript:mostrar_historico({idpersona},{idmodulo})"> Historico</a>
+                                                                                            </td>   
+                                                                                            <td>&nbsp;</td>
+                                                                                        </tr>
+                                                                                        <!-- FIN BLOQUE : tr_calificacion -->  
+                                                                                    </table>
+                                                                
+                                            </td>
+                                            
+                                                 
+                                            
+                                        </tr>
+                                        <!-- FIN BLOQUE : detalle_red -->
+                                      </table>
+                
+          </div>
+       
+

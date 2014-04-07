@@ -1,0 +1,58 @@
+
+
+<div id="edit-form" title="Editar Tag">
+	
+</div>
+<div id="delete-form" title="Borrar Tag">
+	
+</div>
+
+<form id="form_buscar_tag" onsubmit="buscar_tag();return false;" accept-charset="utf-8">
+	<table class="bloque" width="710px">
+	<thead>
+    	<td colspan="2">
+                <div class="nuevo">
+        	<a href="#" onclick="ver_crear_tag();">Nuevo tag</a>
+        </div>
+    	Buscar tag
+       
+        </td>
+    </thead>
+    <tr>
+    <td class="celda_titulo" width="25%">
+    	Buscar Tag
+    </td>
+	<td class="celdaSimple">
+	<input type="text" name="tag" id="tag" size="50" maxlength="250" value="" />
+
+	
+	</td>
+	</tr>
+	<tr>
+		<td align="center" class="celdaSimple" colspan="2">
+                    <button id="boton_buscar" name="commit" type="submit"> Buscar</button>
+			<button id="boton_limpiar" type="reset" value="Limpiar">Limpiar</button>
+		</td>
+	</tr>	
+    <tr>
+   <td class="footer_titulo">
+   		Ordenar por :
+   </td>
+	<td class="footer">
+        <a href="javascript:ver_todos()">Todos</a> &nbsp;||&nbsp;
+        <a href="javascript:ver_ordenados()">[A-Z]</a> &nbsp;||&nbsp;
+	<a href="javascript:ver_ultimos()">Ultimos</a>
+    </td>
+
+    </tr>
+    
+	</table>
+</form>
+
+<div id="resultado_tag">
+</div>	
+
+  <script type="text/javascript" >          
+    $( "#boton_buscar" ).button();
+    $( "#boton_limpiar" ).button();
+</script>

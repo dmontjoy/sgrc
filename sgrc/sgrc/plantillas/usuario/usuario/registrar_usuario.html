@@ -1,0 +1,84 @@
+
+<div id="usuario_div">
+    <form id="form_usuario" onsubmit="guardar_usuario();
+            return false;"  accept-charset="utf-8">
+        <input type="hidden" name="op_usuario" id="op_usuario" value="{op_usuario}" />
+        <input type="hidden" name="idpersona" id="idpersona" value="{idpersona}" />
+        <input type="hidden" name="idmodulo" id="idmodulo" value="{idmodulo}" />
+        <input type="hidden" name="idusuario" id="idusuario" value="{idusuario}" />
+        <table  cellpadding="4" cellspacing="4" width="490px" {clase}>
+            
+            <tr><td colspan="4"><div id="usuario_mensaje" style="background-color: #FFC4C4;"></div></td></tr>
+            
+            <tr>
+                <td width="250px" class="celda_titulo">Nombre de Usuario</td>
+                <td colspan="3" class="celdaSimple">
+                    <input type="text" name="usuario" id="username" value="{username}" size='40' />
+                </td>
+            </tr>
+            <!-- INICIO BLOQUE : clave -->
+            <tr>
+                <td class="celda_titulo">Editar Password</td>
+                <td colspan="3" class="celdaSimple">
+                    <input type="checkbox" name="enable" value="1" onchange="habilitar_campo_password();"/><br />
+                </td>
+            </tr>
+            <!-- FIN BLOQUE : clave -->
+            <tr id="fila_clave_1" style="{estilo}">
+                <td class="celda_titulo">Password</td>
+                <td colspan="3" class="celdaSimple">
+                    <input type="password" name="clave" id="clave"  size='40' />
+                </td>
+            </tr>
+            <tr id="fila_clave_2" style="{estilo}">
+                <td class="celda_titulo">Reingrese el Password</td>
+                <td colspan="3" class="celdaSimple">
+                    <input type="password" name="password" id="password"  size='40'/>
+                </td>
+            </tr>
+            <tr>
+                <td class="celda_titulo">Rol</td>
+                <td colspan="3" class="celdaSimple">
+
+                    <select name="idseguridad_rol" id="idseguridad_rol"  >
+                        <!-- INICIO BLOQUE : tipo -->
+                        <option {selected} value="{value}" >{tipo}</option>
+                        <!-- FIN BLOQUE : tipo -->
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="celda_titulo">Instancias</td>
+                <td colspan="3" class="celdaSimple">
+                    <!-- INICIO BLOQUE : host -->
+                    <div style="{estilo}">
+                    <input  type="checkbox" name="host[]" value="{idmodulo}" {checked} />{host}
+                    </div>
+                    <!-- FIN BLOQUE : host -->
+                </td>
+            </tr>
+             <tr>
+               
+                <td colspan="4" align="center">
+
+                    <input type="submit" name="Guardar" id="Guardar" value="Guardar" />
+
+                </td>
+                
+            </tr>
+
+        
+        </table>
+
+    </form>
+
+</div>
+
+<script type="text/javascript" >
+      
+      
+      $("#Guardar").button();
+      
+     
+    
+</script> 

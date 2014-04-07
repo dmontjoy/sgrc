@@ -1,0 +1,268 @@
+
+
+<form id="form_buscar_reclamo" onsubmit="buscar_reclamo();return false;">
+    
+    
+    <table  class="bloque" cellpadding="4" cellspacing="4" width="710px">
+        <thead>
+        <td colspan="4"> Reclamo - Buscar </td>
+        </thead>
+     <tr>
+            <td class="celda_titulo">C&oacute;digo</td>
+            <td class="celda_titulo" >
+                
+                <input type="text" name="identidad" size="5" >
+                -
+                <input type="text" name="idmodulo_entidad" size="5" >
+                          
+            </td>
+            <td class="celda_titulo">Entidad</td>
+            <td class="celda_titulo" >
+                
+               <select name="entidad" id="entidad">                    
+                    <option value="reclamo" >Reclamo</option>
+                    <option value="apelacion" >Apelaci&oacute;n</option>                    
+                    <option value="propuesta" >Acuerdo</option>                    
+                </select>
+                          
+            </td>
+      </tr>  
+
+      <tr>
+
+            <td class="celda_titulo">Fase
+            </td>
+            <td class="celdaSimple" colspan="3">
+                <!-- INICIO BLOQUE : reclamo_fase -->
+                    <input type="checkbox" name="idreclamo_fase[]" value="{orden}" >{fase}                
+                <!-- FIN BLOQUE : reclamo_fase -->         
+                
+             </td>
+             
+        </tr>
+        <tr>           
+             <td class="celda_titulo">
+                Tipo
+              </td>
+             <td class="celdaSimple" colspan="3">                
+                    <!-- INICIO BLOQUE : reclamo_tipo -->
+                    <input type="checkbox" name="idreclamo_tipo[]" value="{idreclamo_tipo}" >{tipo}                
+                    <!-- FIN BLOQUE : reclamo_tipo -->                
+            </td>
+        </tr>
+         <tr>           
+             <td class="celda_titulo">
+                Estado
+              </td>
+             <td class="celdaSimple" colspan="3">                
+                    <!-- INICIO BLOQUE : reclamo_estado -->
+                    <input type="checkbox" name="idreclamo_estado[]" value="{idreclamo_estado}" >{estado}                
+                    <!-- FIN BLOQUE : reclamo_estado -->                
+            </td>
+        </tr>
+        <tr>
+            <td class="celda_titulo">
+            <label for="from">Del</label>
+            </td>
+            <td class="celda_titulo">
+            <input type="text" id="ifecha1" name="fecha_del" value=""/>
+            
+            </td>
+
+
+            <td class="celda_titulo">
+            <label for="to">Al</label>
+            </td>
+           <td class="celda_titulo"> 
+            <input type="text" id="ifecha2" name="fecha_al" value=""/>
+            
+            </td>
+        </tr>
+         <tr>
+             <td class="celda_titulo">
+            Tag
+            </td>
+                                <td colspan="3" align="left" class="celdaSimple">
+                                    <table>
+                                        <tr>
+                                            <td>
+
+                                                <input type="text" class="buscar"  name="buscar_reclamo_tag" id="buscar_reclamo_tag" onfocus="borrar_reclamo_tag();
+                            busqueda_rapida_reclamo_tag();" value=" Buscar tag" size="20"  >
+                                                    <img id="img_buscar_reclamo_tag"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                                    <input type="hidden" id="nume_celda_reclamo_tag" name="nume_celda_reclamo_tag" value="0" />
+                                                    <input type="hidden" id="nume_fila_reclamo_tag" name="nume_fila_reclamo_tag" value="0" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table id="reclamo_tag"  width="100%">
+                                       
+                                                </table>
+                                            </td>
+
+                                        </tr>
+                                    </table>
+
+                                </td>
+                            </tr>
+                            <tr id="fila_reclamo_sh" >
+                                        <td class="celda_titulo">Reclamante</td>
+                                        <td class="celdaSimple" colspan="3">
+                                            
+                                            <input type="hidden" id="nume_celda_reclamo_sh" name="nume_celda_reclamo_sh" value="0" />
+                                            <input type="hidden" id="nume_fila_reclamo_sh" name="nume_fila_reclamo_sh" value="0" />
+                                            <input type="text" class="buscar" name="reclamo_sh_buscar" id="reclamo_sh_buscar" onfocus="borrar_reclamo_sh_buscar();
+            busqueda_rapida_reclamo_sh_buscar()" value="Buscar Reclamante (stakeholder) por apellido paterno apellido materno nombre"  size="80"  width="100px">
+                                             <img id="img_buscar_reclamo_sh"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                             <input type="hidden" test="SH" value="{cant_sh}" id="count_sh" name="count_sh" />
+
+                                            <table  class="borde" id="reclamo_sh">
+
+                                            </table>
+
+                                </td>
+                            </tr>
+             <tr id="fila_reclamo_rc1" >
+                                        <td class="celda_titulo">Recibido por</td>
+                                        <td class="celdaSimple" colspan="3">
+                                            <table>
+                                                <tr>
+                                                    <td >
+                                                        
+                                                        <input type="text" class="buscar" name="reclamo_rc1_buscar" id="reclamo_rc1_buscar" onfocus="borrar_reclamo_rc1_buscar();
+                        busqueda_rapida_reclamo_rc1_buscar()" value="Buscar Receptor (relacionista) por apellido nombre"  size="50"  width="50px">
+                                                         <img id="img_buscar_reclamo_rc1"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                                         <input id="count_receptor" type="hidden" name="count_receptor" value="{count_receptor}" test="RC">
+                                                    </td>
+                                               
+                                                    <td>
+                                                        <div id="reclamo_receptor">                                                                                                                        
+                                                           
+                                                        </div>
+                                                         
+                                                    </td>
+                                                </tr>
+
+                                            </table>                                    
+                                </td>
+                            </tr>
+                                  
+                  <tr id="fila_reclamo_rc2" >
+                                    <td class="celda_titulo">Responsable</td>
+                                    <td class="celdaSimple" colspan="3">
+
+                                        <table>
+                                            <tr>
+                                                <td >
+                                                    <input type="hidden" id="nume_celda_reclamo_rc" name="nume_celda_reclamo_rc" value="0" />
+                                                    <input type="hidden" id="nume_fila_reclamo_rc" name="nume_fila_reclamo_rc" value="0" />
+
+
+                                                    <input type="text" class="buscar" name="reclamo_rc2_buscar" id="reclamo_rc2_buscar" onfocus="borrar_reclamo_rc2_buscar();
+                busqueda_rapida_reclamo_rc_buscar()" value="Buscar Responsable (relacionista) por apellido nombre"  size="80"  width="80px">
+                                                    <img id="img_buscar_reclamo_rc2"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                                    <input type="hidden"  value="0" id="count_rc" name="count_rc" />
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                        <table width="100%" class="borde" id="reclamo_rc">
+                                            
+
+                                        </table>
+                                    </td>
+                                    </tr> 
+                                     <tr>
+                <td class="celda_titulo">Terminan en</td>
+                <td colspan="3" class="celdaSimple">
+                    <input type="text" name="plazo" id="plazo"  size="10"  width="80px">
+                </td>
+            </tr>
+     
+                <tr>
+         
+                    <td class="celdaSimple" colspan="4" align="center">
+                   <input id="compromiso_buscar_submit" type="submit" value="Buscar"  />
+                   <input type="hidden" id="fid_string" name="fid_string" value="" />
+                    </td>
+                </tr>
+      </table>
+
+</form>
+
+<br/>
+<iframe id="frame4" style="display:none" src=""></iframe>
+<div id="resultado_reclamo">
+</div>
+
+<script type="text/javascript" >
+    $("#compromiso_buscar_submit").button();
+    
+       $("#buscar_reclamo_tag").blur(function() {
+            $("#buscar_reclamo_tag").val("Buscar tag");
+        });
+    
+         $("#reclamo_sh_buscar").blur(function() {
+            $("#reclamo_sh_buscar").val("Buscar Reclamante (stakeholder) por apellido paterno apellido materno nombre");
+        });
+    
+    
+     $("#reclamo_rc1_buscar").blur(function() {
+            $("#reclamo_rc1_buscar").val("Buscar Receptor (relacionista) por apellido nombre");
+        });
+    
+     $("#reclamo_rc2_buscar").blur(function() {
+            $("#reclamo_rc2_buscar").val("Buscar Responsable (relacionista) por apellido nombre");
+        });
+    
+        $("#ifecha1").datepicker({
+                defaultDate: "+1w",
+                changeYear: true,
+                changeMonth: true,
+                numberOfMonths: 1,
+                onClose: function(selectedDate) {
+                    $("#hfecha2").datepicker("option", "minDate", selectedDate);
+                }
+            });
+            $("#ifecha2").datepicker({
+                defaultDate: "+1w",
+                changeYear: true,
+                changeMonth: true,
+                numberOfMonths: 1,
+                onClose: function(selectedDate) {
+                    $("#hfecha1").datepicker("option", "maxDate", selectedDate);
+                }
+            });
+
+            var d = new Date();
+            var YYYY = d.getFullYear();
+            var mm = d.getMonth() + 1;
+            var dd = d.getDate();
+            var dia="";
+            var mes="";
+            
+            if(dd<10){
+                dia="0"+dd;
+            }else{
+                dia=""+dd;
+            }
+        
+            if(mm<10){
+                mes="0"+mm;
+            }else{
+                mes=""+mm;
+            }
+
+            $("#ifecha1").val("01" + "/" + mes + "/" + YYYY);
+            $("#ifecha2").val(dia + "/" + mes + "/" + YYYY);
+
+            $("#form_buscar_reclamo").validate({
+                rules: {
+                    plazo: {                    
+                    number: true
+                    }
+                }
+                });
+            
+</script> 

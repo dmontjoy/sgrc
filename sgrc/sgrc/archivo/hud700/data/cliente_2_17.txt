@@ -1,0 +1,2 @@
+ INSERT INTO persona ( idpersona,idmodulo,nombre , apellido_p , apellido_m , idpersona_tipo , fecha_nacimiento , sexo , idestado_civil , activo , background , comentario , fecha_a )  VALUES  ( 622,2,'mostro' , 'mostro' , 'mostro' , 1 , '' , 1,2, 1 ,'' , '' , '2014-03-19 11:52:14' ) ;
+ INSERT INTO sh ( idsh,idmodulo,activo,fecha_a )  VALUES  ( 622,2,1,'2014-03-19 11:52:14' ) ;

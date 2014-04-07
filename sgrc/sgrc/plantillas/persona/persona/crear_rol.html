@@ -1,0 +1,109 @@
+
+
+<table width="90%" align="center">
+<tr>
+	<td valign="top" width="50%">
+    
+            <form id="form_guardar_rol" name="form_guardar_rol"  onsubmit="guardar_rol();return false;" accept-charset="utf-8">
+            <input id="op_persona" type="hidden"   value="{op_persona}" name="op_persona" />
+            <input id="idrol" type="hidden"   value="{idrol}" name="idrol" />
+            
+            <table class="bloque" width="100%">
+            <thead>
+                    <td colspan="6">
+
+                        {titulo} Rol {rol}
+                    </td>
+            </thead>
+            <tr>
+                    <td  colspan="3" >
+
+                        <span style="float:right;font-weight: bolder;">Ingrese Nombre del Rol :</span>
+
+                </td>
+                    <td  colspan="3">
+                        <input minlength="3" type="text" required name="rol" id="rol" maxlength="250" size="50" value="{rol}" />		
+
+                    </td>
+            </tr>
+             <thead>
+                    <td colspan="3">
+
+                        Servidor
+                    </td>
+                    <td colspan="3">
+
+                       Cliente
+                    </td>
+            </thead>
+            <tr>
+                  
+                <td class="celdaSimple" colspan="3" align="center">
+
+                   <a href="javascript:checkAll('form_guardar_rol', true)" >                   
+
+                    Seleccionar todos
+                    </a>
+                </td>
+                 <td class="celdaSimple" colspan="3" align="center">
+
+                   <a href="javascript:checkAll('form_guardar_rol', false)" >                   
+                    Deseleccionar todos
+                   </a>
+                </td>
+                
+            </tr>
+            <!-- INICIO BLOQUE : fila_permiso -->
+            <tr>                
+                <td class="celdaSimple" width="20px">{numero_server}</td>
+                <td class="celda_titulo" width="20px">
+                    <!-- INICIO BLOQUE : item_permiso_server -->
+                   <input id="{idpermiso}" type="checkbox" name="permisos[]"  value="{idpermiso}" class="todos" onclick="actualiza_estado_permiso({idpermiso})" {checked} />
+                   <input id="id{idpermiso}" type="hidden"   value="{valor}" name="idseguridad_permiso[]" />
+                   <!-- FIN BLOQUE : item_permiso_server -->
+                </td>
+                <td class="{clase_server}" id="td_{idpermiso_server}">
+                    {permiso_server}
+                </td>                                
+                <td class="celdaSimple" width="20px">{numero_cliente}</td>
+                <td class="celda_titulo" width="20px">
+                    <!-- INICIO BLOQUE : item_permiso_cliente -->
+                   <input id="{idpermiso}" type="checkbox" name="permisos[]"  value="{idpermiso}" class="todos" onclick="actualiza_estado_permiso({idpermiso})" {checked} />
+                   <input id="id{idpermiso}" type="hidden"   value="{valor}" name="idseguridad_permiso[]" />
+                   <!-- FIN BLOQUE : item_permiso_cliente -->
+                </td>
+                <td class="{clase_cliente}" id="td_{idpermiso_cliente}">
+                    {permiso_cliente}
+                </td>
+                
+            </tr>
+            <!-- FIN BLOQUE : fila_permiso -->
+            <tr>
+                    <td colspan="6" align="center">
+                        <div id="guardar_rol"><input id="guardar_rol_btn" type="submit" value="Guardar"/></div>
+                </td>
+            </tr>
+            </table>
+              </form>
+
+
+	
+	</td>
+	<td valign="top" width="50%">
+		<div id="resultado_rol">
+                </div>	
+	</td>
+</tr>
+</table>
+ 
+ 
+
+
+
+<script type="text/javascript" >
+          
+  $("#form_guardar_rol").validate();
+  $("#guardar_rol_btn").button();
+
+    
+</script> 

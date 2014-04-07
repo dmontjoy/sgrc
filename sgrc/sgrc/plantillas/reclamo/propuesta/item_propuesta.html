@@ -1,0 +1,18 @@
+<table width="100%" class="celdaPropuesta">
+    <tbody><tr>
+        <td width="80%">
+            <strong>{fecha_propuesta}</strong> Acuerdo Nº {idpropuesta}-{idmodulo_propuesta}
+        </td>
+        <td width="20%" align="right">            
+            <a title="Editar acuerdo" href="javascript:modal_editar_propuesta({idpropuesta},{idmodulo_propuesta});"><img alt="Editar" src="../../../img/edit.png"></a>
+            <a title="Eliminar acuerdo" href="javascript:eliminar_propuesta({idpropuesta},{idmodulo_propuesta});"><img alt="Eliminar" src="../../../img/trash.png"></a>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="2">
+            {propuesta}
+        </td>
+
+    </tr>
+</tbody></table>

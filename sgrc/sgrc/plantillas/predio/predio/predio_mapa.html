@@ -1,0 +1,60 @@
+            
+<div id="predio_stakeholder">
+    
+<input type="hidden" id='idpredio' name='idpredio' value='{idpredio}'>
+<input type="hidden" id='idmodulo_predio' name='idmodulo_predio' value='{idmodulo_predio}'>
+
+<table  class="bloque" cellpadding="4" cellspacing="4" width="100%" >
+
+                <tr><td width="50%" style="vertical-align: top;">
+                <table width="100%">         
+               <!-- INICIO BLOQUE : detalle_predio -->
+                <tr>
+                    <td  class="celdaSimple">
+
+                          <table border="0" width="100%">
+                                <tr>
+                                    <td width="100%">
+                                       <table width="100%">
+                                            <tr>
+                                                <td  style="text-align:justify; ">
+                                                    <span style="width:20px;display:inline-block;">{numero}. 
+                                                    <label style="font-weight:bold;">{fecha_interaccion} </label></span>
+                                                    {nombre_predio}
+                                                </td>
+                                                <td width="40px" align="right">
+                                                    <a href="javascript:consultaGisPredio('{fid_string}', 'gis_{idpredio}')" title="Consultar Datos"><img src="../../../img/gps.png" alt="Editar"/></a>
+
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td  colspan="2" width="100%" style="text-align:justify;padding-left:  20px; ">
+                                                    <div id="gis_{idpredio}"></div>
+                                                </td>
+
+                                            </tr>
+                                            
+                                        </table>
+                                    </td>
+                                </tr>
+                           </table>
+                    </td>
+
+                </tr>
+      <!-- FIN BLOQUE : detalle_predio -->
+                </table>
+                </td>
+                <td style="vertical-align: top;">
+                    
+                    {ver_mapa}
+    
+                </td>
+                
+                
+                </tr>
+</table>
+
+</div>
+
+

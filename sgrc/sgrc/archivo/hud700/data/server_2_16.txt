@@ -1,0 +1,115 @@
+INSERT INTO
+                      `persona`(idpersona,
+                      `idmodulo`,
+                      `apellido_p`,
+                      `apellido_m`,
+                      `nombre`,
+                       imagen,
+                      `activo`,
+                      `idusu_c`,
+                      `idmodulo_c`,
+                      `fecha_nacimiento`,
+                      `idpersona_tipo`,
+                      `idestado_civil`,
+                      `sexo`,
+                       comentario,
+                       background,
+                       fecha_a)
+                    VALUES(621,
+                      1,
+                      'aaa',
+                      'aaa',
+                      'aaa',
+                      '',
+                      1,
+                      1,
+                      1,
+                      '1980-01-01',
+                      1,
+                      '1',
+                      '1',
+                      '',
+                      '',
+                      '2014-03-18 16:40:48');;
+INSERT INTO
+                            `sh`(
+                            `activo`,
+                            `idsh`,
+                            `idmodulo`,
+                            `importancia`)
+                          VALUES(
+                            1,
+                            621,
+                            1,
+                            0);;
+INSERT INTO
+              sh_dimension(idsh_dimension,
+              idmodulo_sh_dimension,  
+              fecha,
+              fecha_a,
+              idsh,
+              idmodulo,
+              idmodulo_a,
+              comentario
+              )
+            VALUES(3,
+              1,
+              '2014-3-18',
+              '2014-03-18 16:41:02',
+              621,
+              1,
+              1,
+              '');;
+INSERT INTO
+              sh_dimension_matriz_sh(idsh_dimension_matriz_sh,
+              idmodulo_sh_dimension,
+              idsh_dimension_matriz_sh_valor,              
+              activo,
+              idsh_dimension                            
+              )
+            VALUES
+            (7,
+              1,
+              2,                                
+              1,
+              3
+              );;
+INSERT INTO
+              sh_dimension_matriz_sh(idsh_dimension_matriz_sh,
+              idmodulo_sh_dimension,
+              idsh_dimension_matriz_sh_valor,              
+              activo,
+              idsh_dimension                            
+              )
+            VALUES
+            (8,
+              1,
+              7,                                
+              1,
+              3
+              );;
+INSERT INTO
+              sh_dimension_matriz_sh(idsh_dimension_matriz_sh,
+              idmodulo_sh_dimension,
+              idsh_dimension_matriz_sh_valor,              
+              activo,
+              idsh_dimension                            
+              )
+            VALUES
+            (9,
+              1,
+              12,                                
+              1,
+              3
+              );;
+UPDATE `sh_dimension`
+                              SET `fecha_a`='2014-03-18 16:41:02',`sh_dimension`.`ultimo`=0
+                              WHERE `sh_dimension`.`idsh`=621 and `sh_dimension`.`idmodulo`=1 
+                              AND `sh_dimension`.`ultimo`=1;;
+update `sh_dimension`
+                              set `fecha_a`='2014-03-18 16:41:03',`sh_dimension`.`ultimo`=1
+                              where `sh_dimension`.`idsh_dimension`=3
+                              and `sh_dimension`.`idmodulo_sh_dimension`=1;;
+UPDATE sh SET `fecha_a`='2014-03-18 16:41:02',importancia=4 
+                  WHERE  idsh=621
+                  AND idmodulo=1;;

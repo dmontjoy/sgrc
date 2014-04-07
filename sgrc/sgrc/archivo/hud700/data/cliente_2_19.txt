@@ -1,0 +1,7 @@
+ INSERT INTO persona ( idpersona,idmodulo,nombre , apellido_p , apellido_m , idpersona_tipo , fecha_nacimiento , sexo , idestado_civil , activo , background , comentario , fecha_a )  VALUES  ( 624,2,'Alan' , 'Dabbs' , '' , 1 , '' , 1,2, 1 ,'' , '' , '2014-03-19 12:24:55' ) ;
+ INSERT INTO sh ( idsh,idmodulo,activo,fecha_a )  VALUES  ( 624,2,1,'2014-03-19 12:24:55' ) ;
+ INSERT INTO persona_telefono ( idpersona_telefono,telefono,idpersona , idmodulo , activo , idmodulo_persona_telefono , fecha_a )  VALUES  ( 1,'997571956',624 , 2 , 1 , 2 , '2014-03-19 12:24:55' ) ;
+ INSERT INTO persona_tag ( idpersona_tag,idtag , idmodulo_tag , idpersona , idmodulo , activo , idmodulo_persona_tag , fecha_a )  VALUES  ( 1,45 , 1 , 624 , 2 , 1 , 2 , '2014-03-19 12:24:55' ) ;
+ INSERT INTO interaccion ( idinteraccion,idmodulo_interaccion,activo,interaccion,fecha,idinteraccion_estado,idinteraccion_prioridad,idinteraccion_tipo,comentario,fecha_a )  VALUES  ( 1,2,1,'Reviewed the system and planned next steps' , '2014-03-19',2,1,2 , '','2014-03-19 12:25:41' ) ;
+ INSERT INTO interaccion_rc ( idinteraccion_rc,idmodulo_interaccion_rc,idinteraccion,idmodulo_interaccion,idrc,idmodulo,activo,fecha_a )  VALUES  ( 1,2,1 , 2,186,1,1 , '2014-03-19 12:25:41' ) ;
+ INSERT INTO interaccion_sh ( idinteraccion_sh,idmodulo_interaccion_sh,idinteraccion,idmodulo_interaccion,idsh,idmodulo,activo,fecha_a )  VALUES  ( 1,2,1 , 2,624,2,1 , '2014-03-19 12:25:41' ) ;

@@ -1,0 +1,117 @@
+
+
+<form id="form_buscar_predio" onsubmit="buscar_predio();return false;" accept-charset="utf-8">
+	<table class="bloque" width="710px">
+	<thead>
+    	<td colspan="2">
+                <div class="nuevo">
+        	<a href="#" onclick="">Nuevo predio</a>
+        </div>
+    	Buscar Predio
+
+        </td>
+    </thead>
+    <tr>
+        <td class="celda_titulo" width="25%">
+         C&oacute;digo de Predio
+        </td>
+	<td class="celdaSimple">
+	<input type="text" name="codigo_predio" id="codigo_predio" size="50" maxlength="250" value="" />
+	</td>
+        
+    </tr>
+             <tr>
+                        <td class="celda_titulo">Tag</td>
+                        <td class="celda_titulo">
+                            <table>
+                                <tr>
+                                    <td >
+                                        <input type="hidden" id="nume_celda_predio_tag" name="nume_celda_predio_tag" value="0" />
+                                        <input type="hidden" id="nume_fila_predio_tag" name="nume_fila_predio_tag" value="0" />
+
+                                        <input class="buscar ui-autocomplete-input" type="text" name="busca_rapida_tag" id="busca_rapida_tag" onfocus="borrar_predio_tag();
+busqueda_rapida_predio_tag(2);" value=" Buscar tag" size="80" style="background-color: rgb(255, 255, 204); ">
+                                        <img id="img_buscar_tag"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <table width="200" class="borde" id="tabla_predio_tag_complejo">
+                               
+                            </table>
+                        </td>
+                    </tr>
+      <tr>
+               <td class="celda_titulo">Stakeholder</td>
+               <td class="celda_titulo">
+                   <table>
+                       <tr>
+                           <td >
+                               <input type="hidden" id="nume_celda_predio_sh" name="nume_celda_predio_sh" value="0" />
+                               <input type="hidden" id="nume_fila_predio_sh" name="nume_fila_predio_sh" value="0" />
+
+                               <input class="buscar ui-autocomplete-input" type="text" name="buscar_predio_sh" id="buscar_predio_sh" onfocus="borrar_predio_sh();
+busqueda_rapida_predio_sh();" value=" Buscar stakeholder" size="80" style="background-color: rgb(255, 255, 204); ">
+                               <img id="img_buscar_sh_rc"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                           </td>
+                       </tr>
+
+                   </table>
+                   <table width="200" class="borde" id="tabla_predio_sh">
+
+                   </table>
+               </td>
+           </tr>   
+           
+           <tr>
+               <td class="celda_titulo">
+                   Tenencia
+               </td>
+               <td class="celda_titulo">
+                    <select name="idpredio_tipo_tenencia">
+                      <option value='' ><-- Selecciona --></option>  
+
+                        <!-- INICIO BLOQUE : bloque_predio_tipo_tenencia --> 
+                       <option value={idpredio_tipo_tenencia} >{predio_tipo_tenencia}</option>  
+                        <!-- FIN BLOQUE : bloque_predio_tipo_tenencia --> 
+
+                     </select>
+               </td>
+           </tr>
+           
+           <tr>
+               <td class="celda_titulo">
+                   Etapa del proceso
+               </td>
+               <td class="celda_titulo">
+                    
+                        <!-- INICIO BLOQUE : bloque_predio_proceso_pasos --> 
+                        <input type="checkbox" value="{idpredio_proceso_pasos}" name="idpredio_proceso_pasos[]"> {predio_proceso_pasos}
+    
+                        <!-- FIN BLOQUE : bloque_predio_proceso_pasos --> 
+
+                     
+               </td>
+           </tr>
+	<tr>
+		<td align="center" class="celdaSimple" colspan="2">
+                    <button id="boton_buscar" name="commit" type="submit"> Buscar</button>
+                    <button id="boton_limpiar" type="reset" value="Limpiar">Limpiar</button>
+		</td>
+	</tr>	
+    <tr>
+
+
+    </tr>
+    
+	</table>
+</form>
+
+<div id="resultado_buscar_predio">
+
+</div>	
+
+  <script type="text/javascript" >          
+    $( "#boton_buscar" ).button();
+    $( "#boton_limpiar" ).button();
+</script>

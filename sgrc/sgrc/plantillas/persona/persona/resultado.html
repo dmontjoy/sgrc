@@ -1,0 +1,67 @@
+<br>
+<table class="bloque" width="710px" style="table-layout: auto;">
+	<tr class="titulo">
+    	<td colspan="5" class="titulo">
+        	Resultado
+        </td>
+    </tr>
+    
+    
+     <!-- INICIO BLOQUE : resultado -->
+    <tr>
+    	<td width="40px" class="titulo_cabecera">N&ordm;
+        	
+        </td>
+    	<td width="190px" class="titulo_cabecera">
+        Apellido pateno
+        </td>
+        <td  width="190px "class="titulo_cabecera">
+       	Apellido materno
+        </td>
+        <td  width="190px" class="titulo_cabecera">
+        Nombre
+        </td>
+        <td width="100px" class="titulo_cabecera">
+        Acci&oacute;n
+        </td>
+    </tr>
+     <!-- INICIO BLOQUE : resultado_persona -->
+        <tr class="renglon" id="persona_{idpersona}_{idmodulo}">
+        <td  class="celdaSimple">{i}.</td>
+        <td  class="celdaSimple">
+            <p class="nombre"> {inicio} {apellido_p}{fin} </p>
+        </td>
+        <td  class="celdaSimple">
+         <p class="nombre"> {inicio}{apellido_m} {fin} </p>
+        </td>
+        <td  class="celdaSimple">
+         <p class="nombre"> {inicio}{nombre} {fin} </p>
+        </td>
+        <td  class="celdaSimple" >
+            
+            <div id="opcion_persona_{idpersona}_{idmodulo}" style="float:left;">
+
+                <!-- INICIO BLOQUE : agregar_persona -->
+                <a title="Activar" href="javascript:agregar_sh_rc({idpersona},{idmodulo},{es_stakeholder})"><img src="../../../img/add.png" alt="Agregar"/></a> 
+                <!-- FIN BLOQUE : agregar_persona -->
+
+                <!-- INICIO BLOQUE : eliminar_persona -->
+                <a title="Desactivar" href="javascript:eliminar_sh_rc({idpersona},{idmodulo},{es_stakeholder})"><img src="../../../img/delete.png" alt="Eliminar"/></a>
+                <!-- FIN BLOQUE : eliminar_persona --> 
+            </div>
+            <div  style="float:left;">
+            
+            <!-- INICIO BLOQUE : agregar_usuario -->
+            <a title="Registrar Usuario" href="javascript:modal_registrar_usuario({idpersona},{idmodulo})"><img src="../../../img/add_user.png" alt="Agregar" title="Agregar Usuario"/></a> 
+            <!-- FIN BLOQUE : agregar_usuario -->
+            &nbsp;
+            <!-- INICIO BLOQUE : ver_usuario -->
+            <a title="Ver Usuarios" href="javascript:modal_ver_usuario({idpersona},{idmodulo})"><img src="../../../img/serach.png" alt="" title="Ver Usuarios"/></a> 
+            <!-- FIN BLOQUE : ver_usuario -->
+            <a title="Eliminar" href="javascript:eliminar_persona({idpersona},{idmodulo})"><img src="../../../img/trash.png" alt="Eliminar"/></a>
+            </div>
+        </td>
+    </tr>
+     <!-- FIN BLOQUE : resultado_persona -->
+    <!-- FIN BLOQUE : resultado -->
+</table>

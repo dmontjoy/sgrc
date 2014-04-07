@@ -1,0 +1,300 @@
+
+{contenido_interaccion}
+
+<form id="form_modal_compromiso" enctype="multipart/form-data" >
+		<input type="hidden" id="idmodulo_compromiso" name="idmodulo_compromiso" value="{idmodulo_compromiso}" />
+        <input type="hidden" id="idcompromiso" name="idcompromiso" value="{idcompromiso}" />
+        <input type="hidden" id="idinteraccion_modulo_compromiso" name="idmodulo_interaccion" value="{idmodulo_interaccion_compromiso}" />
+        <input type="hidden" id="idinteraccion_compromiso" name="idinteraccion" value="{idinteraccion_compromiso}" />
+         <input type="hidden" id="op_stakeholder" name="op_stakeholder" value="{op_stakeholder}" />
+            <table border="0" width="100%">
+			<tr>
+				<td align="center">
+                	<table border="0">
+					<tr>
+						<td>
+                        	<table>
+                                    <tr>
+                                        <td class="celda_titulo">C&oacute;digo</td>
+                                        <td colspan="3" class="celdaSimple">
+                                            {idcompromiso}-{idmodulo_compromiso}
+                                        </td>
+                                    </tr>
+
+                            		
+                                <tr>
+						            
+                                    <td class="celda_titulo">Estado</td>
+                                    <td class="celda_titulo">
+                                            <select name="idcompromiso_estado" id="idcompromiso_estado">
+                                            <!-- INICIO BLOQUE : compromiso_estado -->
+                                            <option value={idcompromiso_estado} {selected}>{compromiso_estado}</option>
+                                             <!-- FIN BLOQUE : compromiso_estado -->
+
+                                            </select>
+                                    </td>
+          
+
+
+                              
+                                <td class="celda_titulo">Prioridad
+                                            <select name="idcompromiso_prioridad" id="idcompromiso_prioridad">
+             					<!-- INICIO BLOQUE : compromiso_prioridad -->	
+                                                    <option value={idcompromiso_prioridad} {selected}>{compromiso_prioridad}</option>
+                                                <!-- FIN BLOQUE : compromiso_prioridad -->
+
+                                                    </select>			
+                                    </td>
+                                                                    <td class="celda_titulo">&nbsp;
+                       
+                                    
+                                     </td>
+						</tr>
+                                                
+                                                
+								<tr >
+                                	<td class="celda_titulo" >Fecha Inicio</td>
+                                   	<td class="celda_titulo" >
+								<input type="text" name="fecha_compromiso" id="fecha_compromiso"  value="{fecha_compromiso}" />
+					</td>
+                                        <td class="celda_titulo" >Fecha Fin</td>
+                                   	<td class="celda_titulo" >
+								<input type="text" name="fecha_fin_compromiso" id="fecha_fin_compromiso"  value="{fecha_fin_compromiso}" />
+					</td>
+                               </tr>
+                               <tr >
+                                	<td class="celda_titulo" >Hora Inicio</td>
+                                   	<td class="celda_titulo" >
+								<select name="hora_compromiso" id="hora_compromiso"  value="{hora_compromiso}" >
+                                                                    <!-- INICIO BLOQUE : hora_compromiso -->
+                                                                    <option {selected} value="{hora}">{hora}</option>
+                                                                    <!-- FIN BLOQUE : hora_compromiso -->
+                                                                </select>:
+                                                                <select name="minuto_compromiso" id="minuto_compromiso"  value="{minuto_compromiso}" >
+                                                                     <!-- INICIO BLOQUE : minuto_compromiso -->
+                                                                    <option {selected} value="{minuto}">{minuto}</option>
+                                                                    <!-- FIN BLOQUE : minuto_compromiso -->
+                                                                </select>   
+					</td>
+                                        <td class="celda_titulo" >Hora Fin</td>
+                                   	<td class="celda_titulo" >
+								<select name="hora_fin_compromiso" id="hora_fin_compromiso"  value="{hora_fin_compromiso}" >
+                                                                    <!-- INICIO BLOQUE : hora_fin_compromiso -->
+                                                                    <option {selected} value="{hora}">{hora}</option>
+                                                                    <!-- FIN BLOQUE : hora_fin_compromiso -->
+                                                                </select>:   
+                                                                <select name="minuto_fin_compromiso" id="minuto_fin_compromiso"  value="{minuto_fin_compromiso}" >
+                                                                    <!-- INICIO BLOQUE : minuto_fin_compromiso -->
+                                                                    <option {selected} value="{minuto}">{minuto}</option>
+                                                                    <!-- FIN BLOQUE : minuto_fin_compromiso -->
+                                                                </select>   
+					</td>
+                               </tr>
+								<tr>
+                                                                    
+                                                                <td class="celda_titulo">Compromiso</td>
+								<td colspan="3" class="celdaSimple">
+                                <textarea minlength="2" required name="compromiso" id="compromiso" rows="5" cols="100">{compromiso}</textarea>
+                                	</td>
+								</tr>
+                                                
+            <tr>
+              <td class="celda_titulo">Relacionista Comunitario</td>
+              <td class="celdaSimple" colspan="3">
+                
+                <table>
+                  <tr>
+                    <td >
+                      <input type="hidden" id="nume_celda_compromiso_rc" name="nume_celda_compromiso_rc" value="{nume_celda_compromiso_rc}" />
+                      <input type="hidden" id="nume_fila_compromiso_rc" name="nume_fila_compromiso_rc" value="{nume_fila_compromiso_rc}" />
+                      
+                      
+                      <input type="text" class="buscar" name="compromiso_rc_buscar" id="compromiso_rc_buscar" onfocus="borrar_compromiso_rc_buscar();busquedarapida_compromiso_rc_buscar()" value="Buscar relacionista por apellido paterno apellido materno nombre"  size="80"  width="100px">
+                      <img id="img_buscar_rc"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                      <input type="hidden" test="RC" value="{cant_rc}" id="cant_rc" name="cant_rc" />
+                      </td>
+                    </tr>
+                  
+                </table>
+                <table width="200" class="borde" id="compromiso_rc">
+                  <!-- INICIO BLOQUE : tr_rc_compromiso -->
+                  <tr>
+                    <!-- INICIO BLOQUE : td_rc_compromiso -->
+                    
+                    <td width="10%" id="compromiso_rc{celda_nume_fila_rc}{celda_nume_celda_rc}">
+                      {rc}
+                      					<!-- INICIO BLOQUE : idcompromiso_complejo_rc -->
+
+                                            <input type="hidden" name="idcompromiso_rc[]" id="idcompromiso_rc{celda_nume_fila_rc}{celda_nume_celda_rc}" value={idcompromiso_complejo_rc} />
+                                            <!-- FIN BLOQUE : idcompromiso_complejo_rc -->
+
+
+                      </td>
+                    <td id="ecompromiso_rc{celda_nume_fila_rc}{celda_nume_celda_rc}">
+                      <!-- INICIO BLOQUE : eliminar_rc_compromiso -->
+                      
+                      
+                      <img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('compromiso_rc{celda_nume_fila_rc}{celda_nume_celda_rc}','cant_rc')" >
+                      <!-- FIN BLOQUE : eliminar_rc_compromiso -->
+                      
+                      </td>
+                    <!-- FIN BLOQUE : td_rc_compromiso -->
+                    
+                    </tr>
+                  <!-- FIN BLOQUE : tr_rc_compromiso --> 
+                  
+              </table></td>
+            </tr>
+            <tr>
+            <td class="celda_titulo">Stakeholder</td>
+            <td class="celdaSimple" colspan="3">
+                <table>
+                    <tr>
+                    	<td >
+                           <input type="hidden" id="nume_celda_compromiso_sh" name="nume_celda_compromiso_sh" value="{nume_celda_compromiso_sh}" />
+                           <input type="hidden" id="nume_fila_compromiso_sh" name="nume_fila_compromiso_sh" value="{nume_fila_compromiso_sh}" />
+                           <input type="text" class="buscar" name="compromiso_sh_buscar" id="compromiso_sh_buscar" onfocus="borrar_compromiso_sh_buscar();busquedarapida_compromiso_sh_buscar()" value="Buscar stakeholder por apellido paterno apellido materno nombre"  size="80"  width="100px">
+                    <img id="img_buscar_compromiso_sh"  src="../../../img/serach.png" style="width:auto; height:auto;vertical-align: middle;"/>
+                	<input type="hidden" test="SH" value="{cant_sh}" id="cant_sh" name="cant_sh" />
+                                                                    </td>
+                                                                </tr>
+    
+		</table>
+            	<table width="200" class="borde" id="compromiso_sh">
+ 					   				<!-- INICIO BLOQUE : tr_sh_compromiso -->
+                                                    <tr>
+                                                       <!-- INICIO BLOQUE : td_sh_compromiso -->
+                                
+                                                        <td width="10%" id="compromiso_sh{celda_nume_fila_sh}{celda_nume_celda_sh}">
+                                                        {sh}
+                                                                                                                <!-- INICIO BLOQUE : idcompromiso_complejo_sh -->
+
+                                                         <input type="hidden" name="idcompromiso_sh[]" id="idcompromiso_sh{celda_nume_fila_sh}{celda_nume_celda_sh}" value={idcompromiso_complejo_sh} />
+                                                                                                                 <!-- FIN BLOQUE : idcompromiso_complejo_sh -->
+
+                                                        </td>
+                                                        <td id="ecompromiso_sh{celda_nume_fila_sh}{celda_nume_celda_sh}">
+                                                        <!-- INICIO BLOQUE : eliminar_sh_compromiso -->
+
+                                                      
+
+                                                        <img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('compromiso_sh{celda_nume_fila_sh}{celda_nume_celda_sh}','cant_sh')" >
+                                                        
+                                                      <!-- FIN BLOQUE : eliminar_sh_compromiso -->
+
+                                                        </td>
+                                                                              <!-- FIN BLOQUE : td_sh_compromiso -->
+                                
+                                                    </tr>
+                                                      <!-- FIN BLOQUE : tr_sh_compromiso --> 
+                        </table>
+            
+            </td>
+            </tr>
+
+            <tr>
+            <td class="celda_titulo">Documentos</td>
+            <td class="celdaSimple" colspan="3">
+                <div id="compromiso_archivo">
+                                                <div><input type='file' name='archivos[]' >(tama&ntilde;o m&aacute;ximo: {maximo} MB)</div><br/>
+                                            </div>
+                                            <a href="javascript:agregar_campo_archivo('compromiso')">Adjuntar otro Archivo (+) </a><br/><br/>
+                                            <table >
+                                             <!-- INICIO BLOQUE : archivo -->
+                                             <tr>
+                                                 <td id="archivo_{idcompromiso_archivo}_{idmodulo_compromiso_archivo}" ><a href="javascript:populateIframe('frame1','compromiso','{ruta}')" title="Descargar">{archivo}</a></td>
+                                                 <td><input type="hidden" name="idcompromiso_archivo[]" id="idarchivo_{idcompromiso_archivo}_{idmodulo_compromiso_archivo}" value="{idcompromiso_archivo}***{idmodulo_compromiso_archivo}***{activo}"/> {fecha}</td>
+                                                 <td><img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('archivo_{idcompromiso_archivo}_{idmodulo_compromiso_archivo}')" ><br/></td></tr>
+                                             <!-- FIN BLOQUE : archivo -->
+                                            </table>
+            </td>
+            </tr>
+            <tr>
+            <td class="celda_titulo">Comentario</td>
+            <td colspan="3" class="celdaSimple">
+            <textarea name="comentario_compromiso" id="comentario_compromiso" cols="100" rows="5">{compromiso_comentario}</textarea></td>
+            </tr>
+            <tr>
+
+            	<td colspan="4" align="center">
+                    <div id="guardar_compromiso"><input id="compromiso_submit" type="submit"  value="Guardar"/></div>
+                </td>
+            </tr>
+            </table>
+            </form>
+
+
+<script type="text/javascript" >
+    
+    $("#compromiso_submit").button();
+    
+    $("#compromiso_rc_buscar").focusout(function() {
+        $("#compromiso_rc_buscar").val("Buscar relacionista por apellido paterno apellido materno nombre");
+    });
+
+    $("#compromiso_sh_buscar").focusout(function() {
+        $("#compromiso_sh_buscar").val("Buscar stakeholder por apellido paterno apellido materno nombre");
+    });
+
+    var idpersona = $("#idpersona").val();
+    var idmodulo = $("#idmodulo").val();
+    var url = '../../../programas/stakeholder/stakeholder/astakeholder.php?idpersona=' + idpersona + '&idmodulo=' + idmodulo;
+    
+    //datastring = $("#guardar_interaccion_stakeholder").serialize();
+    
+    //url = url +'&'+datastring;
+    
+    //alert('URL: '+url);
+    $("#form_modal_compromiso").attr('action', url); 
+    
+    $('#form_modal_compromiso').ajaxForm({
+        beforeSubmit: function() {
+            //alert('Submitting...');
+            if($("#form_modal_compromiso").valid()){
+                $("#guardar_compromiso").html('<img src="../../../img/bar-ajax-loader.gif">');
+                
+            }else{
+                return false;
+            }
+        },
+        success: function(data) {
+         var obj = jQuery.parseJSON(data);
+         
+         $("#pantalla_aux_principal").dialog("close");
+         
+           if (obj.op_stakeholder) {
+
+
+            if (obj.success) {
+                $(".compromiso_" + obj.idcompromiso + "_" + obj.idmodulo_compromiso).html(obj.data);
+                $.jGrowl(obj.mensaje, {theme: 'verde'});
+            } else {
+                $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+            }
+        } else {
+
+            if (obj.success) {
+                $("#tabla_interaccion_" + obj.idinteraccion + "_" + obj.idmodulo_interaccion).prepend('<tr><td colspan="2">' + obj.html + '</td></tr>');
+                $.ajax({
+                    url: '../../../programas/stakeholder/stakeholder/astakeholder.php?op_stakeholder=ver_cuerpo_compromiso&todos=0&flag_estado=1&limite=10',
+                    beforeSend: function() {
+                        $("#cuerpo_compromiso").html('<img src="../../../img/bar-ajax-loader.gif">');
+                    },
+                    success: function(datos) {
+                        $("#cuerpo_compromiso").html(datos);
+                    }
+                });
+                $("#cuerpo_compromiso").html('<img src="../../../img/bar-ajax-loader.gif">');
+                
+                $.jGrowl(obj.mensaje, {theme: 'verde'});
+            } else {
+                $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+            }
+        }
+        }
+    });
+
+$("#form_modal_compromiso").validate({ignore:""});
+</script> 

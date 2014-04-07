@@ -1,0 +1,74 @@
+            
+<div id="predio_stakeholder">
+<table  class="bloque" cellpadding="4" cellspacing="4" width="100%">
+                 <tr>
+                    <td width="100%" class="celdaSimple" colspan="2">
+                        <!-- INICIO BLOQUE : asignar_predio_stakeholder -->
+                        <div style="padding-left: 5px;padding-bottom: 5px">
+                        <input type="text" class="buscar" name="busqueda_rapida_predio_stakeholder" id="busqueda_rapida_predio_stakeholder"  onfocus="borrar_predio_stakeholder();busqueda_rapida_predio_stakeholder();"   value=" Buscar predio" size="70"  width="70px">
+                        <img id="img_complejo_buscar_predio" src="../../../img/serach.png" />
+                        </div>
+                        <!-- FIN BLOQUE : asignar_predio_stakeholder -->  
+                    </td>
+                </tr>
+                <tr>
+                <td width="50%" style="vertical-align: top;">
+                <table width="100%" >         
+               <!-- INICIO BLOQUE : detalle_predio -->
+                <tr>
+                    <td class="celdaSimple">
+
+                          <table width="100%">
+                                <tr>
+                                    <td width="100%">
+                                       <table width="100%">
+                                            <tr>
+                                                <td  style="text-align:justify; ">
+                                                    <a href="javascript:ver_editar_ficha_predio({idpredio},{idmodulo_predio})" title="Predio">{nombre_predio}</a>
+
+                                                    
+                                                </td>
+
+                                                <td width="40px" align="right">
+                                                    <a href="javascript:consultaGisPredio('{fid_string}', 'gis_{idpredio}')" title="Consultar Datos"><img src="../../../img/gps.png" alt="Editar"/></a>
+                                                    <a href="javascript:vista_avanzada_predio('{idpredio}','{idmodulo_predio}','{nombre_predio}')" title="Editar interacci&oacute;n"><img src="../../../img/edit.png" alt="Editar"/></a>
+
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    {direccion}
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td  colspan="2" width="100%" style="text-align:justify;padding-left:  20px; ">
+                                                    <div id="gis_{idpredio}"></div>
+                                                </td>
+
+                                            </tr>
+                                            
+                                        </table>
+                                    </td>
+                                </tr>
+                           </table>
+                    </td>
+
+                </tr>
+      <!-- FIN BLOQUE : detalle_predio -->
+                </table>
+                </td>
+                <td style="vertical-align: top;text-align: right;">
+                    
+                    {ver_mapa}
+    
+                </td>
+                
+                
+                </tr>
+</table>
+
+</div>
+
+

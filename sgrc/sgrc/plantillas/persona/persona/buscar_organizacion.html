@@ -1,0 +1,62 @@
+
+
+<form id="form_buscar_persona" onsubmit="buscar_persona();return false;">
+    <input type="hidden" name="es_stakeholder" id="es_stakeholder" value="{es_stakeholder}" />
+    
+    <table  class="bloque" cellpadding="4" cellspacing="4" width="710px">
+        <thead>
+        <td colspan="4"> Buscar Organizacion</td>
+        </thead>
+        <tr>
+            <td  class="celda_titulo">Nombre comercial</td>
+            <td class="celdaSimple">
+                <input type="text" name="apaterno" id="amaterno"  size='80' value="{amaterno}"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="130px" class="celda_titulo">Raz&oacute;n social</td>
+            <td  class="celdaSimple">
+                <input type="text" name="amaterno" id="apaterno"  size='80' value="{apaterno}"/>
+            </td>
+        </tr>
+        
+        <input type="hidden" name="nombre" id="nombre"  size='60' value=""/>
+        <!-- INICIO BLOQUE : persona_tipo -->
+        <tr>
+                <td class="celda_titulo">Tipo</td>
+                <td colspan="3" class="celdaSimple">
+
+                    <select name="idpersona_tipo" id="idpersona_tipo"  onchange="cambiar_busqueda_persona()">
+                        <!-- INICIO BLOQUE : persona_tipo_opcion -->
+                        <option {selected} value="{idtipo}" >{tipo}</option>
+                        <!-- FIN BLOQUE : persona_tipo_opcion -->
+                        <option {selected_todos} value="0" >TODOS</option>
+                    </select>
+                    <!-- INICIO BLOQUE : filtro -->
+                    <input type="checkbox" name="filtro" id="filtro"  size='80' value="1" /> Incluir {tipo}
+                    <!-- FIN BLOQUE : filtro -->
+                </td>
+            </tr>
+        <!-- FIN BLOQUE : persona_tipo -->
+        
+                <tr>
+         
+            <td class="celdaSimple" colspan="2" align="center">
+           <input id="btn_buscar_org" type="submit" value="Buscar" />
+            </td>
+        </tr>
+      </table>
+
+</form>
+
+<div id="resultado_persona">
+</div>
+
+<script type="text/javascript" >
+
+      $("#form_persona").validate();
+      $("#btn_buscar_org").button();
+
+    
+</script> 
+

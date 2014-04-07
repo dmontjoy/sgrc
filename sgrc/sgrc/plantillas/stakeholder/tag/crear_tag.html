@@ -1,0 +1,68 @@
+
+ 
+ <form id="form_guardar_tag" onsubmit="guardar_tag();ver_crear_tag();return false;" accept-charset="utf-8">
+<table class="bloque" width="710px">
+<thead>
+	<td colspan="2">
+                    <div class="nuevo">
+        	<a href="#" onclick="ver_buscar_tag();">Buscar tag</a>
+        </div>
+    	Nuevo Tag
+    </td>
+</thead>
+<tr>
+	<td class="celda_titulo" width="20%">
+
+       Crear Tag
+  
+    </td>
+	<td class="celdaSimple">
+            <input minlength="3" type="text" required name="tag" id="tag" maxlength="250" size="50" value="" />		
+
+	</td>
+</tr>
+<tr>
+	<td class="celda_titulo" width="20%">
+
+       Anidar
+  
+    </td>
+	<td class="celdaSimple">
+            <select name="idtag_padre_compuesto" id="idtag_padre_compuesto" >		
+                <option value=""> -- Tag Inicial -- </option>
+                <!-- INICIO BLOQUE : tag -->
+                <option value="{idtag}_{idmodulo_tag}">{tag}</option>
+                <!-- FIN BLOQUE : tag -->
+            </select>
+
+	</td>
+</tr>
+    <tr>
+	<td class="celda_titulo" width="20%">
+
+       Habilitar
+  
+    </td>
+	<td class="celdaSimple">
+            <!-- INICIO BLOQUE : tag_entidad -->
+            <input type="checkbox" name=idtag_entidad[]" value="{idtag_entidad}" >{entidad}                
+            <!-- FIN BLOQUE : tag_entidad -->   
+
+	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+            <div id="guardar_tag"><input id="guardar_tag_btn" type="submit" value="Guardar"/></div>
+    </td>
+</tr>
+</table>
+  </form>
+
+
+<script type="text/javascript" >
+          
+  $("#form_guardar_tag").validate();
+  $("#guardar_tag_btn").button();
+
+    
+</script> 

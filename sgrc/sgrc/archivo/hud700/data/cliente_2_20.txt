@@ -1,0 +1,3 @@
+ INSERT INTO interaccion ( idinteraccion,idmodulo_interaccion,activo,interaccion,fecha,idinteraccion_estado,idinteraccion_prioridad,idinteraccion_tipo,comentario,fecha_a )  VALUES  ( 2,2,1,'otra' , '2014-03-19',2,1,2 , '','2014-03-19 12:29:12' ) ;
+ INSERT INTO interaccion_rc ( idinteraccion_rc,idmodulo_interaccion_rc,idinteraccion,idmodulo_interaccion,idrc,idmodulo,activo,fecha_a )  VALUES  ( 2,2,2 , 2,186,1,1 , '2014-03-19 12:29:12' ) ;
+ INSERT INTO interaccion_sh ( idinteraccion_sh,idmodulo_interaccion_sh,idinteraccion,idmodulo_interaccion,idsh,idmodulo,activo,fecha_a )  VALUES  ( 2,2,2 , 2,624,2,1 , '2014-03-19 12:29:12' ) ;

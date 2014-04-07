@@ -1,0 +1,43 @@
+<br>
+<table class="bloque" width="310px">
+	<tr class="titulo">
+    	<td colspan="3" class="titulo">
+        	Resultado
+        </td>
+    </tr>
+    
+    
+     
+    <tr>
+    	<td width="10%">&nbsp;
+        	
+        </td>
+    	<td width="70%" class="titulo_cabecera" align="center">
+        Nombre de Usuario
+        </td>
+       
+        <td width="20%" class="titulo_cabecera">&nbsp;
+        	
+        </td>
+    </tr>
+     <!-- INICIO BLOQUE : resultado_usuario -->
+        <tr class="renglon">
+        <td  class="celdaSimple">{i}.</td>
+    	<td class="celdaSimple">
+            {usuario}
+        </td>
+        
+        <td class="celdaSimple">            
+            &nbsp;
+            <!-- INICIO BLOQUE : editar_usuario -->
+            <a href="javascript:modal_editar_usuario({idusuario},{idmodulo_usuario})"><img src="../../../img/edit.png" alt="Editar"/></a>       
+            &nbsp;
+            <!-- FIN BLOQUE : editar_usuario -->
+            <!-- INICIO BLOQUE : eliminar_usuario -->
+            <a href="javascript:eliminar_usuario({idusuario},{idmodulo_usuario})"><img src="../../../img/trash.png" alt="Eliminar"/></a>       
+            <!-- FIN BLOQUE : eliminar_usuario -->
+        </td>
+    </tr>
+     <!-- FIN BLOQUE : resultado_usuario -->
+   
+</table>

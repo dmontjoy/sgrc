@@ -1,0 +1,54 @@
+
+<div id="hogar">
+    <div id="hogar1">
+        <input type="button" value="Crear nueva l&iacute;nea base de hogar" onclick="javascript:ver_nuevo_hogar({idpersona}, {idmodulo})">
+        <input type="hidden" name="idpersona" id="idpersona" value="{idpersona}">
+        <input type="hidden" name="idmodulo" id="idmodulo" value="{idmodulo}">
+
+        <!-- INICIO BLOQUE : hogar -->
+
+        <table width="100%">
+            <tr>
+                <td>
+                    Fecha&nbsp; {fecha_hogar}
+                   
+                </td>
+                <td>
+                    <!-- INICIO BLOQUE : editar_hogar -->
+                    <a href="javascript:ver_editar_hogar({idsh_hogar},{idmodulo_sh_hogar})" title="Editar hogar"><img src="../../../img/edit.png" alt="Editar"/></a>
+                    <!-- FIN BLOQUE : editar_hogar -->
+                    <!-- INICIO BLOQUE : eliminar_hogar -->
+                    <a href="javascript:eliminar_hogar({idsh_hogar},{idmodulo_sh_hogar})" title="Eliminar hogar"><img src="../../../img/trash.png" alt="Eliminar"/></a>
+                    <!-- FIN BLOQUE : eliminar_hogar --> 
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <table width="100%" class="borde" id="hogar_sh">
+                        <!-- INICIO BLOQUE : tr_sh_hogar -->
+                        <tr>
+                            <!-- INICIO BLOQUE : td_sh_hogar -->
+
+                            <td width="50%">
+                                <a href="javascript:cargar_stakeholder('{idsh}---{idmodulo}---1')">{sh}</a>
+                            </td>
+                            <td width="40%">
+                                {parentesco}
+                            </td>
+                            <!-- FIN BLOQUE : td_sh_hogar -->
+
+                        </tr>
+                        <!-- FIN BLOQUE : tr_sh_hogar -->
+                    </table>            
+                </td>
+
+            </tr>
+
+        </table>
+
+
+
+        <!-- FIN BLOQUE : hogar -->
+    </div>
+</div>

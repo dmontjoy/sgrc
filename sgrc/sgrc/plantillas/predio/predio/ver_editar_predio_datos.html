@@ -1,0 +1,116 @@
+
+<div id="ver_editar_ficha_predio_datos">
+<form id="form_predio_datum"  enctype="multipart/form-data">
+<input type="hidden" id="op_predio" name="op_predio" value="actualizar_predio_datum">
+<table class="bloque" cellpadding="4" cespacing="4" width="100%">
+  
+    <tr>
+        <td class="footer_titulo">
+            Direcci&oacute;n:
+            
+        </td>
+        <td>
+             <input type="text" size="80" name="predio_direccion" id="predio_direccion" value="{predio_direccion}">
+        </td>
+    </tr>
+    <tr>
+        <td class="celda_titulo">
+            Comentario:
+        </td>
+        <td class="celda_titulo">
+            <textarea cols="80" rows="3" name="predio_comentario" id="predio_comentario">{predio_comentario}</textarea>
+        </td>
+    </tr>
+       <!-- INICIO BLOQUE : predio_datum -->
+       <tr>
+           <td class="footer_titulo">
+               {predio_datum} {simbolo}:
+           </td>
+           <td>
+               <input type="text" size="40" name="predio_datum[{idpredio_datum}]" id="predio_datum[{idpredio_datum}]" value="{predio_datum_valor}">
+
+           </td>
+       </tr>
+       <!-- FIN BLOQUE : predio_datum -->
+    
+    
+    
+    <tr id="fila_doc">
+
+        <td colspan="3">
+
+                <div id="predio_archivo">
+                    <div>
+                        <input type='file' name='archivos[]' >(tama&ntilde;o m&aacute;ximo: {maximo} MB)
+
+                    </div><br/>
+                </div>
+                <a href="javascript:agregar_campo_archivo('predio')">Adjuntar otro Archivo (+) </a><br/><br/>
+                <table >
+   
+                 <!-- INICIO BLOQUE : archivo -->
+                 <tr>
+                     <td id="archivo_{idpredio_archivo}_{idmodulo_predio_archivo}" ><a href="javascript:populateIframe('frame1','predio','{ruta}')"  title="Descargar">{archivo}</a></td>
+                     <td><input type="hidden" name="idpredio_archivo[]" id="idarchivo_{idpredio_archivo}_{idmodulo_predio_archivo}" value="{idpredio_archivo}***{idmodulo_predio_archivo}***{activo}"/> {fecha}</td>
+                     <td><img src="../../../img/trash.png"  title="Eliminar" alt="Borrar" width="16" height="16" border="0" class="icono" onclick="disminuye_celda('archivo_{idpredio_archivo}_{idmodulo_predio_archivo}')" ><br/></td>
+                 </tr>
+                 <!-- FIN BLOQUE : archivo -->
+                </table>
+            </td>
+
+        </tr>
+                             
+                           
+                        
+    <tr>
+        <td colspan="3" style="text-align: center">
+            <input type="submit"  id="guadar_predio_datum" value="Guardar"/>
+        </td>
+        
+    </tr>
+</table>
+</form>
+</div>
+<script type="text/javascript" >
+    $("#guadar_predio_datum").button({
+            icons: {
+            primary: "ui-icon-disk"
+            }
+        });
+    var idpredio = $("#idpredio").val();
+    var idmodulo_predio = $("#idmodulo_predio").val();
+    //var presenta=1;
+    
+    var url = '../../../programas/predio/predio/apredio.php?idpredio=' + idpredio + '&idmodulo_predio=' + idmodulo_predio;
+
+    $("#form_predio_datum").attr('action', url);  
+  
+    $('#form_predio_datum').ajaxForm({
+        
+        beforeSubmit: function() {
+         
+           $("#guadar_predio_datum").html('<img src="../../../img/ajax-loader.png">');
+                    
+        },
+        success: function(data) {
+         
+         var obj = jQuery.parseJSON(data);
+
+                 if (obj.success) {
+                    $.jGrowl(obj.mensaje, {theme: 'verde'});
+                } else {
+                    $.jGrowl(obj.mensaje, {theme: 'rojo'});
+
+                }     
+                $.ajax({
+                    url:'../../../programas/predio/predio/apredio.php?op_predio=ver_editar_predio_datos&idpredio='+idpredio+'&idmodulo_predio='+idmodulo_predio,
+                    success: function(datos) {
+                  
+                        $("#ver_editar_ficha_predio_datos").html(datos);
+
+                        
+                    }
+                }); 
+        }
+    });
+ </script>
