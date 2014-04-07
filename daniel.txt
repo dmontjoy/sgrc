@@ -6,5 +6,7 @@ cinco
 seis
 siete
 ocho
+ocho2
 nueve
 diezzzz
+once
