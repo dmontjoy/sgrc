@@ -9,5 +9,4 @@ ocho
 ocho2
 nueve
 diezzzz
-onc
-e
+once
